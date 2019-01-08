@@ -1,0 +1,133 @@
+# Copyright (C) 2019 Woocommerce Import Products Google Sheet
+# This file is distributed under the same license as the Woocommerce Import Products Google Sheet package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Woocommerce Import Products Google Sheet 0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-"
+"import-products-google-sheet\n"
+"POT-Creation-Date: 2019-01-05 15:17:39+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/helpers.php:45
+msgid ""
+"The plugin <strong>\"%s\"</strong> needs the plugin <strong>\"%s\"</strong> "
+"active"
+msgstr ""
+
+#: includes/helpers.php:50 includes/helpers.php:89
+msgid "<strong>%s has been deactivated</strong>"
+msgstr ""
+
+#: includes/helpers.php:82
+msgid ""
+"The plugin <strong>\"%s\"</strong> needs the <strong>version %s</strong> or "
+"newer of <strong>\"%s\"</strong>"
+msgstr ""
+
+#: woocommerce-import-products-google-sheet.php:138
+msgid "Import From Google Sheet"
+msgstr ""
+
+#: woocommerce-importer/class-wc-admin-importers.php:27
+msgid "Product Import Goole Sheet"
+msgstr ""
+
+#: woocommerce-importer/class-wc-product-csv-importer-controller.php:45
+msgid ""
+"File is empty. Please upload something more substantial. This error could "
+"also be caused by uploads being disabled in your php.ini or by post_max_size "
+"being defined as smaller than upload_max_filesize in php.ini."
+msgstr ""
+
+#: woocommerce-importer/class-wc-product-csv-importer-controller.php:62
+#: woocommerce-importer/class-wc-product-csv-importer-controller.php:106
+msgid "Invalid file type. The importer supports CSV and TXT file formats."
+msgstr ""
+
+#: woocommerce-importer/class-wc-product-csv-importer-controller.php:113
+msgid "Please upload or provide the link to a valid CSV file."
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:14
+msgid "Import products from a Google Sheet"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:15
+msgid ""
+"This tool allows you to import (or merge) product data to your store from a "
+"Google Sheet created on your Google Drive."
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:23
+msgid ""
+"Choose Google Seet title that you prexiously set on a <a href=\"\"> plugin "
+"option page</a>:"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:31
+msgid ""
+"Before you can upload your import file, you will need to fix the following "
+"error:"
+msgstr ""
+
+#. translators: %s: maximum upload size
+#: woocommerce-importer/views/html-product-csv-import-form.php:48
+msgid "Maximum size: %s"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:59
+msgid "Update existing products"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:63
+msgid ""
+"Existing products that match by ID or SKU will be updated. Products that do "
+"not exist will be skipped."
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:68
+msgid "Alternatively, enter the path to a CSV file on your server:"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:77
+msgid "CSV Delimiter"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:81
+msgid "Use previous column mapping preferences?"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:103
+msgid "Hide advanced options"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:103
+msgid "Show advanced options"
+msgstr ""
+
+#: woocommerce-importer/views/html-product-csv-import-form.php:104
+msgid "Continue"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Woocommerce Import Products Google Sheet"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Import woocommerce products from google sheet by using native wordpres "
+"importer and"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Oleg Apanovich"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/OlegApanovich"
+msgstr ""

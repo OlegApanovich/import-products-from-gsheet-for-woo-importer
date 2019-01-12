@@ -11,7 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 ?>
 
 <h2>
-	<?php_e( 'Import Woocommerce Produts Google Sheet Plugin Options Page', 'woocommerce-import-products-google-sheet' ) ?>
+	<?php _e( 'Import Woocommerce Produts Google Sheet Plugin Options Page', 'woocommerce-import-products-google-sheet' ) ?>
 </h2>
 <form action="options.php" method="post">
 	<?php settings_fields( 'plugin_wc_import_google_sheet_options' ); ?>

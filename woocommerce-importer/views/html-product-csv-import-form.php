@@ -39,8 +39,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 								if ( ! empty( $options['google_sheet_title'] ) ) {
 									?>
 									<select name="file">
-										<option value="<?php echo get_option( 'google_sheet_title' ) ?>">
-											<?php echo get_option( 'google_sheet_title' ) ?>
+										<option value="<?php echo $options['google_sheet_title'] ?>">
+											<?php echo $options['google_sheet_title'] ?>
 										</option>
 									</select>
 									<?php

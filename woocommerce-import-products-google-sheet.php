@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Woocommerce Import Products Google Sheet
  * Plugin URI:
- * Description: Import woocommerce products from google sheet by using native wordpres importer and
+ * Description: Import woocommerce products from google sheet by using native wordpres importer
  * Version: 0.1
  * Author: Oleg Apanovich
  * Author URI: https://github.com/OlegApanovich

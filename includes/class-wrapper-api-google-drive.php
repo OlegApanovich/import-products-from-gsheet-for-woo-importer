@@ -11,7 +11,7 @@ use Google\Spreadsheet\ServiceRequestFactory;
 /**
  * Api google drive
  */
-class Wrapper_Api_Google_Drive extends Imp_Api {
+class Wrapper_Api_Google_Drive {
 
 	public $spreadsheet;
 

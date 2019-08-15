@@ -18,7 +18,7 @@ Below the instraction how we can recieve client_secret json.
 
 2. Click link https://console.developers.google.com where you can find google console developer.
 
-3. In the seach input type "google drive" and click on the first tip "Google Drive API" (./assets/images/readme_1.png)
+3. In the seach input type "google drive" and click on the first tip "Google Drive API" (assets/images/readme_1.png)
 
 4. If it is your first project in google developer console and you never create project before, then system ask you create new one, click button "Create" (./assets/images/readme_2.png)
 

@@ -37,8 +37,8 @@ class Admin_Settings {
 	public function add_menu() {
 		add_submenu_page(
 			'woocommerce',
-			__( 'Import Google Sheet Settings', 'yandexcheckout' ),
-			__( 'Import Google Sheet Settings', 'yandexcheckout' ),
+			__( 'Import Google Sheet Settings', 'woocommerce-import-products-google-sheet' ),
+			__( 'Import Google Sheet Settings', 'woocommerce-import-products-google-sheet' ),
 			'manage_options',
 			'woocommerce_import_products_google_sheet_menu',
 			array( $this, 'settings_form' )

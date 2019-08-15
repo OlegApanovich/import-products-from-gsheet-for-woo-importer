@@ -30,7 +30,7 @@ Below are the instructions on how we can receive client_secret json.
 
 8. In the next page, the system  will ask you to fill the form out with data for your credentials, please fill it in the same way as you can see on the screenshot below and press the button "What credentials do I need" ![](assets/images/readme_6.png)
 
-9. In the next page you will see the next form for your credentials, feel free to choose any service account name in the appropriate field and select role project -> editor [7.png], key button type leave default json and press button "Continue" ![](assets/images/readme_7.png)
+9. In the next page you will see the next form for your credentials, feel free to choose any service account name in the appropriate field and select role project -> editor, key button type leave default json and press button "Continue" ![](assets/images/readme_7.png)
 
 10. After that, the system will offer you to download the api key json file.  Save it on your local machine and then you can close google developer console browser tab.
 

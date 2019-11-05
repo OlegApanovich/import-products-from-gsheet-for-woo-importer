@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php do_settings_sections( 'plugin' ); ?>
 
 	<?php
-	$this->get_connection_message();
+	$this->set_connection_message();
 	?>
 	<input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
 </form>

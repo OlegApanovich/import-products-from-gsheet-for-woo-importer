@@ -153,7 +153,15 @@ final class WС_Import_Products_Google_Sheet {
 		);
 		wp_localize_script( 'wc_import_google_sheet_admin',
 			'woocommerce_import_google_sheet_admin', $params );
-		wp_enqueue_script( 'wc_import_google_sheet_admin' );
+
+		$settings = new Admin_Settings;
+		$options = get_option( 'plugin_wc_import_google_sheet_options' );
+
+		$check = $settings->check_user_input( $options );
+
+		if ( $check ) {
+			wp_enqueue_script( 'wc_import_google_sheet_admin' );
+		}
 	}
 
 	/**

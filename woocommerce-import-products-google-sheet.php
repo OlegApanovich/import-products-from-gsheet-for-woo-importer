@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name: Woocommerce Import Products Google Sheet
- * Plugin URI:
+ * Plugin URI: https://github.com/OlegApanovich/woocommerce-import-products-google-sheet
  * Description: Import woocommerce products from google sheet by using native wordpres importer
  * Version: 0.1
  * Author: Oleg Apanovich
  * Author URI: https://github.com/OlegApanovich
  * Requires at least: 4.4
- * Tested up to: 5.0
+ * Tested up to: 5.2
  *
  * Text Domain: woocommerce-import-products-google-sheet
  * Domain Path: /languages/
@@ -133,7 +133,6 @@ final class WС_Import_Products_Google_Sheet {
 		load_plugin_textdomain( 'woocommerce-import-products-google-sheet',
 			false, WC_IMPORT_SHEET_URI_ABSPATH . '/languages' );
 	}
-
 
 	/**
 	 * Init frontend files.

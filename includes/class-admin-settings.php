@@ -119,12 +119,13 @@ class Admin_Settings {
 	public function set_options( $input ) {
 		$validate_input = $this->validate_options( $input );
 
-		file_put_contents(
-			WC_IMPORT_SHEET_URI_ABSPATH . 'assets/client_secret.json',
-			$validate_input['google_api_key']
-		);
-
-		$this->set_user_error_message( $validate_input );
+		$check = $this->check_user_input( $input );
+		if ( $check ) {
+			file_put_contents(
+				WC_IMPORT_SHEET_URI_ABSPATH . 'assets/client_secret.json',
+				$validate_input['google_api_key']
+			);
+		}
 
 		return $validate_input;
 	}
@@ -137,9 +138,10 @@ class Admin_Settings {
 	 * @return array $validate_input
 	 */
 	public function validate_options( $input ) {
-		$validate_input['google_api_key'] = trim( $input['google_api_key'] );
 		$validate_input['google_sheet_title']
-		                                  = trim( esc_html( $input['google_sheet_title'] ) );
+		     = trim( $input['google_sheet_title'] );
+		$validate_input['google_api_key']
+		     = trim( $input['google_api_key'] );
 
 		return $validate_input;
 	}
@@ -154,64 +156,100 @@ class Admin_Settings {
 		) {
 			$validate_input =
 				$this->validate_options( $_POST['plugin_wc_import_google_sheet_options'] );
-
-			$this->set_user_error_message( $validate_input );
 		}
 	}
 
 	/**
-	 * Try to check user inputs and return erorr message if they do not valid
+	 * Try to check user inputs and set erorr message if input is not valid
 	 *
 	 * @param array $validate_input
+	 *
+	 * @return bool
 	 */
-	public function set_user_error_message( $validate_input ) {
+	public function check_user_input( $validate_input ) {
+		try {
+			$google_api_obj = new Wrapper_Api_Google_Drive;
+			try {
+				$google_sheet
+					= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
+
+				$check = true;
+			} catch ( Exception $e ) {
+				$check = false;
+			}
+		} catch ( Exception $e ) {
+			$check = false;
+		}
+
+		return $check;
+	}
+
+	/**
+	 * Retrive connection message by isser input
+	 *
+	 * @param array $validate_input
+	 *
+	 * @return string
+	 */
+	public function get_connection_message( $validate_input ) {
+		$message = '';
 		try {
 			$google_api_obj = new Wrapper_Api_Google_Drive;
 
 			try {
 				$google_sheet
 					= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
-				set_transient( 'google_sheet_connection_message', 1 );
+				$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
+
+				$message = sprintf(
+							__(
+								'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
+								'woocommerce-import-products-google-sheet'
+							),
+							$menu_page_url
+						);
 			} catch ( Exception $e ) {
-				set_transient( 'google_sheet_connection_message',
-					esc_html__( 'We can\'t recieve spreeadsheet by your provided settings, please check settings and try it again',
-						'woocommerce-import-products-google-sheet' ) );
+				$message = esc_html__(
+							'We can\'t recieve spreeadsheet by your provided settings, please check settings and try it again',
+							'woocommerce-import-products-google-sheet'
+						);
 			}
 		} catch ( Exception $e ) {
 			if ( ! empty( $e->getMessage() ) ) {
-				set_transient( 'google_sheet_connection_message',
-					sprintf( __( 'We can\'t set connection to google API by your client_secret json setting, please check it and try again.'
-					             . ' API return responce error "%s"',
-						'woocommerce-import-products-google-sheet' ),
-						$e->getMessage() ) );
+				$message =  sprintf(
+								__(
+									'We can\'t set connection to google API by your client_secret json setting, please check it and try again.'
+									 . ' API return responce error "%s"',
+									'woocommerce-import-products-google-sheet'
+								),
+								$e->getMessage()
+							);
 			} else {
-				set_transient( 'google_sheet_connection_message',
-					esc_html__( 'We can\'t set connection to google API by your client_secret json setting, please check it and try again',
-						'woocommerce-import-products-google-sheet' ) );
+				$message = esc_html__(
+						'We can\'t set connection to google API by your client_secret json setting, please check it and try again',
+						'woocommerce-import-products-google-sheet'
+					);
 			}
 		}
+
+		return $message;
 	}
 
 	/**
 	 * After try establish connection to google drive api
 	 * try to display user success or error message
 	 */
-	public function get_connection_message() {
-		$connection_message_error
-			= get_transient( 'google_sheet_connection_message' );
+	public function set_connection_message() {
+		$options = get_option( 'plugin_wc_import_google_sheet_options' );
 
-		if ( $connection_message_error === '1' ) {
-			$menu_page_url = menu_page_url( 'product_importer_google_sheet',
-				false );
-			echo '<h3 style="color:green">'
-			     . sprintf( __( 'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
-					'woocommerce-import-products-google-sheet' ),
-					$menu_page_url ) . '</h3>';
-		} else if ( $connection_message_error ) {
-			echo '<h3 style="color:red">' . $connection_message_error . '</h3>';
+		$connection_message = $this->get_connection_message( $options );
+		$check = $this->check_user_input( $options );
+
+		if ( $check ) {
+			echo '<h3 style="color:green">' . $connection_message . '</h3>';
+		} else {
+			echo '<h3 style="color:red">' . $connection_message . '</h3>';
 		}
-
-		delete_transient( 'google_sheet_connection_message' );
 	}
 }
 

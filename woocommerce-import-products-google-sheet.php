@@ -1,39 +1,37 @@
 <?php
 /**
- * Plugin Name: Woocommerce Import Products Google Sheet
- * Plugin URI: https://github.com/OlegApanovich/woocommerce-import-products-google-sheet
- * Description: Import woocommerce products from google sheet by using native wordpres importer
- * Version: 0.1
- * Author: Oleg Apanovich
- * Author URI: https://github.com/OlegApanovich
- * Requires at least: 4.4
- * Tested up to: 5.2
+ * The plugin bootstrap file
  *
+ * @since 1.0.0
+ * @package Woocommerce_Import_Products_Google_Sheet
+ *
+ * Plugin Name:  Woocommerce Import Products Google Sheet
+ * Plugin URI:   https://github.com/OlegApanovich/woocommerce-import-products-google-sheet
+ * Description:  Import woocommerce products from google sheet by using native wordpres importer
+ * Version:      1.0.0
+ * Author:       Oleg Apanovich
+ * Author URI:   https://github.com/OlegApanovich
+ * License:      GPL-3.0+
+ * License URI:  http://www.gnu.org/licenses/gpl-3.0.txt
  * Text Domain: woocommerce-import-products-google-sheet
- * Domain Path: /languages/
- *
- * @package
- * @category
- * @author Oleg Apanovich
+ * Domain Path: /languages
  */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
 /**
  * Main Plagin Class.
  *
- * @class      WС_Import_Products_Google_Sheet
- * @version    3.1.0
+ * @since 1.0.0
  */
 final class WС_Import_Products_Google_Sheet {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var WС_Import_Products_Google_Sheet
-	 * @since 0.1
+	 * @var    WС_Import_Products_Google_Sheet
+	 * @access protected
+	 * @since  1.0.0
 	 */
 	protected static $_instance = null;
 
@@ -42,7 +40,7 @@ final class WС_Import_Products_Google_Sheet {
 	 *
 	 * Ensures only one instance of plugin is loaded or can be loaded.
 	 *
-	 * @since 0.1
+	 * @since 1.0.0
 	 * @static
 	 * @return Plagin - Main instance.
 	 */
@@ -56,27 +54,30 @@ final class WС_Import_Products_Google_Sheet {
 
 	/**
 	 * WС_Import_Products_Google_Sheet Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
-		// Add woocommerce activation checkup
+
 		$this->define_constants();
 		$this->init_hooks();
 	}
 
 	/**
 	 * Define WС_Import_Products_Google_Sheet Constants.
+	 *
+	 * @since 1.0.0
 	 */
 	private function define_constants() {
 		define( 'WC_IMPORT_SHEET_PLUGIN_FILE', __FILE__ );
-		define( 'WC_IMPORT_SHEET_URI',
-			plugins_url( '', WC_IMPORT_SHEET_PLUGIN_FILE ) );
+		define( 'WC_IMPORT_SHEET_URI', plugins_url( '', WC_IMPORT_SHEET_PLUGIN_FILE ) );
 		define( 'WC_IMPORT_SHEET_URI_ABSPATH', dirname( __FILE__ ) . '/' );
 	}
 
 	/**
 	 * Hook into actions and filters.
 	 *
-	 * @since  0.1
+	 * @since 1.0.0
 	 */
 	private function init_hooks() {
 		add_action( 'init', array( $this, 'includes' ) );
@@ -88,10 +89,13 @@ final class WС_Import_Products_Google_Sheet {
 
 	/**
 	 * Include required core files used in admin and on the frontend.
+	 *
+	 * @since 1.0.0
 	 */
 	public function includes() {
 		if ( $this->is_request( 'admin' ) ) {
-			include_once( WC_IMPORT_SHEET_URI_ABSPATH . 'vendor/autoload.php' );
+			include_once( WC_IMPORT_SHEET_URI_ABSPATH
+			              . 'vendor/autoload.php' );
 			include_once( WC_IMPORT_SHEET_URI_ABSPATH
 			              . 'includes/class-admin-settings.php' );
 			include_once( WC_IMPORT_SHEET_URI_ABSPATH
@@ -103,24 +107,25 @@ final class WС_Import_Products_Google_Sheet {
 
 	/**
 	 * Init plugin when WordPress Initialises.
+	 *
+	 * @since 1.0.0
 	 */
 	public function init() {
 		// Before init action.
 		do_action( 'before_woocommerce_import_products_google_sheet_init' );
-
 		// Set up localisation.
 		$this->load_plugin_textdomain();
-
+		// After init action
 		do_action( 'woocommerce_import_products_google_sheet_init' );
 	}
 
 	/**
 	 * Load Localisation files.
 	 *
-	 * Note: the first-loaded translation file overrides any following ones if the same translation is present.
+	 * Note: the first-loaded translation file overrides any following ones
+	 * if the same translation is present.
 	 *
-	 * Locales found in:
-	 *      - WP_LANG_DIR/plugins/woocommerce-LOCALE.mo
+	 * @since 1.0.0
 	 */
 	public function load_plugin_textdomain() {
 		$locale = is_admin() && function_exists( 'get_user_locale' )
@@ -129,26 +134,28 @@ final class WС_Import_Products_Google_Sheet {
 			'woocommerce-import-products-google-sheet' );
 
 		unload_textdomain( 'woocommerce-import-products-google-sheet' );
-		// load_textdomain( 'woocommerce-import-products-google-sheet', WP_LANG_DIR . '/woocommerce-import-products-google-sheet-' . $locale . '.mo' );
 		load_plugin_textdomain( 'woocommerce-import-products-google-sheet',
 			false, WC_IMPORT_SHEET_URI_ABSPATH . '/languages' );
 	}
 
 	/**
 	 * Init frontend files.
+	 *
+	 * @since 1.0.0
 	 */
 	public function init_frontend() {
 		wp_register_script( 'wc_import_google_sheet_admin',
 			WC_IMPORT_SHEET_URI . '/assets/js/admin.js', [ 'jquery' ] );
 		$params = array(
 			'urls'    => array(
-				'import_products_google_sheet' => current_user_can( 'import' )
+				'import_products_google_sheet' =>
+					current_user_can( 'import' )
 					? esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_importer_google_sheet' ) )
 					: null
 			),
 			'strings' => array(
-				'import_products_google_sheet' => __( 'Import From Google Sheet',
-					'woocommerce-import-products-google-sheet' ),
+				'import_products_google_sheet' =>
+				esc_html__( 'Import From Google Sheet', 'woocommerce-import-products-google-sheet' ),
 			),
 		);
 		wp_localize_script( 'wc_import_google_sheet_admin',
@@ -167,6 +174,8 @@ final class WС_Import_Products_Google_Sheet {
 	/**
 	 * Define constant if not already set.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param  string      $name
 	 * @param  string|bool $value
 	 */
@@ -178,6 +187,8 @@ final class WС_Import_Products_Google_Sheet {
 
 	/**
 	 * What type of request is this?
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param  string $type admin, ajax, cron or frontend.
 	 *
@@ -199,6 +210,8 @@ final class WС_Import_Products_Google_Sheet {
 
 	/**
 	 * Add plugin provided screen to woocommerce admin area
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param array $screen_ids
 	 *

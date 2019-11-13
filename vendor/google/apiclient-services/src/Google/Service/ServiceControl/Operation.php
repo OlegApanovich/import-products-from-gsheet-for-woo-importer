@@ -30,7 +30,6 @@ class Google_Service_ServiceControl_Operation extends Google_Collection
   public $operationName;
   protected $quotaPropertiesType = 'Google_Service_ServiceControl_QuotaProperties';
   protected $quotaPropertiesDataType = '';
-  public $resourceContainer;
   protected $resourcesType = 'Google_Service_ServiceControl_ResourceInfo';
   protected $resourcesDataType = 'array';
   public $startTime;
@@ -125,14 +124,6 @@ class Google_Service_ServiceControl_Operation extends Google_Collection
   public function getQuotaProperties()
   {
     return $this->quotaProperties;
-  }
-  public function setResourceContainer($resourceContainer)
-  {
-    $this->resourceContainer = $resourceContainer;
-  }
-  public function getResourceContainer()
-  {
-    return $this->resourceContainer;
   }
   /**
    * @param Google_Service_ServiceControl_ResourceInfo

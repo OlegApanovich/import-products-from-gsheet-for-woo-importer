@@ -1,20 +1,28 @@
 <?php
-
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die;
-}
+defined( 'ABSPATH' ) || exit;
 
 use Google\Spreadsheet\DefaultServiceRequest;
 use Google\Spreadsheet\ServiceRequestFactory;
 
 /**
- * Api google drive
+ * Wrapper for a Google APIs Client Library for PHP
+ *
+* @since 1.0.0
  */
 class Wrapper_Api_Google_Drive {
 
+	/**
+	 * The instance of the SpreadsheetService
+	 *
+	 * @since  1.0.0
+	 */
 	public $spreadsheet;
 
+	/**
+	 * Construcotr for Wrapper_Api_Google_Drive
+	 *
+	 * @since 1.0.0
+	 */
 	function __construct() {
 		putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . WC_IMPORT_SHEET_URI_ABSPATH
 		        . '/assets/client_secret.json' );
@@ -40,9 +48,11 @@ class Wrapper_Api_Google_Drive {
 	/**
 	 * Set working sheet
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $sheet_title
 	 *
-	 * @return
+	 * @return object
 	 */
 	public function set_sheet( $sheet_title ) {
 		$this->spreadsheet = ( new Google\Spreadsheet\SpreadsheetService )
@@ -55,7 +65,9 @@ class Wrapper_Api_Google_Drive {
 	/**
 	 * Get working sheet content row by row
 	 *
-	 * @return array $sheet_content
+	 * @since 1.0.0
+	 *
+	 * @return array
 	 */
 	public function get_sheet_content() {
 		$sheet_content = [];
@@ -75,6 +87,8 @@ class Wrapper_Api_Google_Drive {
 
 	/**
 	 * Get csv data of this worksheet
+	 *
+	 * @since 1.0.0
 	 *
 	 * @return string $csv
 	 */

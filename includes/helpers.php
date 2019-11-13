@@ -1,6 +1,9 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Verify if a plugin is active, if not deactivate the actual plugin an show an error
+ *
  * by https://gist.github.com/dianjuar/9a398c9e86a20a30868eee0c653e0ca4
  *
  * @param  [string]  $my_plugin_name
@@ -26,10 +29,12 @@
  */
 if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 	function wc_import_google_sheet_is_plugin_active(
-		$my_plugin_name, $dependency_plugin_name, $path_to_plugin,
-		$textdomain = '', $version_to_check = null
+		$my_plugin_name,
+		$dependency_plugin_name,
+		$path_to_plugin,
+		$textdomain = '',
+		$version_to_check = null
 	) {
-
 		# Needed to the function "deactivate_plugins" works
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
@@ -39,7 +44,9 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 
 			# Show an error alert on the admin area
 			add_action( 'admin_notices', function () use (
-				$my_plugin_name, $dependency_plugin_name, $textdomain
+				$my_plugin_name,
+				$dependency_plugin_name,
+				$textdomain
 			) {
 				?>
                 <div class="updated error">
@@ -62,18 +69,17 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 				<?php
 			} );
 		} else {
-
 			# If version to check is not defined do nothing
 			if ( $version_to_check === null ) {
 				return;
 			}
 
 			# Get the plugin dependency info
-			$depPlugin_data = get_plugin_data( WP_PLUGIN_DIR . '/'
-			                                   . $path_to_plugin );
+			$dep_plugin_data =
+				get_plugin_data( WP_PLUGIN_DIR . '/' . $path_to_plugin );
 
 			# Compare version
-			$error = ! version_compare( $depPlugin_data['Version'],
+			$error = ! version_compare( $dep_plugin_data['Version'],
 				$version_to_check, '>=' ) ? true : false;
 
 			if ( $error ) {
@@ -82,7 +88,9 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 				deactivate_plugins( 'woocommerce-import-products-google-sheet/woocommerce-import-products-google-sheet.php' );
 
 				add_action( 'admin_notices', function () use (
-					$my_plugin_name, $dependency_plugin_name, $version_to_check,
+					$my_plugin_name,
+					$dependency_plugin_name,
+					$version_to_check, 
 					$textdomain
 				) {
 					?>
@@ -111,6 +119,6 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 					}
 				} );
 			}
-		}# else
+		}
 	}
 endif;

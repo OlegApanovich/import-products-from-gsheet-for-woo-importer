@@ -128,6 +128,7 @@ class Google_Service_Datastore_Resource_Projects extends Google_Service_Resource
   }
   /**
    * Prevents the supplied keys' IDs from being auto-allocated by Cloud Datastore.
+   * Used for imports only; other workloads are not supported.
    * (projects.reserveIds)
    *
    * @param string $projectId The ID of the project against which to make the

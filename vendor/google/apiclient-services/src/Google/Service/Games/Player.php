@@ -30,6 +30,7 @@ class Google_Service_Games_Player extends Google_Model
   protected $nameDataType = '';
   public $originalPlayerId;
   public $playerId;
+  public $playerStattus;
   protected $profileSettingsType = 'Google_Service_Games_ProfileSettings';
   protected $profileSettingsDataType = '';
   public $title;
@@ -131,6 +132,14 @@ class Google_Service_Games_Player extends Google_Model
   public function getPlayerId()
   {
     return $this->playerId;
+  }
+  public function setPlayerStattus($playerStattus)
+  {
+    $this->playerStattus = $playerStattus;
+  }
+  public function getPlayerStattus()
+  {
+    return $this->playerStattus;
   }
   /**
    * @param Google_Service_Games_ProfileSettings

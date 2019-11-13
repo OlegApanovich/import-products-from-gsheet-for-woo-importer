@@ -1,16 +1,17 @@
 <?php
-// exit if accessed directly
-if ( ! defined( 'ABSPATH' ) ) {
-	die;
-}
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Admin settings
+ *
+ * @since 1.0.0
  */
 class Admin_Settings {
 
 	/**
 	 * Construcotr for admin settings
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		$this->init();
@@ -18,6 +19,8 @@ class Admin_Settings {
 
 	/**
 	 * Init amdin settings
+	 *
+	 * @since 1.0.0
 	 */
 	public function init() {
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
@@ -33,12 +36,14 @@ class Admin_Settings {
 
 	/**
 	 * Add submenu to woocommerce admin menu
+	 *
+	 * @since 1.0.0
 	 */
 	public function add_menu() {
 		add_submenu_page(
 			'woocommerce',
-			__( 'Import Google Sheet Settings', 'woocommerce-import-products-google-sheet' ),
-			__( 'Import Google Sheet Settings', 'woocommerce-import-products-google-sheet' ),
+			esc_html__( 'Import Google Sheet Settings','woocommerce-import-products-google-sheet' ),
+			esc_html__( 'Import Google Sheet Settings', 'woocommerce-import-products-google-sheet' ),
 			'manage_options',
 			'woocommerce_import_products_google_sheet_menu',
 			array( $this, 'settings_form' )
@@ -47,6 +52,8 @@ class Admin_Settings {
 
 	/**
 	 * Add main plugin setings form
+	 *
+	 * @since 1.0.0
 	 */
 	public function settings_form() {
 		include_once( WC_IMPORT_SHEET_URI_ABSPATH
@@ -55,6 +62,8 @@ class Admin_Settings {
 
 	/**
 	 * Init plugin settings
+	 *
+	 * @since 1.0.0
 	 */
 	public function plugin_admin_init_settings() {
 		register_setting(
@@ -88,6 +97,8 @@ class Admin_Settings {
 
 	/**
 	 * Function callback for a add_settings_section
+	 *
+	 * @since 1.0.0
 	 */
 	public function plugin_section_text() {
 		echo '<p></p>';
@@ -95,6 +106,8 @@ class Admin_Settings {
 
 	/**
 	 * Function callback for a add_settings_field
+	 *
+	 * @since 1.0.0
 	 */
 	public function display_settings() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );
@@ -112,42 +125,38 @@ class Admin_Settings {
 	/**
 	 * Set options
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $input
 	 *
-	 * @return array $new_input
+	 * @return array
 	 */
 	public function set_options( $input ) {
-		$validate_input = $this->validate_options( $input );
+		$valid_input = $this->validate_options( $input );
 
-		$check = $this->check_user_input( $input );
-		if ( $check ) {
-			file_put_contents(
-				WC_IMPORT_SHEET_URI_ABSPATH . 'assets/client_secret.json',
-				$validate_input['google_api_key']
-			);
-		}
-
-		return $validate_input;
+		return $valid_input;
 	}
 
 	/**
 	 * Validate user input
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $input
 	 *
-	 * @return array $validate_input
+	 * @return array
 	 */
 	public function validate_options( $input ) {
-		$validate_input['google_sheet_title']
-		     = trim( $input['google_sheet_title'] );
-		$validate_input['google_api_key']
-		     = trim( $input['google_api_key'] );
+		$valid_input['google_sheet_title'] = ( $input['google_sheet_title'] );
+		$valid_input['google_api_key'] = trim( $input['google_api_key'] );
 
-		return $validate_input;
+		return $valid_input;
 	}
 
 	/**
 	 * Try to get sheet data from saved options
+	 *
+	 * @since 1.0.0
 	 */
 	public function set_sheet_data_by_options() {
 		if (
@@ -162,22 +171,28 @@ class Admin_Settings {
 	/**
 	 * Try to check user inputs and set erorr message if input is not valid
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param array $validate_input
 	 *
 	 * @return bool
 	 */
 	public function check_user_input( $validate_input ) {
-		try {
-			$google_api_obj = new Wrapper_Api_Google_Drive;
+		if ( $this->set_file_access( $validate_input ) ) {
 			try {
-				$google_sheet
-					= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
+				$google_api_obj = new Wrapper_Api_Google_Drive;
+				try {
+					$google_sheet
+						= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
 
-				$check = true;
+					$check = true;
+				} catch ( Exception $e ) {
+					$check = false;
+				}
 			} catch ( Exception $e ) {
 				$check = false;
 			}
-		} catch ( Exception $e ) {
+		} else {
 			$check = false;
 		}
 
@@ -187,48 +202,59 @@ class Admin_Settings {
 	/**
 	 * Retrive connection message by isser input
 	 *
-	 * @param array $validate_input
+	 * @since 1.0.0
+	 *
+	 * @param array $valid_input
 	 *
 	 * @return string
 	 */
-	public function get_connection_message( $validate_input ) {
+	public function get_connection_message( $valid_input ) {
 		$message = '';
-		try {
-			$google_api_obj = new Wrapper_Api_Google_Drive;
 
-			try {
-				$google_sheet
-					= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
-				$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
-
-				$message = sprintf(
-							__(
-								'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
-								'woocommerce-import-products-google-sheet'
-							),
-							$menu_page_url
-						);
-			} catch ( Exception $e ) {
-				$message = esc_html__(
-							'We can\'t recieve spreeadsheet by your provided settings, please check settings and try it again',
+		if ( ! $this->set_file_access( $valid_input ) ) {
+			$message = esc_html__(
+							'Please check if plugin ' . WC_IMPORT_SHEET_URI_ABSPATH . 'assets directory has write permission',
 							'woocommerce-import-products-google-sheet'
 						);
-			}
-		} catch ( Exception $e ) {
-			if ( ! empty( $e->getMessage() ) ) {
-				$message =  sprintf(
+		} else {
+			try {
+				$google_api_obj = new Wrapper_Api_Google_Drive;
+
+				try {
+					$google_sheet
+						= $google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
+					$menu_page_url
+						= menu_page_url( 'product_importer_google_sheet', false );
+
+					$message = sprintf(
 								__(
-									'We can\'t set connection to google API by your client_secret json setting, please check it and try again.'
-									 . ' API return responce error "%s"',
+									'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
 									'woocommerce-import-products-google-sheet'
 								),
-								$e->getMessage()
+								$menu_page_url
 							);
-			} else {
-				$message = esc_html__(
-						'We can\'t set connection to google API by your client_secret json setting, please check it and try again',
-						'woocommerce-import-products-google-sheet'
-					);
+				} catch ( Exception $e ) {
+					$message = esc_html__(
+								'We can\'t recieve spreeadsheet by your provided settings, please check settings and try it again',
+								'woocommerce-import-products-google-sheet'
+							);
+				}
+			} catch ( Exception $e ) {
+				if ( ! empty( $e->getMessage() ) ) {
+					$message =  sprintf(
+									__(
+										'We can\'t set connection to google API by your client_secret json setting, please check it and try again.'
+										 . ' API return responce error "%s"',
+										'woocommerce-import-products-google-sheet'
+									),
+									$e->getMessage()
+								);
+				} else {
+					$message = esc_html__(
+							'We can\'t set connection to google API by your client_secret json setting, please check it and try again',
+							'woocommerce-import-products-google-sheet'
+						);
+				}
 			}
 		}
 
@@ -236,8 +262,34 @@ class Admin_Settings {
 	}
 
 	/**
+	 * Try to set file access
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $validate_input
+	 *
+	 * @return bool
+	 */
+	public function set_file_access( $valid_input ) {
+		$success = file_put_contents(
+			WC_IMPORT_SHEET_URI_ABSPATH . 'assets/client_secret.json',
+			$valid_input['google_api_key']
+		);
+
+		if ( ! empty( $success ) ) {
+			$success = true;
+		} else {
+			$success = false;
+		}
+
+		return $success;
+	}
+
+	/**
 	 * After try establish connection to google drive api
 	 * try to display user success or error message
+	 *
+	 * @since 1.0.0
 	 */
 	public function set_connection_message() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );

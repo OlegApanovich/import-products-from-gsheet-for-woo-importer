@@ -30,7 +30,7 @@
  */
 class Google_Service_GamesManagement extends Google_Service
 {
-  /** Share your Google+ profile information and view and manage your game activity. */
+  /** Create, edit, and delete your Google Play Games activity. */
   const GAMES =
       "https://www.googleapis.com/auth/games";
 
@@ -38,7 +38,6 @@ class Google_Service_GamesManagement extends Google_Service
   public $applications;
   public $events;
   public $players;
-  public $quests;
   public $rooms;
   public $scores;
   public $turnBasedMatches;
@@ -46,13 +45,15 @@ class Google_Service_GamesManagement extends Google_Service
   /**
    * Constructs the internal representation of the GamesManagement service.
    *
-   * @param Google_Client $client
+   * @param Google_Client $client The client used to deliver requests.
+   * @param string $rootUrl The root URL used for requests to the service.
    */
-  public function __construct(Google_Client $client)
+  public function __construct(Google_Client $client, $rootUrl = null)
   {
     parent::__construct($client);
-    $this->rootUrl = 'https://www.googleapis.com/';
+    $this->rootUrl = $rootUrl ?: 'https://www.googleapis.com/';
     $this->servicePath = 'games/v1management/';
+    $this->batchPath = 'batch/gamesManagement/v1management';
     $this->version = 'v1management';
     $this->serviceName = 'gamesManagement';
 
@@ -204,48 +205,6 @@ class Google_Service_GamesManagement extends Google_Service
                   'required' => true,
                 ),
               ),
-            ),
-          )
-        )
-    );
-    $this->quests = new Google_Service_GamesManagement_Resource_Quests(
-        $this,
-        $this->serviceName,
-        'quests',
-        array(
-          'methods' => array(
-            'reset' => array(
-              'path' => 'quests/{questId}/reset',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'questId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'resetAll' => array(
-              'path' => 'quests/reset',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'resetAllForAllPlayers' => array(
-              'path' => 'quests/resetAllForAllPlayers',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
-            ),'resetForAllPlayers' => array(
-              'path' => 'quests/{questId}/resetForAllPlayers',
-              'httpMethod' => 'POST',
-              'parameters' => array(
-                'questId' => array(
-                  'location' => 'path',
-                  'type' => 'string',
-                  'required' => true,
-                ),
-              ),
-            ),'resetMultipleForAllPlayers' => array(
-              'path' => 'quests/resetMultipleForAllPlayers',
-              'httpMethod' => 'POST',
-              'parameters' => array(),
             ),
           )
         )

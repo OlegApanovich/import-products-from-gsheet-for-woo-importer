@@ -25,6 +25,7 @@ class Google_Service_DLP_GooglePrivacyDlpV2RedactImageRequest extends Google_Col
   public $includeFindings;
   protected $inspectConfigType = 'Google_Service_DLP_GooglePrivacyDlpV2InspectConfig';
   protected $inspectConfigDataType = '';
+  public $location;
 
   /**
    * @param Google_Service_DLP_GooglePrivacyDlpV2ByteContentItem
@@ -75,5 +76,13 @@ class Google_Service_DLP_GooglePrivacyDlpV2RedactImageRequest extends Google_Col
   public function getInspectConfig()
   {
     return $this->inspectConfig;
+  }
+  public function setLocation($location)
+  {
+    $this->location = $location;
+  }
+  public function getLocation()
+  {
+    return $this->location;
   }
 }

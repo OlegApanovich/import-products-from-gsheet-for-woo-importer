@@ -83,6 +83,8 @@ final class WС_Import_Products_Google_Sheet {
 		add_action( 'init', array( $this, 'includes' ) );
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'admin_init', array( $this, 'init_frontend' ), 0 );
+		add_filter('plugin_action_links_' . plugin_basename( __FILE__ ),
+			array( $this, 'set_plugin_action_links' ), 10, 1 );
 		add_filter( 'woocommerce_screen_ids',
 			array( $this, 'add_woocommerce_screen_ids' ), 10, 1 );
 	}
@@ -221,6 +223,27 @@ final class WС_Import_Products_Google_Sheet {
 		$screen_ids[] = 'product_page_product_importer_google_sheet';
 
 		return $screen_ids;
+	}
+
+	/**
+	 * Короткое описание функции
+	 *
+	 * @param int $bar test description this argument
+	 *
+	 * @return void
+	 */
+	public function set_plugin_action_links( $links ) {
+		return array_merge(
+			array(
+				'<a href="' . 
+				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) . 
+				'">' . 
+				esc_html__( 'Settings', 'woocommerce-import-products-google-sheet' ) . 
+				'</a>'
+			),
+			$links
+		);
+		return $links;
 	}
 }
 

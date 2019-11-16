@@ -14,8 +14,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$options = array( 'google_sheet_title', 'google_api_key' );
+$option_name = array( 'plugin_wc_import_google_sheet_options' );
 
-foreach ( $options as $option_name ) {
-	delete_option( $option_name );
-}
+delete_option( $option_name );
+

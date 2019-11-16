@@ -243,7 +243,7 @@ class Admin_Settings {
 				if ( ! empty( $e->getMessage() ) ) {
 					$message =  sprintf(
 									__(
-										'We can\'t set connection to google API by your client_secret json setting, please check it and try again.'
+										'We can\'t set connection to google API by your providing settings, please check it and try again.'
 										 . ' API return responce error "%s"',
 										'woocommerce-import-products-google-sheet'
 									),

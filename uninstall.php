@@ -14,7 +14,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$options = array( 'wporg_option' );
+$options = array( 'google_sheet_title', 'google_api_key' );
 
 foreach ( $options as $option_name ) {
 	delete_option( $option_name );

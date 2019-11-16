@@ -211,12 +211,12 @@ class Admin_Settings {
 	public function get_connection_message( $valid_input ) {
 		$message = '';
 
-		if ( ! $this->set_file_access( $valid_input ) ) {
+		if ( ! empty( $valid_input ) && ! $this->set_file_access( $valid_input ) ) {
 			$message = esc_html__(
 							'Please check if plugin ' . WC_IMPORT_SHEET_URI_ABSPATH . 'assets directory has write permission',
 							'woocommerce-import-products-google-sheet'
 						);
-		} else {
+		} elseif ( ! empty( $valid_input ) ) {
 			try {
 				$google_api_obj = new Wrapper_Api_Google_Drive;
 

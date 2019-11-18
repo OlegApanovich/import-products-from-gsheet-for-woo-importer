@@ -32,7 +32,7 @@ Below are the instructions on how we can receive client_secret json.
 
 9. In the next page you will see the next form for your credentials, feel free to choose any service account name in the appropriate field and select role project -> editor, key button type leave default json and press button "Continue" ![](assets/screenshot-7.png)
 
-10. After that, the system will offer you to download the api key json file.  Save it on your local machine and then you can close google developer console browser tab.
+10. After that, the system will offer you to download the api key json file. Save it on your local machine and then you can close google developer console browser tab.
 
 11. Please copy the client_secret json key that you have received in the previous step to appropriate input in option plugin page ![](assets/screenshot-8.png)
 

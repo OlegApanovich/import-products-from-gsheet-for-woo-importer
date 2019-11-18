@@ -26,6 +26,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @param  [string] $version_to_check
  *                   Optional, verify certain version of the dependent plugin
+ *
+ * @return bool
  */
 if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 	function wc_import_google_sheet_is_plugin_active(
@@ -35,6 +37,7 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 		$textdomain = '',
 		$version_to_check = null
 	) {
+		$success = true;
 		# Needed to the function "deactivate_plugins" works
 		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
@@ -68,6 +71,8 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
                 </div>
 				<?php
 			} );
+
+			$success = false;
 		} else {
 			# If version to check is not defined do nothing
 			if ( $version_to_check === null ) {
@@ -118,7 +123,11 @@ if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
 						unset( $_GET['activate'] );
 					}
 				} );
+
+				$success = false;
 			}
 		}
+
+		return $success;
 	}
 endif;

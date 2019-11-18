@@ -7,7 +7,7 @@
  *
  * Plugin Name:  Woocommerce Import Products Google Sheet
  * Plugin URI:   https://github.com/OlegApanovich/woocommerce-import-products-google-sheet
- * Description:  Import woocommerce products from google sheet by using native wordpres importer
+ * Description:  Import woocommerce products from google sheet by using native woocommerce importer
  * Version:      1.0.0
  * Author:       Oleg Apanovich
  * Author URI:   https://github.com/OlegApanovich
@@ -17,8 +17,6 @@
  * Domain Path: /languages
  */
 defined( 'ABSPATH' ) || exit;
-
-require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
 /**
  * Main Plagin Class.
@@ -58,9 +56,22 @@ final class WС_Import_Products_Google_Sheet {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
-		$this->define_constants();
-		$this->init_hooks();
+		// check if woocommerce is already active
+		$woocommerce_check = wc_import_google_sheet_is_plugin_active(
+			'Woocommerce Import Products Google Sheet',
+			'WooCommerce',
+			'woocommerce/woocommerce.php',
+			'woocommerce-import-products-google-sheet',
+			'3.1.0'
+		);
+
+		if ( $woocommerce_check ) {
+			// Add woocommerce activation checkup
+			$this->define_constants();
+			$this->init_hooks();
+		}
 	}
 
 	/**
@@ -246,14 +257,5 @@ final class WС_Import_Products_Google_Sheet {
 		return $links;
 	}
 }
-
-// check if woocommerce is already active
-wc_import_google_sheet_is_plugin_active(
-	'Woocommerce Import Products Google Sheet',
-	'WooCommerce',
-	'woocommerce/woocommerce.php',
-	'woocommerce-import-products-google-sheet',
-	'3.1.0'
-);
 
 WС_Import_Products_Google_Sheet::instance();

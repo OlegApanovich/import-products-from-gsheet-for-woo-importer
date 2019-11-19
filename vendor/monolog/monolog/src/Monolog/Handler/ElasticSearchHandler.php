@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 /*
  * This file is part of the Monolog package.
@@ -27,13 +27,13 @@ use Elastica\Exception\ExceptionInterface;
  *        'index' => 'elastic_index_name',
  *        'type' => 'elastic_doc_type',
  *    );
- *    $handler = new ElasticaHandler($client, $options);
+ *    $handler = new ElasticSearchHandler($client, $options);
  *    $log = new Logger('application');
  *    $log->pushHandler($handler);
  *
  * @author Jelle Vink <jelle.vink@gmail.com>
  */
-class ElasticaHandler extends AbstractProcessingHandler
+class ElasticSearchHandler extends AbstractProcessingHandler
 {
     /**
      * @var Client
@@ -43,24 +43,24 @@ class ElasticaHandler extends AbstractProcessingHandler
     /**
      * @var array Handler config options
      */
-    protected $options = [];
+    protected $options = array();
 
     /**
-     * @param Client     $client  Elastica Client object
-     * @param array      $options Handler configuration
-     * @param int|string $level   The minimum logging level at which this handler will be triggered
-     * @param bool       $bubble  Whether the messages that are handled can bubble up the stack or not
+     * @param Client $client  Elastica Client object
+     * @param array  $options Handler configuration
+     * @param int    $level   The minimum logging level at which this handler will be triggered
+     * @param bool   $bubble  Whether the messages that are handled can bubble up the stack or not
      */
-    public function __construct(Client $client, array $options = [], $level = Logger::DEBUG, bool $bubble = true)
+    public function __construct(Client $client, array $options = array(), $level = Logger::DEBUG, $bubble = true)
     {
         parent::__construct($level, $bubble);
         $this->client = $client;
         $this->options = array_merge(
-            [
+            array(
                 'index'          => 'monolog',      // Elastic index name
                 'type'           => 'record',       // Elastic document type
                 'ignore_error'   => false,          // Suppress Elastica exceptions
-            ],
+            ),
             $options
         );
     }
@@ -68,24 +68,27 @@ class ElasticaHandler extends AbstractProcessingHandler
     /**
      * {@inheritDoc}
      */
-    protected function write(array $record): void
+    protected function write(array $record)
     {
-        $this->bulkSend([$record['formatted']]);
+        $this->bulkSend(array($record['formatted']));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFormatter(FormatterInterface $formatter): HandlerInterface
+    public function setFormatter(FormatterInterface $formatter)
     {
         if ($formatter instanceof ElasticaFormatter) {
             return parent::setFormatter($formatter);
         }
-
-        throw new \InvalidArgumentException('ElasticaHandler is only compatible with ElasticaFormatter');
+        throw new \InvalidArgumentException('ElasticSearchHandler is only compatible with ElasticaFormatter');
     }
 
-    public function getOptions(): array
+    /**
+     * Getter options
+     * @return array
+     */
+    public function getOptions()
     {
         return $this->options;
     }
@@ -93,7 +96,7 @@ class ElasticaHandler extends AbstractProcessingHandler
     /**
      * {@inheritDoc}
      */
-    protected function getDefaultFormatter(): FormatterInterface
+    protected function getDefaultFormatter()
     {
         return new ElasticaFormatter($this->options['index'], $this->options['type']);
     }
@@ -101,7 +104,7 @@ class ElasticaHandler extends AbstractProcessingHandler
     /**
      * {@inheritdoc}
      */
-    public function handleBatch(array $records): void
+    public function handleBatch(array $records)
     {
         $documents = $this->getFormatter()->formatBatch($records);
         $this->bulkSend($documents);
@@ -109,9 +112,10 @@ class ElasticaHandler extends AbstractProcessingHandler
 
     /**
      * Use Elasticsearch bulk API to send list of documents
+     * @param  array             $documents
      * @throws \RuntimeException
      */
-    protected function bulkSend(array $documents): void
+    protected function bulkSend(array $documents)
     {
         try {
             $this->client->addDocuments($documents);

@@ -1,6 +1,7 @@
 {
     "require": {
         "google/apiclient": "^2.0",
+        "monolog/monolog": "^1.23",
         "asimlqt/php-google-spreadsheet-client": "3.0.*"
     }
 }

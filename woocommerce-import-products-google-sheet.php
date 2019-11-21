@@ -3,9 +3,8 @@
  * The plugin bootstrap file
  *
  * @since 1.0.0
- * @package Woocommerce_Import_Products_Google_Sheet
  *
- * Plugin Name:  Woocommerce Import Products Google Sheet
+ * Plugin Name:  GSheet For Woo Importer
  * Plugin URI:   https://github.com/OlegApanovich/woocommerce-import-products-google-sheet
  * Description:  Import woocommerce products from google sheet by using native woocommerce importer
  * Version:      1.0.0
@@ -237,11 +236,13 @@ final class WС_Import_Products_Google_Sheet {
 	}
 
 	/**
-	 * Короткое описание функции
+	 * Set additional links on a plugin admin dashbord page
 	 *
-	 * @param int $bar test description this argument
+	 * @since 1.0.0
 	 *
-	 * @return void
+	 * @param array $links
+	 *
+	 * @return array
 	 */
 	public function set_plugin_action_links( $links ) {
 		return array_merge(

@@ -28,10 +28,6 @@ class Admin_Settings {
 			'admin_init',
 			array( $this, 'plugin_admin_init_settings' )
 		);
-		add_action(
-			'admin_init',
-			array( $this, 'set_sheet_data_by_options' )
-		);
 	}
 
 	/**
@@ -147,25 +143,10 @@ class Admin_Settings {
 	 * @return array
 	 */
 	public function validate_options( $input ) {
-		$valid_input['google_sheet_title'] = ( $input['google_sheet_title'] );
-		$valid_input['google_api_key'] = trim( $input['google_api_key'] );
+		$valid_input['google_sheet_title'] = esc_html( $input['google_sheet_title'] );
+		$valid_input['google_api_key'] = esc_html( $input['google_api_key'] );
 
 		return $valid_input;
-	}
-
-	/**
-	 * Try to get sheet data from saved options
-	 *
-	 * @since 1.0.0
-	 */
-	public function set_sheet_data_by_options() {
-		if (
-			! empty( $options = get_option( 'plugin_wc_import_google_sheet_options' ) ) &&
-			! empty( $_POST['plugin_wc_import_google_sheet_options'] )
-		) {
-			$validate_input =
-				$this->validate_options( $_POST['plugin_wc_import_google_sheet_options'] );
-		}
 	}
 
 	/**
@@ -292,7 +273,7 @@ class Admin_Settings {
 	 * @since 1.0.0
 	 */
 	public function set_connection_message() {
-		$options = get_option( 'plugin_wc_import_google_sheet_options' );
+		$options = $this->get_plugin_options();
 
 		$connection_message = $this->get_connection_message( $options );
 		$check = $this->check_user_input( $options );
@@ -303,6 +284,23 @@ class Admin_Settings {
 			echo '<h3 style="color:red">' . $connection_message . '</h3>';
 		}
 	}
+
+	/**
+	 * Get plugin options
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	public function get_plugin_options() {
+		$options = get_option( 'plugin_wc_import_google_sheet_options' );
+
+		$options['google_sheet_title'] = wp_specialchars_decode( $options['google_sheet_title'], ENT_QUOTES );
+		$options['google_api_key'] = wp_specialchars_decode( $options['google_api_key'], ENT_QUOTES );
+
+		return $options;
+	}
+
 }
 
 new Admin_Settings();

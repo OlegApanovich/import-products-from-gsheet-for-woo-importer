@@ -174,9 +174,7 @@ final class WС_Import_Products_Google_Sheet {
 			'woocommerce_import_google_sheet_admin', $params );
 
 		$settings = new Admin_Settings;
-		$options = get_option( 'plugin_wc_import_google_sheet_options' );
-
-		$check = $settings->check_user_input( $options );
+		$check = $settings->check_user_input( $settings->get_plugin_options() );
 
 		if ( $check ) {
 			wp_enqueue_script( 'wc_import_google_sheet_admin' );

@@ -1,6 +1,8 @@
 <?php
 /**
  * Class WC_Product_Google_Sheet_Importer_Controller file.
+ *
+ * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -11,15 +13,22 @@ if ( ! class_exists( 'WP_Importer' ) ) {
 
 /**
  * Product importer controller - handles file upload and forms in admin.
+ *
+ * @since 1.0.0
  */
 class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_Controller {
 	/**
 	 * Output information about the uploading process.
+	 *
+	 * @since 1.0.0
 	 */
 	protected function upload_form() {
 		$bytes      = apply_filters( 'import_upload_size_limit', wp_max_upload_size() );
 		$size       = size_format( $bytes );
 		$upload_dir = wp_upload_dir();
+
+		$options = get_option( 'plugin_wc_import_google_sheet_options' );
+		$google_sheet_title = html_entity_decode( htmlentities( $options['google_sheet_title'] ) );
 
 		// include plugin custom import form
 		include dirname( __FILE__ ) . '/views/html-product-csv-import-form.php';
@@ -29,6 +38,8 @@ class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Imp
 	 * Handles the CSV upload and initial parsing of the file to prepare for
 	 * displaying author import options.
 	 *
+	 * @since 1.0.0
+	 *
 	 * @return string|WP_Error
 	 */
 	public function handle_upload() {
@@ -37,24 +48,45 @@ class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Imp
 
 		if ( empty( $file_url ) ) {
 			if ( ! isset( $_REQUEST['file'] ) ) {
-				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_empty', __( 'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.', 'woocommerce-import-products-google-sheet' ) );
+				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_empty',
+					__( 'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.',
+						'woocommerce-import-products-google-sheet' )
+				);
 			}
 
 			if ( $_REQUEST['file'] ) {
-				$file_content = $this->google_sheet_get_csv_file( $_REQUEST['file'] );
+				$options = get_option( 'plugin_wc_import_google_sheet_options' );
+				$google_sheet_title = wp_specialchars_decode( $options['google_sheet_title'] );
 
-				$upload_dir_arr = wp_upload_dir();
+				if ( $google_sheet_title == $_REQUEST['file'] ) {
+					$file_content = $this->google_sheet_get_csv_file( $google_sheet_title );
 
-				$file_sheet_url = $upload_dir_arr['url'] . '/' . $_REQUEST['file'] . '.csv';
-				$file_sheet_path = $upload_dir_arr['path'] . '/' . $_REQUEST['file'] . '.csv';
+					$upload_dir_arr = wp_upload_dir();
 
-				file_put_contents( $file_sheet_path, $file_content );
+					$file_name = sanitize_file_name( $_REQUEST['file'] );
+					$file_sheet_url = $upload_dir_arr['url'] . '/' . $file_name . '.csv';
+					$file_sheet_path = $upload_dir_arr['path'] . '/' . $file_name . '.csv';
+
+					file_put_contents( $file_sheet_path, $file_content );
+				} else {
+					return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid',
+						__( "Your current chosen google sheet title don't set in plugin google sheet title option, please update plugin options and return to import again..",
+						'woocommerce-import-products-google-sheet' )
+					);
+				}
+
 			} else {
-				$file_sheet_url = '';
+				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid',
+					__( "You don't set google style sheet title setting, please set it and return again",
+						'woocommerce-import-products-google-sheet' )
+				);
 			}
 
 			if ( ! self::is_file_valid_csv( wc_clean( wp_unslash( array_slice( explode( '/', $file_sheet_url ), -1 )[0] ) ), false ) ) {
-				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid', __( 'Invalid file type. The importer supports CSV and TXT file formats.', 'woocommerce-import-products-google-sheet' ) );
+				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid',
+					__( 'Invalid file type. The importer supports CSV and TXT file formats.',
+						'woocommerce-import-products-google-sheet' )
+				);
 			}
 
 			$overrides = array(
@@ -71,10 +103,6 @@ class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Imp
 				"url"  => $file_sheet_url,
 				"type" => "text/csv",
 			];
-
-			if ( isset( $upload['error'] ) ) {
-				return new WP_Error( 'woocommerce_product_csv_importer_upload_error', $upload['error'] );
-			}
 
 			// Construct the object array.
 			$object = array(

@@ -35,12 +35,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						} else {
 							?>
 								<?php
-								$options = get_option( 'plugin_wc_import_google_sheet_options' );
 								if ( ! empty( $options['google_sheet_title'] ) ) {
 									?>
 									<select name="file">
-										<option value="<?php echo $options['google_sheet_title'] ?>">
-											<?php echo $options['google_sheet_title'] ?>
+										<option value="<?php echo $google_sheet_title ?>">
+											<?php echo $google_sheet_title ?>
 										</option>
 									</select>
 									<?php

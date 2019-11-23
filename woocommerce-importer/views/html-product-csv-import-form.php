@@ -2,12 +2,12 @@
 /**
  * Admin View: Product import form
  *
+ * @since 1.0.0
+ *
  * @package WooCommerce/Admin
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) || exit;
 ?>
 <form class="wc-progress-form-content woocommerce-importer" enctype="multipart/form-data" method="post">
 	<header>

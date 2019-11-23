@@ -6,6 +6,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * by https://gist.github.com/dianjuar/9a398c9e86a20a30868eee0c653e0ca4
  *
+ * @since  1.0.0
+ *
  * @param  [string]  $my_plugin_name
  *                   The plugin name trying to activate. The name of this plugin
  *                   Ex:

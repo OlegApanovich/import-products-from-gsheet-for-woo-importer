@@ -2,16 +2,15 @@
 /**
  * Admin View: Product import form
  *
- * @package WooCommerce/Admin
+ * @since  1.0.0
  */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+
+defined( 'ABSPATH' ) || exit;
 ?>
 
 <h3><?php esc_html_e( 'Google drive API client_secret json', 'woocommerce-import-products-google-sheet' ) ?></h3>
 <textarea id="plugin_google_api_key" required name="plugin_wc_import_google_sheet_options[google_api_key]" rows="14" cols="50" value="<?php echo $google_api_key ?>">
-	<?php echo $google_api_key ?>
+<?php echo $google_api_key ?>
 </textarea>
 <br>
 <h3><?php esc_html_e( 'Google sheet title', 'woocommerce-import-products-google-sheet' ) ?></h3>

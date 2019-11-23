@@ -1,17 +1,23 @@
 <?php
 /**
  * Init WooCommerce data importers.
+ *
+ * @since 1.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
 
 /**
  * Google_Sheet_WC_Admin_Importers Class.
+ *
+ * @since 1.0.0
  */
 class Google_Sheet_WC_Admin_Importers extends WC_Admin_Importers {
 
 	/**
 	 * Constructor.
+	 *
+	 * @since 1.0.0
 	 */
 	public function __construct() {
 		if ( ! $this->import_allowed() ) {
@@ -32,6 +38,8 @@ class Google_Sheet_WC_Admin_Importers extends WC_Admin_Importers {
 
 	/**
 	 * The product importer.
+	 *
+	 * @since 1.0.0
 	 */
 	public function product_importer() {
 

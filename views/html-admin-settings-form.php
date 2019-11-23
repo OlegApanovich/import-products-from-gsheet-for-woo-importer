@@ -2,7 +2,7 @@
 /**
  * Admin View: Product import form
  *
- * @package WooCommerce/Admin
+ * @since 1.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

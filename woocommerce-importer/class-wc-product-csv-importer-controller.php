@@ -139,6 +139,8 @@ class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Imp
 	/**
 	 * Gateway for a google sheet api
 	 *
+	 * @since 1.0.0
+	 *
 	 * @param string $file_name
 	 *
 	 * @return string $sheet_content_csv

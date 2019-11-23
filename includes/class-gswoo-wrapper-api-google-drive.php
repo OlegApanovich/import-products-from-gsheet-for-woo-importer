@@ -9,7 +9,7 @@ use Google\Spreadsheet\ServiceRequestFactory;
  *
 * @since 1.0.0
  */
-class Wrapper_Api_Google_Drive {
+class GSWOO_Wrapper_Api_Google_Drive {
 
 	/**
 	 * The instance of the SpreadsheetService
@@ -19,12 +19,12 @@ class Wrapper_Api_Google_Drive {
 	public $spreadsheet;
 
 	/**
-	 * Construcotr for Wrapper_Api_Google_Drive
+	 * Construcotr for GSWOO_Wrapper_Api_Google_Drive
 	 *
 	 * @since 1.0.0
 	 */
 	function __construct() {
-		putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . WC_IMPORT_SHEET_URI_ABSPATH
+		putenv( 'GOOGLE_APPLICATION_CREDENTIALS=' . GSWOO_URI_ABSPATH
 		        . '/assets/client_secret.json' );
 		$client = new Google_Client;
 		$client->useApplicationDefaultCredentials();

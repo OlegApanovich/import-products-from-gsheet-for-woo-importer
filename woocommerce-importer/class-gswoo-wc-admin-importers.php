@@ -8,11 +8,11 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Google_Sheet_WC_Admin_Importers Class.
+ * GSWOO_Admin_Importers Class.
  *
  * @since 1.0.0
  */
-class Google_Sheet_WC_Admin_Importers extends WC_Admin_Importers {
+class GSWOO_Admin_Importers extends WC_Admin_Importers {
 
 	/**
 	 * Constructor.
@@ -45,11 +45,11 @@ class Google_Sheet_WC_Admin_Importers extends WC_Admin_Importers {
 
 		include_once WC_ABSPATH . 'includes/admin/importers/class-wc-product-csv-importer-controller.php';
 		include_once WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
-		include_once WC_IMPORT_SHEET_URI_ABSPATH . 'woocommerce-importer/class-wc-product-csv-importer-controller.php';
+		include_once GSWOO_URI_ABSPATH . 'woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php';
 
-		$importer = new Google_Sheet_WC_Product_CSV_Importer_Controller();
+		$importer = new GSWOO_WC_Product_CSV_Importer_Controller();
 		$importer->dispatch();
 	}
 }
 
-new Google_Sheet_WC_Admin_Importers();
+new GSWOO_Admin_Importers();

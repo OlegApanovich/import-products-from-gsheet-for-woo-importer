@@ -16,7 +16,7 @@ if ( ! class_exists( 'WP_Importer' ) ) {
  *
  * @since 1.0.0
  */
-class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_Controller {
+class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_Controller {
 	/**
 	 * Output information about the uploading process.
 	 *
@@ -146,7 +146,7 @@ class Google_Sheet_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Imp
 	 * @return string $sheet_content_csv
 	 */
 	public function google_sheet_get_csv_file( $file_name ) {
-		$google_api_obj = new Wrapper_Api_Google_Drive;
+		$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive;
 		$google_api_obj->set_sheet( $file_name );
 		$sheet_content_csv = $google_api_obj->get_sheet_csv();
 

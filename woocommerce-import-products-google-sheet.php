@@ -22,7 +22,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-final class WС_Import_Products_Google_Sheet {
+final class GSWOO_Plugin {
 	/**
 	 * The single instance of the class.
 	 *
@@ -58,7 +58,7 @@ final class WС_Import_Products_Google_Sheet {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
 		// check if woocommerce is already active
-		$woocommerce_check = wc_import_google_sheet_is_plugin_active(
+		$woocommerce_check = gswoo_is_plugin_active(
 			'Woocommerce Import Products Google Sheet',
 			'WooCommerce',
 			'woocommerce/woocommerce.php',
@@ -79,9 +79,9 @@ final class WС_Import_Products_Google_Sheet {
 	 * @since 1.0.0
 	 */
 	private function define_constants() {
-		define( 'WC_IMPORT_SHEET_PLUGIN_FILE', __FILE__ );
-		define( 'WC_IMPORT_SHEET_URI', plugins_url( '', WC_IMPORT_SHEET_PLUGIN_FILE ) );
-		define( 'WC_IMPORT_SHEET_URI_ABSPATH', dirname( __FILE__ ) . '/' );
+		define( 'GSWOO_PLUGIN_FILE', __FILE__ );
+		define( 'GSWOO_URI', plugins_url( '', GSWOO_PLUGIN_FILE ) );
+		define( 'GSWOO_URI_ABSPATH', dirname( __FILE__ ) . '/' );
 	}
 
 	/**
@@ -106,14 +106,14 @@ final class WС_Import_Products_Google_Sheet {
 	 */
 	public function includes() {
 		if ( $this->is_request( 'admin' ) ) {
-			include_once( WC_IMPORT_SHEET_URI_ABSPATH
+			include_once( GSWOO_URI_ABSPATH
 			              . 'vendor/autoload.php' );
-			include_once( WC_IMPORT_SHEET_URI_ABSPATH
-			              . 'includes/class-admin-settings.php' );
-			include_once( WC_IMPORT_SHEET_URI_ABSPATH
-			              . 'woocommerce-importer/class-wc-admin-importers.php' );
-			include_once( WC_IMPORT_SHEET_URI_ABSPATH
-			              . 'includes/class-wrapper-api-google-drive.php' );
+			include_once( GSWOO_URI_ABSPATH
+			              . 'includes/class-gswoo-admin-settings.php' );
+			include_once( GSWOO_URI_ABSPATH
+			              . 'woocommerce-importer/class-gswoo-wc-admin-importers.php' );
+			include_once( GSWOO_URI_ABSPATH
+			              . 'includes/class-gswoo-wrapper-api-google-drive.php' );
 		}
 	}
 
@@ -147,7 +147,7 @@ final class WС_Import_Products_Google_Sheet {
 
 		unload_textdomain( 'woocommerce-import-products-google-sheet' );
 		load_plugin_textdomain( 'woocommerce-import-products-google-sheet',
-			false, WC_IMPORT_SHEET_URI_ABSPATH . '/languages' );
+			false, GSWOO_URI_ABSPATH . '/languages' );
 	}
 
 	/**
@@ -157,7 +157,7 @@ final class WС_Import_Products_Google_Sheet {
 	 */
 	public function init_frontend() {
 		wp_register_script( 'wc_import_google_sheet_admin',
-			WC_IMPORT_SHEET_URI . '/assets/js/admin.js', [ 'jquery' ] );
+			GSWOO_URI . '/assets/js/admin.js', [ 'jquery' ] );
 		$params = array(
 			'urls'    => array(
 				'import_products_google_sheet' =>
@@ -173,7 +173,7 @@ final class WС_Import_Products_Google_Sheet {
 		wp_localize_script( 'wc_import_google_sheet_admin',
 			'woocommerce_import_google_sheet_admin', $params );
 
-		$settings = new Admin_Settings;
+		$settings = new GSWOO_Admin_Settings;
 		$check = $settings->check_user_input( $settings->get_plugin_options() );
 
 		if ( $check ) {
@@ -257,4 +257,4 @@ final class WС_Import_Products_Google_Sheet {
 	}
 }
 
-WС_Import_Products_Google_Sheet::instance();
+GSWOO_Plugin::instance();

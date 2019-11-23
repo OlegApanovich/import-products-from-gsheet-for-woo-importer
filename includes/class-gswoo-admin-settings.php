@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class Admin_Settings {
+class GSWOO_Admin_Settings {
 
 	/**
 	 * Construcotr for admin settings
@@ -52,7 +52,7 @@ class Admin_Settings {
 	 * @since 1.0.0
 	 */
 	public function settings_form() {
-		include_once( WC_IMPORT_SHEET_URI_ABSPATH
+		include_once( GSWOO_URI_ABSPATH
 		              . 'views/html-admin-settings-form.php' );
 	}
 
@@ -114,7 +114,7 @@ class Admin_Settings {
 		$google_sheet_title = ! empty( $options['google_sheet_title'] )
 			? $options['google_sheet_title'] : '';
 
-		include_once( WC_IMPORT_SHEET_URI_ABSPATH
+		include_once( GSWOO_URI_ABSPATH
 		              . 'views/html-admin-settings-form-options.php' );
 	}
 
@@ -161,7 +161,7 @@ class Admin_Settings {
 	public function check_user_input( $validate_input ) {
 		if ( $this->set_file_access( $validate_input ) ) {
 			try {
-				$google_api_obj = new Wrapper_Api_Google_Drive;
+				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive;
 				try {
 					$google_sheet
 						= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
@@ -194,12 +194,12 @@ class Admin_Settings {
 
 		if ( ! empty( $valid_input ) && ! $this->set_file_access( $valid_input ) ) {
 			$message = esc_html__(
-							'Please check if plugin ' . WC_IMPORT_SHEET_URI_ABSPATH . 'assets directory has write permission',
+							'Please check if plugin ' . GSWOO_URI_ABSPATH . 'assets directory has write permission',
 							'woocommerce-import-products-google-sheet'
 						);
 		} elseif ( ! empty( $valid_input ) ) {
 			try {
-				$google_api_obj = new Wrapper_Api_Google_Drive;
+				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive;
 
 				try {
 					$google_sheet
@@ -253,7 +253,7 @@ class Admin_Settings {
 	 */
 	public function set_file_access( $valid_input ) {
 		$success = file_put_contents(
-			WC_IMPORT_SHEET_URI_ABSPATH . 'assets/client_secret.json',
+			GSWOO_URI_ABSPATH . 'assets/client_secret.json',
 			$valid_input['google_api_key']
 		);
 
@@ -303,4 +303,4 @@ class Admin_Settings {
 
 }
 
-new Admin_Settings();
+new GSWOO_Admin_Settings();

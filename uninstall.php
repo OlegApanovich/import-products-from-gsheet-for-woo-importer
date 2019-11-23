@@ -17,4 +17,3 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 $option_name = 'plugin_wc_import_google_sheet_options';
 
 delete_option( $option_name );
-

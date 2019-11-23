@@ -31,8 +31,8 @@ defined( 'ABSPATH' ) || exit;
  *
  * @return bool
  */
-if ( ! function_exists( 'wc_import_google_sheet_is_plugin_active' ) ) :
-	function wc_import_google_sheet_is_plugin_active(
+if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
+	function gswoo_is_plugin_active(
 		$my_plugin_name,
 		$dependency_plugin_name,
 		$path_to_plugin,

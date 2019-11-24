@@ -295,8 +295,10 @@ class GSWOO_Admin_Settings {
 	public function get_plugin_options() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );
 
-		$options['google_sheet_title'] = wp_specialchars_decode( $options['google_sheet_title'], ENT_QUOTES );
-		$options['google_api_key'] = wp_specialchars_decode( $options['google_api_key'], ENT_QUOTES );
+		if ( ! empty( $options['google_sheet_title'] ) && ! empty( $options['google_api_key'] ) ) {
+			$options['google_sheet_title'] = wp_specialchars_decode( $options['google_sheet_title'], ENT_QUOTES );
+			$options['google_api_key'] = wp_specialchars_decode( $options['google_api_key'], ENT_QUOTES );
+		}
 
 		return $options;
 	}

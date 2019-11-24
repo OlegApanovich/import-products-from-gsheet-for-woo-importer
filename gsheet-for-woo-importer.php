@@ -74,7 +74,7 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * Define WС_Import_Products_Google_Sheet Constants.
+	 * Define plugin Constants.
 	 *
 	 * @since 1.0.0
 	 */
@@ -100,7 +100,7 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * Include required core files used in admin and on the frontend.
+	 * Include required plugin core files
 	 *
 	 * @since 1.0.0
 	 */

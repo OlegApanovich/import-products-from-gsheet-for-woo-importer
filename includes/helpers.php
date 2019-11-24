@@ -45,7 +45,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 
 		if ( ! is_plugin_active( $path_to_plugin ) ) {
 			# Deactivate the current plugin
-			deactivate_plugins( 'woocommerce-import-products-google-sheet/woocommerce-import-products-google-sheet.php' );
+			deactivate_plugins( 'gsheet-for-woo-importer/gsheet-for-woo-importer.php' );
 
 			# Show an error alert on the admin area
 			add_action( 'admin_notices', function () use (

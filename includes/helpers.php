@@ -2,7 +2,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Verify if a plugin is active, if not deactivate the actual plugin an show an error
+ * Verify if a plugin is active, if not deactivate the actual plugin and show an error
  *
  * by https://gist.github.com/dianjuar/9a398c9e86a20a30868eee0c653e0ca4
  *
@@ -41,7 +41,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 
 		if ( ! is_plugin_active( $path_to_plugin ) ) {
 			# Deactivate the current plugin
-			deactivate_plugins( 'gsheet-for-woo-importer/gsheet-for-woo-importer.php' );
+			deactivate_plugins( 'import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php' );
 
 			# Show an error alert on the admin area
 			add_action( 'admin_notices', function () use (

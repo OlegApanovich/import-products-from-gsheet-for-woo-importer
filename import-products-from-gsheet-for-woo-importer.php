@@ -61,6 +61,7 @@ final class GSWOO_Plugin {
 		$woocommerce_check = gswoo_is_plugin_active(
 			'GSheet For Woo Importer',
 			'WooCommerce',
+			'woocommerce/woocommerce.php',
 			'3.1.0'
 		);
 
@@ -80,6 +81,7 @@ final class GSWOO_Plugin {
 		define( 'GSWOO_PLUGIN_FILE', __FILE__ );
 		define( 'GSWOO_URI', plugins_url( '', GSWOO_PLUGIN_FILE ) );
 		define( 'GSWOO_URI_ABSPATH', dirname( __FILE__ ) . '/' );
+		define( 'GSWOO_WC_ABSPATH', WP_PLUGIN_DIR . '/woocommerce/' );
 	}
 
 	/**
@@ -138,12 +140,6 @@ final class GSWOO_Plugin {
 	 * @since 1.0.0
 	 */
 	public function load_plugin_textdomain() {
-		$locale = is_admin() && function_exists( 'get_user_locale' )
-			? get_user_locale() : get_locale();
-		$locale = apply_filters( 'plugin_locale', $locale,
-			'import-products-from-gsheet-for-woo-importer' );
-
-		unload_textdomain( 'import-products-from-gsheet-for-woo-importer' );
 		load_plugin_textdomain( 'import-products-from-gsheet-for-woo-importer',
 			false, GSWOO_URI_ABSPATH . '/languages' );
 	}

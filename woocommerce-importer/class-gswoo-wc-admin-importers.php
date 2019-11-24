@@ -43,8 +43,8 @@ class GSWOO_Admin_Importers extends WC_Admin_Importers {
 	 */
 	public function product_importer() {
 
-		include_once WC_ABSPATH . 'includes/admin/importers/class-wc-product-csv-importer-controller.php';
-		include_once WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
+		include_once GSWOO_WC_ABSPATH . 'includes/admin/importers/class-wc-product-csv-importer-controller.php';
+		include_once GSWOO_WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
 		include_once GSWOO_URI_ABSPATH . 'woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php';
 
 		$importer = new GSWOO_WC_Product_CSV_Importer_Controller();

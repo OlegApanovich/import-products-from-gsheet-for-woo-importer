@@ -106,7 +106,7 @@ class GSWOO_Admin_Settings {
 	 * @since 1.0.0
 	 */
 	public function display_settings() {
-		$options = get_option( 'plugin_wc_import_google_sheet_options' );
+		$options = $this->get_plugin_options();
 
 		$google_api_key = ! empty( $options['google_api_key'] )
 			? $options['google_api_key'] : '';

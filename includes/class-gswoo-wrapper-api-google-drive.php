@@ -90,7 +90,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @return string $csv
+	 * @return string
 	 */
 	public function get_sheet_csv() {
 		$sheet_content = [];

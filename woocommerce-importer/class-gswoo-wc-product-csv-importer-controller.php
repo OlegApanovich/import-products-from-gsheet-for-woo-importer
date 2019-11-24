@@ -1,6 +1,6 @@
 <?php
 /**
- * Class WC_Product_Google_Sheet_Importer_Controller file.
+ * Class GSWOO_WC_Product_CSV_Importer_Controller file.
  *
  * @since 1.0.0
  */
@@ -143,7 +143,7 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 	 *
 	 * @param string $file_name
 	 *
-	 * @return string $sheet_content_csv
+	 * @return string
 	 */
 	public function google_sheet_get_csv_file( $file_name ) {
 		$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive;

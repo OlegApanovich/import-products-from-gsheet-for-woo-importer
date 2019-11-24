@@ -5,14 +5,14 @@
  * @since 1.0.0
  *
  * Plugin Name:  GSheet For Woo Importer
- * Plugin URI:   https://github.com/OlegApanovich/gsheet-for-woo-importer
+ * Plugin URI:   https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
  * Description:  Import woocommerce products from google sheet by using native woocommerce importer
  * Version:      1.0.0
  * Author:       Oleg Apanovich
  * Author URI:   https://github.com/OlegApanovich
  * License:      GPL-3.0+
  * License URI:  http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain:  woocommerce-import-products-google-sheet
+ * Text Domain:  import-products-from-gsheet-for-woo-importer
  * Domain Path:  /languages
  */
 defined( 'ABSPATH' ) || exit;
@@ -61,8 +61,6 @@ final class GSWOO_Plugin {
 		$woocommerce_check = gswoo_is_plugin_active(
 			'GSheet For Woo Importer',
 			'WooCommerce',
-			'woocommerce/woocommerce.php',
-			'woocommerce-import-products-google-sheet',
 			'3.1.0'
 		);
 
@@ -74,7 +72,7 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * Define plugin Constants.
+	 * Define plugin constants.
 	 *
 	 * @since 1.0.0
 	 */
@@ -143,10 +141,10 @@ final class GSWOO_Plugin {
 		$locale = is_admin() && function_exists( 'get_user_locale' )
 			? get_user_locale() : get_locale();
 		$locale = apply_filters( 'plugin_locale', $locale,
-			'woocommerce-import-products-google-sheet' );
+			'import-products-from-gsheet-for-woo-importer' );
 
-		unload_textdomain( 'woocommerce-import-products-google-sheet' );
-		load_plugin_textdomain( 'woocommerce-import-products-google-sheet',
+		unload_textdomain( 'import-products-from-gsheet-for-woo-importer' );
+		load_plugin_textdomain( 'import-products-from-gsheet-for-woo-importer',
 			false, GSWOO_URI_ABSPATH . '/languages' );
 	}
 
@@ -167,7 +165,7 @@ final class GSWOO_Plugin {
 			),
 			'strings' => array(
 				'import_products_google_sheet' =>
-				esc_html__( 'Import From Google Sheet', 'woocommerce-import-products-google-sheet' ),
+				esc_html__( 'Import From Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
 			),
 		);
 		wp_localize_script( 'wc_import_google_sheet_admin',
@@ -248,7 +246,7 @@ final class GSWOO_Plugin {
 				'<a href="' . 
 				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) . 
 				'">' . 
-				esc_html__( 'Settings', 'woocommerce-import-products-google-sheet' ) . 
+				esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' ) . 
 				'</a>'
 			),
 			$links

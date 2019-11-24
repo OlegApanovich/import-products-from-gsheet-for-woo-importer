@@ -23,9 +23,6 @@ defined( 'ABSPATH' ) || exit;
  *                   Ex:
  *                   woocommerce/woocommerce.php
  *
- * @param  [string] $textdomain
- *                   Text domain to looking the localization (the translated strings)
- *
  * @param  [string] $version_to_check
  *                   Optional, verify certain version of the dependent plugin
  *
@@ -36,7 +33,6 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 		$my_plugin_name,
 		$dependency_plugin_name,
 		$path_to_plugin,
-		$textdomain = '',
 		$version_to_check = null
 	) {
 		$success = true;
@@ -50,22 +46,25 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 			# Show an error alert on the admin area
 			add_action( 'admin_notices', function () use (
 				$my_plugin_name,
-				$dependency_plugin_name,
-				$textdomain
+				$dependency_plugin_name
 			) {
 				?>
                 <div class="updated error">
                     <p>
 						<?php
 						echo sprintf(
-							__( 'The plugin <strong>"%s"</strong> needs the plugin <strong>"%s"</strong> active',
-								$textdomain ),
+							__(
+								'The plugin <strong>"%s"</strong> needs the plugin <strong>"%s"</strong> active',
+								'import-products-from-gsheet-for-woo-importer'
+							),
 							$my_plugin_name, $dependency_plugin_name
 						);
 						echo '<br>';
 						echo sprintf(
-							__( '<strong>%s has been deactivated</strong>',
-								$textdomain ),
+							__(
+								'<strong>%s has been deactivated</strong>',
+								'import-products-from-gsheet-for-woo-importer'
+							),
 							$my_plugin_name
 						);
 						?>
@@ -92,29 +91,32 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 			if ( $error ) {
 
 				# Deactivate the current plugin
-				deactivate_plugins( 'woocommerce-import-products-google-sheet/woocommerce-import-products-google-sheet.php' );
+				deactivate_plugins( 'import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php' );
 
 				add_action( 'admin_notices', function () use (
 					$my_plugin_name,
 					$dependency_plugin_name,
-					$version_to_check, 
-					$textdomain
+					$version_to_check
 				) {
 					?>
                     <div class="updated error">
                         <p>
 							<?php
 							echo sprintf(
-								__( 'The plugin <strong>"%s"</strong> needs the <strong>version %s</strong> or newer of <strong>"%s"</strong>',
-									$textdomain ),
+								__(
+									'The plugin <strong>"%s"</strong> needs the <strong>version %s</strong> or newer of <strong>"%s"</strong>',
+									'import-products-from-gsheet-for-woo-importer'
+								),
 								$my_plugin_name,
 								$version_to_check,
 								$dependency_plugin_name
 							);
 							echo '<br>';
 							echo sprintf(
-								__( '<strong>%s has been deactivated</strong>',
-									$textdomain ),
+								__(
+									'<strong>%s has been deactivated</strong>',
+									'import-products-from-gsheet-for-woo-importer'
+								),
 								$my_plugin_name
 							);
 							?>

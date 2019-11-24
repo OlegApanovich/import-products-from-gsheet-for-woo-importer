@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) || exit;
 ?>
 <form class="wc-progress-form-content woocommerce-importer" enctype="multipart/form-data" method="post">
 	<header>
-		<h2><?php esc_html_e( 'Import products from a Google Sheet', 'woocommerce-import-products-google-sheet' ); ?></h2>
-		<p><?php esc_html_e( 'This tool allows you to import (or merge) product data to your store from a Google Sheet created on your Google Drive.', 'woocommerce-import-products-google-sheet' ); ?></p>
+		<h2><?php esc_html_e( 'Import products from a Google Sheet', 'import-products-from-gsheet-for-woo-importer' ); ?></h2>
+		<p><?php esc_html_e( 'This tool allows you to import (or merge) product data to your store from a Google Sheet created on your Google Drive.', 'import-products-from-gsheet-for-woo-importer' ); ?></p>
 	</header>
 	<section>
 		<table class="form-table woocommerce-importer-options">
@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 				<tr>
 					<th scope="row">
 						<label for="upload">
-							<?php _e( 'Choose Google Sheet title:', 'woocommerce-import-products-google-sheet' ); ?>
+							<?php _e( 'Choose Google Sheet title:', 'import-products-from-gsheet-for-woo-importer' ); ?>
 						</label>
 					</th>
 					<td>
@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
 						if ( ! empty( $upload_dir['error'] ) ) {
 							?>
 							<div class="inline error">
-								<p><?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'woocommerce-import-products-google-sheet' ); ?></p>
+								<p><?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'import-products-from-gsheet-for-woo-importer' ); ?></p>
 								<p><strong><?php echo esc_html( $upload_dir['error'] ); ?></strong></p>
 							</div>
 							<?php
@@ -46,7 +46,7 @@ defined( 'ABSPATH' ) || exit;
 								} else {
 									$menu_page_url = menu_page_url( 'woocommerce_import_products_google_sheet_menu', false );
 									?>
-									<p style='color: red;'><?php printf( __( "You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it", 'woocommerce-import-products-google-sheet' ), $menu_page_url ) ?></p>
+									<p style='color: red;'><?php printf( __( "You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it", 'import-products-from-gsheet-for-woo-importer' ), $menu_page_url ) ?></p>
 									<?php
 								}
 								?>
@@ -58,7 +58,7 @@ defined( 'ABSPATH' ) || exit;
 								<?php
 								printf(
 									/* translators: %s: maximum upload size */
-									esc_html__( 'Maximum size: %s', 'woocommerce-import-products-google-sheet' ),
+									esc_html__( 'Maximum size: %s', 'import-products-from-gsheet-for-woo-importer' ),
 									esc_html( $size )
 								);
 								?>
@@ -69,16 +69,16 @@ defined( 'ABSPATH' ) || exit;
 					</td>
 				</tr>
 				<tr>
-					<th><label for="woocommerce-importer-update-existing"><?php esc_html_e( 'Update existing products', 'woocommerce-import-products-google-sheet' ); ?></label><br/></th>
+					<th><label for="woocommerce-importer-update-existing"><?php esc_html_e( 'Update existing products', 'import-products-from-gsheet-for-woo-importer' ); ?></label><br/></th>
 					<td>
 						<input type="hidden" name="update_existing" value="0" />
 						<input type="checkbox" id="woocommerce-importer-update-existing" name="update_existing" value="1" />
-						<label for="woocommerce-importer-update-existing"><?php esc_html_e( 'Existing products that match by ID or SKU will be updated. Products that do not exist will be skipped.', 'woocommerce-import-products-google-sheet' ); ?></label>
+						<label for="woocommerce-importer-update-existing"><?php esc_html_e( 'Existing products that match by ID or SKU will be updated. Products that do not exist will be skipped.', 'import-products-from-gsheet-for-woo-importer' ); ?></label>
 					</td>
 				</tr>
 				<tr class="woocommerce-importer-advanced hidden">
 					<th>
-						<label for="woocommerce-importer-file-url"><?php esc_html_e( 'Alternatively, enter the path to a CSV file on your server:', 'woocommerce-import-products-google-sheet' ); ?></label>
+						<label for="woocommerce-importer-file-url"><?php esc_html_e( 'Alternatively, enter the path to a CSV file on your server:', 'import-products-from-gsheet-for-woo-importer' ); ?></label>
 					</th>
 					<td>
 						<label for="woocommerce-importer-file-url" class="woocommerce-importer-file-url-field-wrapper">
@@ -87,11 +87,11 @@ defined( 'ABSPATH' ) || exit;
 					</td>
 				</tr>
 				<tr class="woocommerce-importer-advanced hidden">
-					<th><label><?php esc_html_e( 'CSV Delimiter', 'woocommerce-import-products-google-sheet' ); ?></label><br/></th>
+					<th><label><?php esc_html_e( 'CSV Delimiter', 'import-products-from-gsheet-for-woo-importer' ); ?></label><br/></th>
 					<td><input type="text" name="delimiter" placeholder="," size="2" /></td>
 				</tr>
 				<tr class="woocommerce-importer-advanced hidden">
-					<th><label><?php esc_html_e( 'Use previous column mapping preferences?', 'woocommerce-import-products-google-sheet' ); ?></label><br/></th>
+					<th><label><?php esc_html_e( 'Use previous column mapping preferences?', 'import-products-from-gsheet-for-woo-importer' ); ?></label><br/></th>
 					<td><input type="checkbox" id="woocommerce-importer-map-preferences" name="map_preferences" value="1" /></td>
 				</tr>
 			</tbody>
@@ -113,8 +113,8 @@ defined( 'ABSPATH' ) || exit;
 		});
 	</script>
 	<div class="wc-actions">
-		<a href="#" class="woocommerce-importer-toggle-advanced-options" data-hidetext="<?php esc_html_e( 'Hide advanced options', 'woocommerce-import-products-google-sheet' ); ?>" data-showtext="<?php esc_html_e( 'Hide advanced options', 'woocommerce-import-products-google-sheet' ); ?>"><?php esc_html_e( 'Show advanced options', 'woocommerce-import-products-google-sheet' ); ?></a>
-		<button type="submit" class="button button-primary button-next" value="<?php esc_attr_e( 'Continue', 'woocommerce-import-products-google-sheet' ); ?>" name="save_step"><?php esc_html_e( 'Continue', 'woocommerce-import-products-google-sheet' ); ?></button>
+		<a href="#" class="woocommerce-importer-toggle-advanced-options" data-hidetext="<?php esc_html_e( 'Hide advanced options', 'import-products-from-gsheet-for-woo-importer' ); ?>" data-showtext="<?php esc_html_e( 'Hide advanced options', 'import-products-from-gsheet-for-woo-importer' ); ?>"><?php esc_html_e( 'Show advanced options', 'import-products-from-gsheet-for-woo-importer' ); ?></a>
+		<button type="submit" class="button button-primary button-next" value="<?php esc_attr_e( 'Continue', 'import-products-from-gsheet-for-woo-importer' ); ?>" name="save_step"><?php esc_html_e( 'Continue', 'import-products-from-gsheet-for-woo-importer' ); ?></button>
 		<?php wp_nonce_field( 'woocommerce-csv-importer' ); ?>
 	</div>
 </form>

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GSheet For Woo Importer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-24 10:40+0000\n"
+"POT-Creation-Date: 2019-11-24 13:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -18,6 +18,11 @@ msgstr ""
 #: includes/class-gswoo-admin-settings.php:226
 #, php-format
 msgid " API return responce error \"%s\""
+msgstr ""
+
+#: includes/helpers.php:64 includes/helpers.php:116
+#, php-format
+msgid "<strong>%s has been deactivated</strong>"
 msgstr ""
 
 #: woocommerce-importer/views/html-product-csv-import-form.php:81
@@ -81,10 +86,10 @@ msgstr ""
 
 #. URI of the plugin
 msgid ""
-"https://github.com/OlegApanovich/woocommerce-import-products-google-sheet"
+"https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer"
 msgstr ""
 
-#: gsheet-for-woo-importer.php:170
+#: import-products-from-gsheet-for-woo-importer.php:168
 msgid "Import From Google Sheet"
 msgstr ""
 
@@ -130,12 +135,26 @@ msgstr ""
 msgid "Product Import Goole Sheet"
 msgstr ""
 
-#: gsheet-for-woo-importer.php:251
+#: import-products-from-gsheet-for-woo-importer.php:249
 msgid "Settings"
 msgstr ""
 
 #: woocommerce-importer/views/html-product-csv-import-form.php:116
 msgid "Show advanced options"
+msgstr ""
+
+#: includes/helpers.php:106
+#, php-format
+msgid ""
+"The plugin <strong>\"%s\"</strong> needs the <strong>version %s</strong> or "
+"newer of <strong>\"%s\"</strong>"
+msgstr ""
+
+#: includes/helpers.php:56
+#, php-format
+msgid ""
+"The plugin <strong>\"%s\"</strong> needs the plugin <strong>\"%s\"</strong> "
+"active"
 msgstr ""
 
 #: woocommerce-importer/views/html-product-csv-import-form.php:15

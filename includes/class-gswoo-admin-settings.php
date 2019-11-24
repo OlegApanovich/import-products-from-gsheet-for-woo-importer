@@ -38,8 +38,8 @@ class GSWOO_Admin_Settings {
 	public function add_menu() {
 		add_submenu_page(
 			'woocommerce',
-			esc_html__( 'Import Google Sheet Settings','woocommerce-import-products-google-sheet' ),
-			esc_html__( 'Import Google Sheet Settings', 'woocommerce-import-products-google-sheet' ),
+			esc_html__( 'Import Google Sheet Settings','import-products-from-gsheet-for-woo-importer' ),
+			esc_html__( 'Import Google Sheet Settings', 'import-products-from-gsheet-for-woo-importer' ),
 			'manage_options',
 			'woocommerce_import_products_google_sheet_menu',
 			array( $this, 'settings_form' )
@@ -195,7 +195,7 @@ class GSWOO_Admin_Settings {
 		if ( ! empty( $valid_input ) && ! $this->set_file_access( $valid_input ) ) {
 			$message = esc_html__(
 							'Please check if plugin ' . GSWOO_URI_ABSPATH . 'assets directory has write permission',
-							'woocommerce-import-products-google-sheet'
+							'import-products-from-gsheet-for-woo-importer'
 						);
 		} elseif ( ! empty( $valid_input ) ) {
 			try {
@@ -210,14 +210,14 @@ class GSWOO_Admin_Settings {
 					$message = sprintf(
 								__(
 									'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
-									'woocommerce-import-products-google-sheet'
+									'import-products-from-gsheet-for-woo-importer'
 								),
 								$menu_page_url
 							);
 				} catch ( Exception $e ) {
 					$message = esc_html__(
 								'We can\'t recieve spreeadsheet by your provided settings, please check settings and try it again',
-								'woocommerce-import-products-google-sheet'
+								'import-products-from-gsheet-for-woo-importer'
 							);
 				}
 			} catch ( Exception $e ) {
@@ -226,14 +226,14 @@ class GSWOO_Admin_Settings {
 									__(
 										'We can\'t set connection to google API by your providing settings, please check it and try again.'
 										 . ' API return responce error "%s"',
-										'woocommerce-import-products-google-sheet'
+										'import-products-from-gsheet-for-woo-importer'
 									),
 									$e->getMessage()
 								);
 				} else {
 					$message = esc_html__(
 							'We can\'t set connection to google API by your client_secret json setting, please check it and try again',
-							'woocommerce-import-products-google-sheet'
+							'import-products-from-gsheet-for-woo-importer'
 						);
 				}
 			}

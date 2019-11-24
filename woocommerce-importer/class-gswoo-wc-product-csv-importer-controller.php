@@ -50,7 +50,7 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 			if ( ! isset( $_REQUEST['file'] ) ) {
 				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_empty',
 					__( 'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.',
-						'woocommerce-import-products-google-sheet' )
+						'import-products-from-gsheet-for-woo-importer' )
 				);
 			}
 
@@ -71,21 +71,21 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 				} else {
 					return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid',
 						__( "Your current chosen google sheet title don't set in plugin google sheet title option, please update plugin options and return to import again..",
-						'woocommerce-import-products-google-sheet' )
+						'import-products-from-gsheet-for-woo-importer' )
 					);
 				}
 
 			} else {
 				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid',
 					__( "You don't set google style sheet title setting, please set it and return again",
-						'woocommerce-import-products-google-sheet' )
+						'import-products-from-gsheet-for-woo-importer' )
 				);
 			}
 
 			if ( ! self::is_file_valid_csv( wc_clean( wp_unslash( array_slice( explode( '/', $file_sheet_url ), -1 )[0] ) ), false ) ) {
 				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid',
 					__( 'Invalid file type. The importer supports CSV and TXT file formats.',
-						'woocommerce-import-products-google-sheet' )
+						'import-products-from-gsheet-for-woo-importer' )
 				);
 			}
 
@@ -126,14 +126,14 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 			return $upload['file'];
 		} elseif ( file_exists( ABSPATH . $file_url ) ) {
 			if ( ! self::is_file_valid_csv( ABSPATH . $file_url ) ) {
-				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid', __( 'Invalid file type. The importer supports CSV and TXT file formats.', 'woocommerce-import-products-google-sheet' ) );
+				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_invalid', __( 'Invalid file type. The importer supports CSV and TXT file formats.', 'import-products-from-gsheet-for-woo-importer' ) );
 			}
 
 			return ABSPATH . $file_url;
 		}
 		// phpcs:enable
 
-		return new WP_Error( 'woocommerce_product_csv_importer_upload_invalid_file', __( 'Please upload or provide the link to a valid CSV file.', 'woocommerce-import-products-google-sheet' ) );
+		return new WP_Error( 'woocommerce_product_csv_importer_upload_invalid_file', __( 'Please upload or provide the link to a valid CSV file.', 'import-products-from-gsheet-for-woo-importer' ) );
 	}
 
 	/**

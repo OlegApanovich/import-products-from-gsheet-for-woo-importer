@@ -12,8 +12,8 @@
  * Author URI:   https://github.com/OlegApanovich
  * License:      GPL-3.0+
  * License URI:  http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain: woocommerce-import-products-google-sheet
- * Domain Path: /languages
+ * Text Domain:  woocommerce-import-products-google-sheet
+ * Domain Path:  /languages
  */
 defined( 'ABSPATH' ) || exit;
 

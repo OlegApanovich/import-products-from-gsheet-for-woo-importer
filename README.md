@@ -8,6 +8,9 @@ Standard woocommerce import, that was introduced by woocommerce team since versi
 1. Upload the plugin to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
+Also as an option you can use the [plugin page](https://wordpress.org/plugins/import-products-from-gsheet-for-woo-importer/) on WordPress.org.
+
+
 ## Set plugin option
 
 After plugin installation we need to get client_secret json from google drive api.

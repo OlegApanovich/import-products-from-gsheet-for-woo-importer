@@ -107,7 +107,7 @@ final class GSWOO_Plugin {
 	public function includes() {
 		if ( $this->is_request( 'admin' ) ) {
 			include_once( GSWOO_URI_ABSPATH
-			              . 'vendor/autoload.php' );
+			              . 'lib/autoload.php' );
 			include_once( GSWOO_URI_ABSPATH
 			              . 'includes/class-gswoo-admin-settings.php' );
 			include_once( GSWOO_URI_ABSPATH

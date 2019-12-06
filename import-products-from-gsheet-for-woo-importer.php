@@ -93,10 +93,18 @@ final class GSWOO_Plugin {
 		add_action( 'init', array( $this, 'includes' ) );
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'admin_init', array( $this, 'init_frontend' ), 0 );
-		add_filter('plugin_action_links_' . plugin_basename( __FILE__ ),
-			array( $this, 'set_plugin_action_links' ), 10, 1 );
-		add_filter( 'woocommerce_screen_ids',
-			array( $this, 'add_woocommerce_screen_ids' ), 10, 1 );
+		add_filter(
+			'plugin_action_links_' . plugin_basename( __FILE__ ),
+			array( $this, 'set_plugin_action_links' ),
+			10,
+			1
+		);
+		add_filter(
+			'woocommerce_screen_ids',
+			array( $this, 'add_woocommerce_screen_ids' ),
+			10,
+			1
+		);
 	}
 
 	/**
@@ -106,14 +114,10 @@ final class GSWOO_Plugin {
 	 */
 	public function includes() {
 		if ( $this->is_request( 'admin' ) ) {
-			include_once( GSWOO_URI_ABSPATH
-			              . 'lib/autoload.php' );
-			include_once( GSWOO_URI_ABSPATH
-			              . 'includes/class-gswoo-admin-settings.php' );
-			include_once( GSWOO_URI_ABSPATH
-			              . 'woocommerce-importer/class-gswoo-wc-admin-importers.php' );
-			include_once( GSWOO_URI_ABSPATH
-			              . 'includes/class-gswoo-wrapper-api-google-drive.php' );
+			include_once GSWOO_URI_ABSPATH . 'lib/autoload.php';
+			include_once GSWOO_URI_ABSPATH . 'includes/class-gswoo-admin-settings.php';
+			include_once GSWOO_URI_ABSPATH . 'woocommerce-importer/class-gswoo-wc-admin-importers.php';
+			include_once GSWOO_URI_ABSPATH . 'includes/class-gswoo-wrapper-api-google-drive.php';
 		}
 	}
 
@@ -140,8 +144,11 @@ final class GSWOO_Plugin {
 	 * @since 1.0.0
 	 */
 	public function load_plugin_textdomain() {
-		load_plugin_textdomain( 'import-products-from-gsheet-for-woo-importer',
-			false, GSWOO_URI_ABSPATH . '/languages' );
+		load_plugin_textdomain(
+			'import-products-from-gsheet-for-woo-importer',
+			false,
+			GSWOO_URI_ABSPATH . '/languages'
+		);
 	}
 
 	/**
@@ -150,25 +157,31 @@ final class GSWOO_Plugin {
 	 * @since 1.0.0
 	 */
 	public function init_frontend() {
-		wp_register_script( 'wc_import_google_sheet_admin',
-			GSWOO_URI . '/assets/js/admin.js', [ 'jquery' ] );
+		wp_register_script(
+			'wc_import_google_sheet_admin',
+			GSWOO_URI . '/assets/js/admin.js',
+			array( 'jquery' )
+		);
 		$params = array(
 			'urls'    => array(
 				'import_products_google_sheet' =>
 					current_user_can( 'import' )
 					? esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_importer_google_sheet' ) )
-					: null
+					: null,
 			),
 			'strings' => array(
 				'import_products_google_sheet' =>
 				esc_html__( 'Import From Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
 			),
 		);
-		wp_localize_script( 'wc_import_google_sheet_admin',
-			'woocommerce_import_google_sheet_admin', $params );
+		wp_localize_script(
+			'wc_import_google_sheet_admin',
+			'woocommerce_import_google_sheet_admin',
+			$params
+		);
 
-		$settings = new GSWOO_Admin_Settings;
-		$check = $settings->check_user_input( $settings->get_plugin_options() );
+		$settings = new GSWOO_Admin_Settings();
+		$check    = $settings->check_user_input( $settings->get_plugin_options() );
 
 		if ( $check ) {
 			wp_enqueue_script( 'wc_import_google_sheet_admin' );
@@ -200,15 +213,15 @@ final class GSWOO_Plugin {
 	 */
 	private function is_request( $type ) {
 		switch ( $type ) {
-			case 'admin' :
+			case 'admin':
 				return is_admin();
-			case 'ajax' :
+			case 'ajax':
 				return defined( 'DOING_AJAX' );
-			case 'cron' :
+			case 'cron':
 				return defined( 'DOING_CRON' );
-			case 'frontend' :
+			case 'frontend':
 				return ( ! is_admin() || defined( 'DOING_AJAX' ) )
-				       && ! defined( 'DOING_CRON' );
+					   && ! defined( 'DOING_CRON' );
 		}
 	}
 
@@ -239,11 +252,11 @@ final class GSWOO_Plugin {
 	public function set_plugin_action_links( $links ) {
 		return array_merge(
 			array(
-				'<a href="' . 
-				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) . 
-				'">' . 
-				esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' ) . 
-				'</a>'
+				'<a href="' .
+				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) .
+				'">' .
+				esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' ) .
+				'</a>',
 			),
 			$links
 		);

@@ -36,15 +36,15 @@ defined( 'ABSPATH' ) || exit;
 								if ( ! empty( $options['google_sheet_title'] ) ) {
 									?>
 									<select name="file">
-										<option value="<?php echo $google_sheet_title ?>">
-											<?php echo $google_sheet_title ?>
+										<option value="<?php echo $google_sheet_title; ?>">
+											<?php echo $google_sheet_title; ?>
 										</option>
 									</select>
 									<?php
 								} else {
 									$menu_page_url = menu_page_url( 'woocommerce_import_products_google_sheet_menu', false );
 									?>
-									<p style='color: red;'><?php printf( __( "You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it", 'import-products-from-gsheet-for-woo-importer' ), $menu_page_url ) ?></p>
+									<p style='color: red;'><?php printf( __( "You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it", 'import-products-from-gsheet-for-woo-importer' ), $menu_page_url ); ?></p>
 									<?php
 								}
 								?>
@@ -63,7 +63,7 @@ defined( 'ABSPATH' ) || exit;
 							</small>
 							<?php
 						}
-					?>
+						?>
 					</td>
 				</tr>
 				<tr>

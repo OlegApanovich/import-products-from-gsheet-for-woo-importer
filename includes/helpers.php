@@ -36,28 +36,31 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 		$version_to_check = null
 	) {
 		$success = true;
-		# Needed to the function "deactivate_plugins" works
-		include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		// Needed to the function "deactivate_plugins" works
+		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		if ( ! is_plugin_active( $path_to_plugin ) ) {
-			# Deactivate the current plugin
+			// Deactivate the current plugin
 			deactivate_plugins( 'import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php' );
 
-			# Show an error alert on the admin area
-			add_action( 'admin_notices', function () use (
+			// Show an error alert on the admin area
+			add_action(
+				'admin_notices',
+				function () use (
 				$my_plugin_name,
 				$dependency_plugin_name
-			) {
-				?>
-                <div class="updated error">
-                    <p>
+				) {
+					?>
+				<div class="updated error">
+					<p>
 						<?php
 						echo sprintf(
 							__(
-								'The plugin <strong>"%s"</strong> needs the plugin <strong>"%s"</strong> active',
+								'The plugin <strong>"%1$s"</strong> needs the plugin <strong>"%2$s"</strong> active',
 								'import-products-from-gsheet-for-woo-importer'
 							),
-							$my_plugin_name, $dependency_plugin_name
+							$my_plugin_name,
+							$dependency_plugin_name
 						);
 						echo '<br>';
 						echo sprintf(
@@ -68,43 +71,49 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 							$my_plugin_name
 						);
 						?>
-                    </p>
-                </div>
-				<?php
-			} );
+					</p>
+				</div>
+					<?php
+				}
+			);
 
 			$success = false;
 		} else {
-			# If version to check is not defined do nothing
+			// If version to check is not defined do nothing
 			if ( $version_to_check === null ) {
 				return;
 			}
 
-			# Get the plugin dependency info
+			// Get the plugin dependency info
 			$dep_plugin_data =
 				get_plugin_data( WP_PLUGIN_DIR . '/' . $path_to_plugin );
 
-			# Compare version
-			$error = ! version_compare( $dep_plugin_data['Version'],
-				$version_to_check, '>=' ) ? true : false;
+			// Compare version
+			$error = ! version_compare(
+				$dep_plugin_data['Version'],
+				$version_to_check,
+				'>='
+			) ? true : false;
 
 			if ( $error ) {
 
-				# Deactivate the current plugin
+				// Deactivate the current plugin
 				deactivate_plugins( 'import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php' );
 
-				add_action( 'admin_notices', function () use (
+				add_action(
+					'admin_notices',
+					function () use (
 					$my_plugin_name,
 					$dependency_plugin_name,
 					$version_to_check
-				) {
-					?>
-                    <div class="updated error">
-                        <p>
+					) {
+						?>
+					<div class="updated error">
+						<p>
 							<?php
 							echo sprintf(
 								__(
-									'The plugin <strong>"%s"</strong> needs the <strong>version %s</strong> or newer of <strong>"%s"</strong>',
+									'The plugin <strong>"%1$s"</strong> needs the <strong>version %2$s</strong> or newer of <strong>"%3$s"</strong>',
 									'import-products-from-gsheet-for-woo-importer'
 								),
 								$my_plugin_name,
@@ -120,13 +129,14 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 								$my_plugin_name
 							);
 							?>
-                        </p>
-                    </div>
-					<?php
-					if ( isset( $_GET['activate'] ) ) {
-						unset( $_GET['activate'] );
+						</p>
+					</div>
+						<?php
+						if ( isset( $_GET['activate'] ) ) {
+							unset( $_GET['activate'] );
+						}
 					}
-				} );
+				);
 
 				$success = false;
 			}

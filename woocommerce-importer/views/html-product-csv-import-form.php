@@ -3,6 +3,9 @@
  * Admin View: Product import form
  *
  * @since 1.0.0
+ *
+ * @package GSWOO
+ * @subpackage GSWOO/woocommerce-importer/views
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -44,7 +47,21 @@ defined( 'ABSPATH' ) || exit;
 								} else {
 									$menu_page_url = menu_page_url( 'woocommerce_import_products_google_sheet_menu', false );
 									?>
-									<p style='color: red;'><?php printf( __( "You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it", 'import-products-from-gsheet-for-woo-importer' ), $menu_page_url ); ?></p>
+									<p style='color: red;'>
+										<?php
+										echo wp_kses(
+											printf(
+												// translators: %$s: plugin settings page url.
+												__(
+													"You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it",
+													'import-products-from-gsheet-for-woo-importer'
+												),
+												$menu_page_url
+											),
+											array( 'a' => array() )
+										);
+										?>
+									</p>
 									<?php
 								}
 								?>

@@ -3,6 +3,9 @@
  * Admin View: Product import form
  *
  * @since 1.0.0
+ *
+ * @package GSWOO
+ * @subpackage GSWOO/views
  */
 
 defined( 'ABSPATH' ) || exit;

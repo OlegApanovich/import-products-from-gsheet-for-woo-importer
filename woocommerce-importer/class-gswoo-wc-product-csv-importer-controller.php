@@ -3,6 +3,9 @@
  * Class GSWOO_WC_Product_CSV_Importer_Controller file.
  *
  * @since 1.0.0
+ *
+ * @package GSWOO
+ * @subpackage GSWOO/woocommerce-importer
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -30,7 +33,7 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 		$options            = get_option( 'plugin_wc_import_google_sheet_options' );
 		$google_sheet_title = html_entity_decode( htmlentities( $options['google_sheet_title'] ) );
 
-		// include plugin custom import form
+		// Include plugin custom import form.
 		include dirname( __FILE__ ) . '/views/html-product-csv-import-form.php';
 	}
 
@@ -107,7 +110,6 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 
 			$import = $file_sheet_path; // WPCS: sanitization ok, input var ok.
 
-			// $upload    = wp_handle_upload( $import, $overrides );
 			$upload = array(
 				'file' => $file_sheet_path,
 				'url'  => $file_sheet_url,
@@ -151,7 +153,7 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $file_name
+	 * @param string $file_name Google sheet file name.
 	 *
 	 * @return string
 	 */

@@ -1,8 +1,11 @@
 <?php
 /**
- * Init WooCommerce data importers.
+ * Init WooCommerce data importers
  *
  * @since 1.0.0
+ *
+ * @package GSWOO
+ * @subpackage GSWOO/woocommerce-importer
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -12,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class GSWOO_Admin_Importers extends WC_Admin_Importers {
+class GSWOO_WC_Admin_Importers extends WC_Admin_Importers {
 
 	/**
 	 * Constructor.
@@ -52,4 +55,4 @@ class GSWOO_Admin_Importers extends WC_Admin_Importers {
 	}
 }
 
-new GSWOO_Admin_Importers();
+new GSWOO_WC_Admin_Importers();

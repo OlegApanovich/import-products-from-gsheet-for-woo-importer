@@ -5,7 +5,7 @@
  * @since 1.0.0
  *
  * @package GSWOO
- * @subpackage GSWOO/views1
+ * @subpackage GSWOO/views
  */
 
 defined( 'ABSPATH' ) || exit;

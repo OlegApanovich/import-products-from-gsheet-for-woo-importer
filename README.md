@@ -11,7 +11,7 @@ Standard woocommerce import, that was introduced by woocommerce team since versi
 Also as an option you can use the [plugin page](https://wordpress.org/plugins/import-products-from-gsheet-for-woo-importer/) on WordPress.org.
 
 
-## Set plugin option
+## Set plugin options
 
 After plugin installation we need to get client_secret json from google drive api.
 

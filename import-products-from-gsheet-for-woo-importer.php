@@ -15,6 +15,7 @@
  * Text Domain:  import-products-from-gsheet-for-woo-importer
  * Domain Path:  /languages
  */
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -26,11 +27,11 @@ final class GSWOO_Plugin {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var    WС_Import_Products_Google_Sheet
+	 * @var    GSWOO_Plugin
 	 * @access protected
 	 * @since  1.0.0
 	 */
-	protected static $_instance = null;
+	protected static $instance = null;
 
 	/**
 	 * Main plugin instance.
@@ -42,11 +43,11 @@ final class GSWOO_Plugin {
 	 * @return Plagin - Main instance.
 	 */
 	public static function instance() {
-		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
-		return self::$_instance;
+		return self::$instance;
 	}
 
 	/**
@@ -57,7 +58,7 @@ final class GSWOO_Plugin {
 	public function __construct() {
 		require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
 
-		// check if woocommerce is already active
+		// Check if woocommerce is already active.
 		$woocommerce_check = gswoo_is_plugin_active(
 			'GSheet For Woo Importer',
 			'WooCommerce',
@@ -66,7 +67,7 @@ final class GSWOO_Plugin {
 		);
 
 		if ( $woocommerce_check ) {
-			// Add woocommerce activation checkup
+			// Add woocommerce activation checkup.
 			$this->define_constants();
 			$this->init_hooks();
 		}
@@ -131,7 +132,7 @@ final class GSWOO_Plugin {
 		do_action( 'before_woocommerce_import_products_google_sheet_init' );
 		// Set up localisation.
 		$this->load_plugin_textdomain();
-		// After init action
+		// After init action.
 		do_action( 'woocommerce_import_products_google_sheet_init' );
 	}
 
@@ -160,7 +161,9 @@ final class GSWOO_Plugin {
 		wp_register_script(
 			'wc_import_google_sheet_admin',
 			GSWOO_URI . '/assets/js/admin.js',
-			array( 'jquery' )
+			array( 'jquery' ),
+			true,
+			true
 		);
 		$params = array(
 			'urls'    => array(
@@ -193,8 +196,8 @@ final class GSWOO_Plugin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param  string      $name
-	 * @param  string|bool $value
+	 * @param  string      $name contant name.
+	 * @param  string|bool $value constant value.
 	 */
 	private function define( $name, $value ) {
 		if ( ! defined( $name ) ) {
@@ -220,8 +223,7 @@ final class GSWOO_Plugin {
 			case 'cron':
 				return defined( 'DOING_CRON' );
 			case 'frontend':
-				return ( ! is_admin() || defined( 'DOING_AJAX' ) )
-					   && ! defined( 'DOING_CRON' );
+				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
 		}
 	}
 
@@ -230,7 +232,7 @@ final class GSWOO_Plugin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $screen_ids
+	 * @param array $screen_ids all screen ids.
 	 *
 	 * @return array $screen_ids
 	 */
@@ -245,7 +247,7 @@ final class GSWOO_Plugin {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $links
+	 * @param array $links all links.
 	 *
 	 * @return array
 	 */
@@ -260,7 +262,6 @@ final class GSWOO_Plugin {
 			),
 			$links
 		);
-		return $links;
 	}
 }
 

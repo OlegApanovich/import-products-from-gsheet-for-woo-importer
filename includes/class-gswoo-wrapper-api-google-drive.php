@@ -1,4 +1,13 @@
 <?php
+/**
+ * File contain Wrapper for a Google APIs Client Library for PHP
+ *
+ * @since 1.0.0
+ *
+ * @package GSWOO
+ * @subpackage GSWOO/includes
+ */
+
 defined( 'ABSPATH' ) || exit;
 
 use Google\Spreadsheet\DefaultServiceRequest;
@@ -12,7 +21,9 @@ use Google\Spreadsheet\ServiceRequestFactory;
 class GSWOO_Wrapper_Api_Google_Drive {
 
 	/**
-	 * The instance of the SpreadsheetService
+	 * The instance of the SpreadsheetService.
+	 *
+	 * @var SpreadsheetService
 	 *
 	 * @since  1.0.0
 	 */
@@ -23,7 +34,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 *
 	 * @since 1.0.0
 	 */
-	function __construct() {
+	public function __construct() {
 		putenv(
 			'GOOGLE_APPLICATION_CREDENTIALS=' . GSWOO_URI_ABSPATH
 				. '/assets/client_secret.json'
@@ -43,9 +54,9 @@ class GSWOO_Wrapper_Api_Google_Drive {
 			$client->refreshTokenWithAssertion();
 		}
 
-		$accessToken = $client->fetchAccessTokenWithAssertion()['access_token'];
+		$access_token = $client->fetchAccessTokenWithAssertion()['access_token'];
 		ServiceRequestFactory::setInstance(
-			new DefaultServiceRequest( $accessToken )
+			new DefaultServiceRequest( $access_token )
 		);
 	}
 
@@ -54,7 +65,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $sheet_title
+	 * @param string $sheet_title title os spreedshhet on a google drive.
 	 *
 	 * @return object
 	 */
@@ -67,7 +78,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	}
 
 	/**
-	 * Get working sheet content row by row
+	 * Get working sheet content row by row.
 	 *
 	 * @since 1.0.0
 	 *
@@ -75,14 +86,14 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 */
 	public function get_sheet_content() {
 		$sheet_content = array();
-		// Get the first worksheet (tab)
+		// Get the first worksheet (tab).
 		$worksheets = $this->spreadsheet->getWorksheetFeed()->getEntries();
 		$worksheet  = $worksheets[0];
 
-		$listFeed = $worksheet->getListFeed();
+		$list_feed = $worksheet->getListFeed();
 
-		/** @var ListEntry */
-		foreach ( $listFeed->getEntries() as $entry ) {
+		// @var ListEntry.
+		foreach ( $list_feed->getEntries() as $entry ) {
 			$sheet_content[] = $entry->getValues();
 		}
 
@@ -98,7 +109,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 */
 	public function get_sheet_csv() {
 		$sheet_content = array();
-		// Get the first worksheet (tab)
+		// Get the first worksheet (tab).
 		$worksheets = $this->spreadsheet->getWorksheetFeed()->getEntries();
 		$worksheet  = $worksheets[0];
 

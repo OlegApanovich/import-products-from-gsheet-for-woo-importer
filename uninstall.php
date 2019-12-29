@@ -1,12 +1,9 @@
 <?php
-
 /**
  * Fired when the plugin is uninstalled.
  *
- * When populating this file, consider the following flow
- * of control:
- *
- * @since      1.0.0
+ * @since 1.0.0
+ * @package GSWOO
  */
 
 // If uninstall not called from WordPress, then exit.

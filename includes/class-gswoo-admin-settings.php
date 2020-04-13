@@ -293,9 +293,9 @@ class GSWOO_Admin_Settings {
 		$check              = $this->check_user_input( $options );
 
 		if ( $check ) {
-			echo '<h3 style="color:green">' . wp_kses( $connection_message, array( 'a' => array() ) ) . '</h3>';
+			echo '<h3 style="color:green">' . wp_kses( $connection_message, array( 'a' => array( 'href' => array() ) ) ) . '</h3>';
 		} else {
-			echo '<h3 style="color:red">' . wp_kses( $connection_message, array( 'a' => array() ) ) . '</h3>';
+			echo '<h3 style="color:red">' . wp_kses( $connection_message, array( 'a' => array( 'href' => array() ) ) ) . '</h3>';
 		}
 	}
 

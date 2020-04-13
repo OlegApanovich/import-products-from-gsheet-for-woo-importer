@@ -165,6 +165,7 @@ final class GSWOO_Plugin {
 			true,
 			true
 		);
+
 		$params = array(
 			'urls'    => array(
 				'import_products_google_sheet' =>
@@ -177,6 +178,7 @@ final class GSWOO_Plugin {
 				esc_html__( 'Import From Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
 			),
 		);
+
 		wp_localize_script(
 			'wc_import_google_sheet_admin',
 			'woocommerce_import_google_sheet_admin',

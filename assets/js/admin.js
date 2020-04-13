@@ -7,7 +7,9 @@
 
 ( function( $, woocommerce_import_google_sheet_admin ) {
 	$(
+
 		function() {
+
 			var $product_screen = $( '.edit-php.post-type-product' ),
 			$title_action       = $product_screen.find( '.page-title-action:first' ),
 

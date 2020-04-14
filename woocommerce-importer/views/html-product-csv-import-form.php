@@ -37,11 +37,18 @@ defined( 'ABSPATH' ) || exit;
 							?>
 								<?php
 								if ( ! empty( $options['google_sheet_title'] ) ) {
+									$google_sheet_title_list = array_map( 'trim', explode( ',' , $options['google_sheet_title'] ) );
 									?>
 									<select name="file">
-										<option value="<?php echo $google_sheet_title; ?>">
-											<?php echo $google_sheet_title; ?>
-										</option>
+										<?php
+										foreach ( $google_sheet_title_list as $google_sheet_title ) {
+											?>
+											<option value="<?php echo $google_sheet_title; ?>">
+												<?php echo $google_sheet_title; ?>
+											</option>
+											<?php
+										}
+										?>
 									</select>
 									<?php
 								} else {

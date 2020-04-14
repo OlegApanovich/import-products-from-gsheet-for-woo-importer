@@ -61,28 +61,17 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 			}
 
 			if ( $_REQUEST['file'] ) {
-				$options            = get_option( 'plugin_wc_import_google_sheet_options' );
-				$google_sheet_title = wp_specialchars_decode( $options['google_sheet_title'] );
 
-				if ( $google_sheet_title == $_REQUEST['file'] ) {
-					$file_content = $this->google_sheet_get_csv_file( $google_sheet_title );
+				$file_content = $this->google_sheet_get_csv_file( $_REQUEST['file'] );
 
-					$upload_dir_arr = wp_upload_dir();
+				$upload_dir_arr = wp_upload_dir();
 
-					$file_name       = sanitize_file_name( $_REQUEST['file'] );
-					$file_sheet_url  = $upload_dir_arr['url'] . '/' . $file_name . '.csv';
-					$file_sheet_path = $upload_dir_arr['path'] . '/' . $file_name . '.csv';
+				$file_name       = sanitize_file_name( $_REQUEST['file'] );
+				$file_sheet_url  = $upload_dir_arr['url'] . '/' . $file_name . '.csv';
+				$file_sheet_path = $upload_dir_arr['path'] . '/' . $file_name . '.csv';
 
-					file_put_contents( $file_sheet_path, $file_content );
-				} else {
-					return new WP_Error(
-						'woocommerce_product_csv_importer_upload_file_invalid',
-						__(
-							"Your current chosen google sheet title don't set in plugin google sheet title option, please update plugin options and return to import again..",
-							'import-products-from-gsheet-for-woo-importer'
-						)
-					);
-				}
+				file_put_contents( $file_sheet_path, $file_content );
+
 			} else {
 				return new WP_Error(
 					'woocommerce_product_csv_importer_upload_file_invalid',

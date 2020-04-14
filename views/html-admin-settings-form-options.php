@@ -17,4 +17,8 @@ defined( 'ABSPATH' ) || exit;
 </textarea>
 <br>
 <h3><?php esc_html_e( 'Google sheet title', 'import-products-from-gsheet-for-woo-importer' ); ?></h3>
-<input id="plugin_google_sheet_title" required name="plugin_wc_import_google_sheet_options[google_sheet_title]" size="40" type="text" value="<?php echo esc_html( $google_sheet_title ); ?>">
+<p><?php esc_html_e( 'Add multiple google sheets with comma separator', 'import-products-from-gsheet-for-woo-importer' ) ?></p><br>
+<textarea id="plugin_google_sheet_title" required name="plugin_wc_import_google_sheet_options[google_sheet_title]" rows="14" cols="50" value="<?php echo esc_html( $google_sheet_title ); ?>">
+<?php echo esc_html( $google_sheet_title ); ?>
+</textarea>
+

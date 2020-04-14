@@ -173,8 +173,9 @@ class GSWOO_Admin_Settings {
 			try {
 				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
 				try {
-					$google_sheet
-						= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
+					foreach ( $validate_input['google_sheet_title'] as $google_sheet_title ) {
+						$google_sheet  = $google_api_obj->set_sheet( $google_sheet_title );
+					}
 
 					$check = true;
 				} catch ( Exception $e ) {
@@ -214,10 +215,12 @@ class GSWOO_Admin_Settings {
 		} elseif ( ! empty( $valid_input ) ) {
 			try {
 				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
+				$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
 
 				try {
-					$google_sheet  = $google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
-					$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
+					foreach ( $valid_input['google_sheet_title'] as $google_sheet_title ) {
+						$google_sheet  = $google_api_obj->set_sheet( $google_sheet_title );
+					}
 
 					$message = sprintf(
 						// translators: %s: plugin import page url.
@@ -308,15 +311,28 @@ class GSWOO_Admin_Settings {
 	 */
 	public function get_plugin_options() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );
-
+ 
 		if ( ! empty( $options['google_sheet_title'] ) && ! empty( $options['google_api_key'] ) ) {
-			$options['google_sheet_title'] = wp_specialchars_decode( $options['google_sheet_title'], ENT_QUOTES );
 			$options['google_api_key']     = wp_specialchars_decode( $options['google_api_key'], ENT_QUOTES );
+			$google_sheet_title            = wp_specialchars_decode( $options['google_sheet_title'], ENT_QUOTES );
+			$options['google_sheet_title'] = $this->get_google_sheet_title( $google_sheet_title );
 		}
 
 		return $options;
 	}
 
+	/**
+	 * Devide google_sheet_title to multiple titles
+	 *
+	 * @param string $bar test description this argument
+	 *
+	 * @return array
+	 */
+	public function get_google_sheet_title( $google_sheet_title ) {
+		$google_sheet_title = array_map( 'trim', explode( ',' , $google_sheet_title ) );
+
+		return $google_sheet_title;
+	}
 }
 
 new GSWOO_Admin_Settings();

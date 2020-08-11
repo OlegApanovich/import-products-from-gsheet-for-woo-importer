@@ -74,7 +74,7 @@ class GSWOO_Admin_Settings {
 		register_setting(
 			'plugin_wc_import_google_sheet_options',
 			'plugin_wc_import_google_sheet_options',
-			array( $this, 'set_options' )
+			array( 'sanitize_callback' => array( $this, 'validate_options' ) )
 		);
 
 		add_settings_section(
@@ -129,22 +129,7 @@ class GSWOO_Admin_Settings {
 	}
 
 	/**
-	 * Set options
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $input Option input value.
-	 *
-	 * @return array
-	 */
-	public function set_options( $input ) {
-		$valid_input = $this->validate_options( $input );
-
-		return $valid_input;
-	}
-
-	/**
-	 * Validate user input
+	 * Set options and validate user input
 	 *
 	 * @since 1.0.0
 	 *

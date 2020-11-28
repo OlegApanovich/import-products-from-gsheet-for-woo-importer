@@ -68,10 +68,12 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 							sprintf(
 								// translators: %1$s: current plugin name.
 								__(
-									'<strong>%s has been deactivated</strong>',
+									'%1$1s%2$2s has been deactivated%3$3s',
 									'import-products-from-gsheet-for-woo-importer'
 								),
-								$my_plugin_name
+								'<strong>',
+								$my_plugin_name,
+								'<srong>'
 							),
 							array( 'strong' => array() )
 						);
@@ -123,9 +125,9 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 										'The plugin <strong>"%1$s"</strong> needs the <strong>version %2$s</strong> or newer of <strong>"%3$s"</strong>',
 										'import-products-from-gsheet-for-woo-importer'
 									),
-									esc_html( $my_plugin_name ),
-									esc_html( $version_to_check ),
-									esc_html( $dependency_plugin_name )
+									$my_plugin_name,
+									$version_to_check,
+									$dependency_plugin_nam
 								),
 								array( 'strong' => array() )
 							);
@@ -134,10 +136,12 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 								sprintf(
 									// translators: %1$s: current plugin name.
 									__(
-										'<strong>%s has been deactivated</strong>',
+										'%1$1s%2$2s has been deactivated%3$3s',
 										'import-products-from-gsheet-for-woo-importer'
 									),
-									esc_html( $my_plugin_name )
+									'<strong>',
+									$my_plugin_name,
+									'<srong>'
 								),
 								array( 'strong' => array() )
 							);

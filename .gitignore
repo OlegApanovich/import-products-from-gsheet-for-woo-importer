@@ -1,6 +1,7 @@
 # DEV #
 #######
 .svn
+.htaccess
 
 # IDE #
 #######
@@ -21,15 +22,11 @@ ehthumbs.db
 [Dd]esktop.ini
 *.log
 
-# WordPress #
-#############
-.htaccess
-
 # Composer #
-#############
+############
 vendor/
 composer.lock
 
 # Other #
-#############
+#########
 assets/client_secret.json

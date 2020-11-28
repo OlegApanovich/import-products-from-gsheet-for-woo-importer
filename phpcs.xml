@@ -8,7 +8,6 @@
 	<!-- Exclude paths -->
 	<exclude-pattern>lib</exclude-pattern>
 	<exclude-pattern>vendor</exclude-pattern>
-	<exclude-pattern>vendor</exclude-pattern>
 	<exclude-pattern>languages</exclude-pattern>
 	<exclude-pattern>woocommerce-importer</exclude-pattern>
 

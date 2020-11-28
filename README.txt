@@ -49,7 +49,7 @@ Also you can follow instructions on a screenshots below.
 
 7. In the next page you will see the next form for your credentials, feel free to choose any service account name in the appropriate field and select role project -> editor, key button type leave default json and press button "Continue".
 
-8. After all, the system will offer you to download the api key json file. Save it on your local machine and then you can close google developer console browser tab. Please copy the client_secret json key that you have received in the previous step to appropriate input in option plugin page. Please find client_email in client_secret json and copy it to your buffer for the next step.
+8. After all, the system will offer you to download the api key json file. Save it on your local machine and then you can close google developer console browser tab. Please copy the client_secret json key (all file content) that you have received in the previous step to appropriate input in option plugin page. Please find client_email in client_secret json file and copy it to your buffer for the next step.
 
 9. Open your google sheet file that you set to your google drive in step 1 and share access to it with client_email email that you copy to buffer in previous step.
 

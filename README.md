@@ -38,7 +38,7 @@ Below are the instructions on how we can receive client_secret json.
 
 10. After that, the system will offer you to download the api key json file. Save it on your local machine and then you can close google developer console browser tab.
 
-11. Please copy the client_secret json key that you have received in the previous step to appropriate input in option plugin page ![](assets/screenshot-8.png)
+11. Please copy the client_secret json key (all file content) that you have received in the previous step to appropriate input in option plugin page ![](assets/screenshot-8.png)
 
 12. Please find client_email in client_secret json and copy it to your buffer for the next step.
 

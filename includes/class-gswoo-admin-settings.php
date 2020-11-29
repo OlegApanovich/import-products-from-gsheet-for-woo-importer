@@ -149,17 +149,17 @@ class GSWOO_Admin_Settings {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $validate_input Options after input falidation.
+	 * @param array $user_input Options after input falidation.
 	 *
 	 * @return bool
 	 */
-	public function check_user_input( $validate_input ) {
-		if ( $this->set_file_access( $validate_input ) ) {
+	public function check_user_input( $user_input ) {
+		if ( $this->put_key_to_file_access( $user_input ) ) {
 			try {
 				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
 				try {
 					$google_sheet
-						= $google_api_obj->set_sheet( $validate_input['google_sheet_title'] );
+						= $google_api_obj->set_sheet( $user_input['google_sheet_title'] );
 
 					$check = true;
 				} catch ( Exception $e ) {
@@ -187,8 +187,43 @@ class GSWOO_Admin_Settings {
 	public function get_connection_message( $valid_input ) {
 		$message = '';
 
-		if ( ! empty( $valid_input ) && ! $this->set_file_access( $valid_input ) ) {
-			$message = esprintf(
+		if ( empty( $valid_input ) ) {
+			return $message;
+		}
+
+		if ( $this->put_key_to_file_access( $valid_input ) ) {
+			try {
+				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
+				$google_sheet   = $google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
+				$menu_page_url  = menu_page_url( 'product_importer_google_sheet', false );
+
+				$message = sprintf(
+					// translators: %s: plugin import page url.
+					__(
+						'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
+						'import-products-from-gsheet-for-woo-importer'
+					),
+					$menu_page_url
+				);
+			} catch ( Exception $e ) {
+				if ( empty( $e->getMessage() ) ) {
+					$message = esc_html__(
+						"We can't recieve spreeadsheet by your provided settings, please check settings and try it again",
+						'import-products-from-gsheet-for-woo-importer'
+					);
+				} else {
+					$message = sprintf(
+						// translators: %s: error message.
+						__(
+							"We can't recieve spreeadsheet by your provided settings, please check settings and try it again. Google API responce error: '%s'",
+							'import-products-from-gsheet-for-woo-importer'
+						),
+						$e->getMessage()
+					);
+				}
+			}
+		} else {
+			$message = sprintf(
 				// translators: %1$s: path to assets directory of file plugin.
 				esc_html__(
 					'Please check if plugin %1$s assets directory has write permission',
@@ -196,46 +231,6 @@ class GSWOO_Admin_Settings {
 				),
 				GSWOO_URI_ABSPATH
 			);
-		} elseif ( ! empty( $valid_input ) ) {
-			try {
-				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
-
-				try {
-					$google_sheet  = $google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
-					$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
-
-					$message = sprintf(
-						// translators: %s: plugin import page url.
-						__(
-							'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
-							'import-products-from-gsheet-for-woo-importer'
-						),
-						$menu_page_url
-					);
-				} catch ( Exception $e ) {
-					$message = esc_html__(
-						'We can\'t recieve spreeadsheet by your provided settings, please check settings and try it again',
-						'import-products-from-gsheet-for-woo-importer'
-					);
-				}
-			} catch ( Exception $e ) {
-				if ( ! empty( $e->getMessage() ) ) {
-					$message = sprintf(
-						// translators: %s: error message.
-						__(
-							"We can't set connection to google API by your providing settings, please check it and try again.'
-										 . ' API return responce error '%s'",
-							'import-products-from-gsheet-for-woo-importer'
-						),
-						$e->getMessage()
-					);
-				} else {
-					$message = esc_html__(
-						'We can\'t set connection to google API by your client_secret json setting, please check it and try again',
-						'import-products-from-gsheet-for-woo-importer'
-					);
-				}
-			}
 		}
 
 		return $message;
@@ -250,16 +245,26 @@ class GSWOO_Admin_Settings {
 	 *
 	 * @return bool
 	 */
-	public function set_file_access( $valid_input ) {
-		$success = file_put_contents(
-			GSWOO_URI_ABSPATH . 'assets/client_secret.json',
-			$valid_input['google_api_key']
-		);
+	public function put_key_to_file_access( $valid_input ) {
+		$success = false;
 
-		if ( ! empty( $success ) ) {
-			$success = true;
-		} else {
+		if ( empty( $valid_input ) ) {
+			return $success;
+		}
+
+		try {
+			$try_file_put = file_put_contents(
+				GSWOO_URI_ABSPATH . 'assets/client_secret.json',
+				$valid_input['google_api_key']
+			);
+		} catch ( Exception $e ) {
 			$success = false;
+		}
+
+		if ( empty( $try_file_put ) ) {
+			$success = false;
+		} else {
+			$success = true;
 		}
 
 		return $success;
@@ -275,7 +280,8 @@ class GSWOO_Admin_Settings {
 		$options = $this->get_plugin_options();
 
 		$connection_message = $this->get_connection_message( $options );
-		$check              = $this->check_user_input( $options );
+		// Input already validated through settings API.
+		$check = $this->check_user_input( $options );
 
 		if ( $check ) {
 			echo '<h3 style="color:green">' . wp_kses( $connection_message, array( 'a' => array( 'href' => array() ) ) ) . '</h3>';

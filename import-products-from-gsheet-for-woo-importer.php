@@ -19,7 +19,7 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Main Plagin Class.
+ * Main Plugin Class.
  *
  * @since 1.0.0
  */
@@ -40,7 +40,7 @@ final class GSWOO_Plugin {
 	 *
 	 * @since 1.0.0
 	 * @static
-	 * @return Plagin - Main instance.
+	 * @return object Plugin main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$instance ) ) {
@@ -56,7 +56,8 @@ final class GSWOO_Plugin {
 	 * @since 1.0.0
 	 */
 	public function __construct() {
-		require_once plugin_dir_path( __FILE__ ) . 'includes/helpers.php';
+
+		require_once __DIR__ . '/includes/helpers.php';
 
 		// Check if woocommerce is already active.
 		$woocommerce_check = gswoo_is_plugin_active(
@@ -194,20 +195,6 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * Define constant if not already set.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param  string      $name contant name.
-	 * @param  string|bool $value constant value.
-	 */
-	private function define( $name, $value ) {
-		if ( ! defined( $name ) ) {
-			define( $name, $value );
-		}
-	}
-
-	/**
 	 * What type of request is this?
 	 *
 	 * @since 1.0.0
@@ -217,16 +204,23 @@ final class GSWOO_Plugin {
 	 * @return bool
 	 */
 	private function is_request( $type ) {
+		$is_type = false;
 		switch ( $type ) {
 			case 'admin':
-				return is_admin();
+				$is_type = is_admin();
+				break;
 			case 'ajax':
-				return defined( 'DOING_AJAX' );
+				$is_type = defined( 'DOING_AJAX' );
+				break;
 			case 'cron':
-				return defined( 'DOING_CRON' );
+				$is_type = defined( 'DOING_CRON' );
+				break;
 			case 'frontend':
-				return ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+				$is_type = ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
+				break;
 		}
+
+		return $is_type;
 	}
 
 	/**
@@ -245,7 +239,7 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * Set additional links on a plugin admin dashbord page
+	 * Set additional links on a plugin admin dashboard page
 	 *
 	 * @since 1.0.0
 	 *

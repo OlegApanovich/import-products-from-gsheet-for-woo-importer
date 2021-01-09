@@ -8,6 +8,8 @@
  * @subpackage GSWOO/woocommerce-importer
  */
 
+use Google\Spreadsheet\Exception\SpreadsheetNotFoundException;
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'WP_Importer' ) ) {
@@ -24,6 +26,7 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 	 * Output information about the uploading process.
 	 *
 	 * @since 1.0.0
+	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	protected function upload_form() {
 		$bytes      = apply_filters( 'import_upload_size_limit', wp_max_upload_size() );
@@ -42,6 +45,10 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 	 * displaying author import options.
 	 *
 	 * @since 1.0.0
+	 *
+	 * @noinspection PhpUnusedLocalVariableInspection
+	 *
+	 * @throws SpreadsheetNotFoundException
 	 *
 	 * @return string|WP_Error
 	 */
@@ -151,17 +158,17 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 	/**
 	 * Gateway for a google sheet api
 	 *
-	 * @since 1.0.0
-	 *
 	 * @param string $file_name Google sheet file name.
 	 *
 	 * @return string
+	 * @throws SpreadsheetNotFoundException
+	 * @since 1.0.0
+	 *
 	 */
 	public function google_sheet_get_csv_file( $file_name ) {
 		$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
 		$google_api_obj->set_sheet( $file_name );
-		$sheet_content_csv = $google_api_obj->get_sheet_csv();
 
-		return $sheet_content_csv;
+		return $google_api_obj->get_sheet_csv();
 	}
 }

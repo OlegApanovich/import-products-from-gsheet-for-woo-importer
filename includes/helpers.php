@@ -53,7 +53,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 						<?php
 						echo wp_kses(
 							sprintf(
-								// translators: %1$s: current plugin name, %2$s plugin name that curent plugin dependent on.
+								// translators: %1$s: current plugin name, %2$s plugin name that current plugin dependent on.
 								__(
 									'The plugin <strong>"%1$s"</strong> needs the plugin <strong>"%2$s"</strong> active',
 									'import-products-from-gsheet-for-woo-importer'
@@ -88,6 +88,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 		} else {
 			// If version to check is not defined do nothing.
 			if ( null === $version_to_check ) {
+				/** @noinspection PhpInconsistentReturnPointsInspection */
 				return;
 			}
 
@@ -100,7 +101,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 				$dep_plugin_data['Version'],
 				$version_to_check,
 				'>='
-			) ? true : false;
+			);
 
 			if ( $error ) {
 
@@ -120,14 +121,14 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 							<?php
 							echo wp_kses(
 								sprintf(
-									// translators: %1$s: current plugin name,%2$s plugin version to check, %3$s plugin name that curent plugin dependent on.
+									// translators: %1$s: current plugin name,%2$s plugin version to check, %3$s plugin name that current plugin dependent on.
 									__(
 										'The plugin <strong>"%1$s"</strong> needs the <strong>version %2$s</strong> or newer of <strong>"%3$s"</strong>',
 										'import-products-from-gsheet-for-woo-importer'
 									),
 									$my_plugin_name,
 									$version_to_check,
-									$dependency_plugin_nam
+									$dependency_plugin_name
 								),
 								array( 'strong' => array() )
 							);

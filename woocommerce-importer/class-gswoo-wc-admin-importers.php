@@ -27,13 +27,15 @@ class GSWOO_WC_Admin_Importers extends WC_Admin_Importers {
 			return;
 		}
 
+		parent::__construct();
+
 		add_action( 'admin_menu', array( $this, 'add_to_menus' ) );
 		add_action( 'admin_head', array( $this, 'hide_from_menus' ) );
 
 		// Register WooCommerce importers.
 		$this->importers['product_importer_google_sheet'] = array(
 			'menu'       => 'edit.php?post_type=product',
-			'name'       => __( 'Product Import Goole Sheet', 'import-products-from-gsheet-for-woo-importer' ),
+			'name'       => __( 'Product Import Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
 			'capability' => 'import',
 			'callback'   => array( $this, 'product_importer' ),
 		);

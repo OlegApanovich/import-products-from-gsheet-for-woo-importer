@@ -1,6 +1,6 @@
 <?php
 /**
- * File contain Wrapper for a Google APIs Client Library for PHP
+ * File contain Wrapper for a PHP Google APIs Client Library
  *
  * @since 1.0.0
  *
@@ -11,6 +11,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use Google\Spreadsheet\DefaultServiceRequest;
+use Google\Spreadsheet\Exception\SpreadsheetNotFoundException;
 use Google\Spreadsheet\ServiceRequestFactory;
 
 /**
@@ -23,14 +24,14 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	/**
 	 * The instance of the SpreadsheetService.
 	 *
-	 * @var SpreadsheetService
+	 * @var object SpreadsheetService
 	 *
 	 * @since  1.0.0
 	 */
 	public $spreadsheet;
 
 	/**
-	 * Construcotr for GSWOO_Wrapper_Api_Google_Drive
+	 * Constructor for GSWOO_Wrapper_Api_Google_Drive
 	 *
 	 * @since 1.0.0
 	 */
@@ -65,9 +66,11 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $sheet_title title os spreedshhet on a google drive.
+	 * @param string $sheet_title title os spreadsheet on a google drive.
 	 *
 	 * @return object
+	 *
+	 * @throws SpreadsheetNotFoundException
 	 */
 	public function set_sheet( $sheet_title ) {
 		$this->spreadsheet = ( new Google\Spreadsheet\SpreadsheetService() )
@@ -108,13 +111,10 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 * @return string
 	 */
 	public function get_sheet_csv() {
-		$sheet_content = array();
 		// Get the first worksheet (tab).
 		$worksheets = $this->spreadsheet->getWorksheetFeed()->getEntries();
 		$worksheet  = $worksheets[0];
 
-		$csv = $worksheet->getCsv();
-
-		return $csv;
+		return $worksheet->getCsv();
 	}
 }

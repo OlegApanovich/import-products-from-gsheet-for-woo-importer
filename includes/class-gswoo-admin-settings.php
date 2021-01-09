@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 class GSWOO_Admin_Settings {
 
 	/**
-	 * Construcotr for admin settings
+	 * Constructor for admin settings
 	 *
 	 * @since 1.0.0
 	 */
@@ -27,7 +27,7 @@ class GSWOO_Admin_Settings {
 	}
 
 	/**
-	 * Init amdin settings
+	 * Init admin settings
 	 *
 	 * @since 1.0.0
 	 */
@@ -56,7 +56,7 @@ class GSWOO_Admin_Settings {
 	}
 
 	/**
-	 * Add main plugin setings form
+	 * Add main plugin settings form
 	 *
 	 * @since 1.0.0
 	 */
@@ -114,6 +114,7 @@ class GSWOO_Admin_Settings {
 	 * Function callback for a add_settings_field
 	 *
 	 * @since 1.0.0
+	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_settings() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );
@@ -131,6 +132,8 @@ class GSWOO_Admin_Settings {
 	/**
 	 * Set options and validate user input
 	 *
+	 * @noinspection PhpUnused
+	 *
 	 * @since 1.0.0
 	 *
 	 * @param array $input Option input value.
@@ -145,11 +148,11 @@ class GSWOO_Admin_Settings {
 	}
 
 	/**
-	 * Try to check user inputs and set erorr message if input is not valid
+	 * Try to check user inputs and set error message if input is not valid
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $user_input Options after input falidation.
+	 * @param array $user_input Options after input validation.
 	 *
 	 * @return bool
 	 */
@@ -158,8 +161,7 @@ class GSWOO_Admin_Settings {
 			try {
 				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
 				try {
-					$google_sheet
-						= $google_api_obj->set_sheet( $user_input['google_sheet_title'] );
+					$google_api_obj->set_sheet( $user_input['google_sheet_title'] );
 
 					$check = true;
 				} catch ( Exception $e ) {
@@ -176,9 +178,11 @@ class GSWOO_Admin_Settings {
 	}
 
 	/**
-	 * Retrive connection message by isser input
+	 * Retrieve connection message by user input
 	 *
 	 * @since 1.0.0
+	 *
+	 * @noinspection HtmlUnknownTarget
 	 *
 	 * @param array $valid_input Options after input validation.
 	 *
@@ -194,13 +198,14 @@ class GSWOO_Admin_Settings {
 		if ( $this->put_key_to_file_access( $valid_input ) ) {
 			try {
 				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
-				$google_sheet   = $google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
+				// fall in catch exception if error retrieve
+				$google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
 				$menu_page_url  = menu_page_url( 'product_importer_google_sheet', false );
 
 				$message = sprintf(
 					// translators: %s: plugin import page url.
 					__(
-						'Your settings was recived successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
+						'Your settings was received successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
 						'import-products-from-gsheet-for-woo-importer'
 					),
 					$menu_page_url
@@ -208,14 +213,14 @@ class GSWOO_Admin_Settings {
 			} catch ( Exception $e ) {
 				if ( empty( $e->getMessage() ) ) {
 					$message = esc_html__(
-						"We can't recieve spreeadsheet by your provided settings, please check settings and try it again",
+						"We can't receive spreadsheet by your provided settings, please check settings and try it again",
 						'import-products-from-gsheet-for-woo-importer'
 					);
 				} else {
 					$message = sprintf(
 						// translators: %s: error message.
 						__(
-							"We can't recieve spreeadsheet by your provided settings, please check settings and try it again. Google API responce error: '%s'",
+							"We can't received spreadsheet by your provided settings, please check settings and try it again. Google API response error: '%s'",
 							'import-products-from-gsheet-for-woo-importer'
 						),
 						$e->getMessage()
@@ -246,10 +251,9 @@ class GSWOO_Admin_Settings {
 	 * @return bool
 	 */
 	public function put_key_to_file_access( $valid_input ) {
-		$success = false;
 
 		if ( empty( $valid_input ) ) {
-			return $success;
+			return false;
 		}
 
 		try {
@@ -258,16 +262,14 @@ class GSWOO_Admin_Settings {
 				$valid_input['google_api_key']
 			);
 		} catch ( Exception $e ) {
-			$success = false;
+			return false;
 		}
 
 		if ( empty( $try_file_put ) ) {
-			$success = false;
-		} else {
-			$success = true;
+			return false;
 		}
 
-		return $success;
+		return true;
 	}
 
 	/**
@@ -275,6 +277,7 @@ class GSWOO_Admin_Settings {
 	 * try to display user success or error message
 	 *
 	 * @since 1.0.0
+	 * @noinspection PhpUnused
 	 */
 	public function set_connection_message() {
 		$options = $this->get_plugin_options();
@@ -307,7 +310,6 @@ class GSWOO_Admin_Settings {
 
 		return $options;
 	}
-
 }
 
 new GSWOO_Admin_Settings();

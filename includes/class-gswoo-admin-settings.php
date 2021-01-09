@@ -198,9 +198,9 @@ class GSWOO_Admin_Settings {
 		if ( $this->put_key_to_file_access( $valid_input ) ) {
 			try {
 				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
-				// fall in catch exception if error retrieve
+				// fall in catch exception if error retrieve.
 				$google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
-				$menu_page_url  = menu_page_url( 'product_importer_google_sheet', false );
+				$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
 
 				$message = sprintf(
 					// translators: %s: plugin import page url.

@@ -88,7 +88,11 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 		} else {
 			// If version to check is not defined do nothing.
 			if ( null === $version_to_check ) {
-				/** @noinspection PhpInconsistentReturnPointsInspection */
+				/**
+				 * Allow empty return
+				 *
+				 * @noinspection PhpInconsistentReturnPointsInspection
+				 */
 				return;
 			}
 

@@ -70,7 +70,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 *
 	 * @return object
 	 *
-	 * @throws SpreadsheetNotFoundException
+	 * @throws SpreadsheetNotFoundException Not fount spreadsheet.
 	 */
 	public function set_sheet( $sheet_title ) {
 		$this->spreadsheet = ( new Google\Spreadsheet\SpreadsheetService() )

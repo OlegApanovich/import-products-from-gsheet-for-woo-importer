@@ -21,10 +21,14 @@ class Google_Service_Sheets_BaselineValueFormat extends Google_Model
   public $description;
   protected $negativeColorType = 'Google_Service_Sheets_Color';
   protected $negativeColorDataType = '';
+  protected $negativeColorStyleType = 'Google_Service_Sheets_ColorStyle';
+  protected $negativeColorStyleDataType = '';
   protected $positionType = 'Google_Service_Sheets_TextPosition';
   protected $positionDataType = '';
   protected $positiveColorType = 'Google_Service_Sheets_Color';
   protected $positiveColorDataType = '';
+  protected $positiveColorStyleType = 'Google_Service_Sheets_ColorStyle';
+  protected $positiveColorStyleDataType = '';
   protected $textFormatType = 'Google_Service_Sheets_TextFormat';
   protected $textFormatDataType = '';
 
@@ -59,6 +63,20 @@ class Google_Service_Sheets_BaselineValueFormat extends Google_Model
     return $this->negativeColor;
   }
   /**
+   * @param Google_Service_Sheets_ColorStyle
+   */
+  public function setNegativeColorStyle(Google_Service_Sheets_ColorStyle $negativeColorStyle)
+  {
+    $this->negativeColorStyle = $negativeColorStyle;
+  }
+  /**
+   * @return Google_Service_Sheets_ColorStyle
+   */
+  public function getNegativeColorStyle()
+  {
+    return $this->negativeColorStyle;
+  }
+  /**
    * @param Google_Service_Sheets_TextPosition
    */
   public function setPosition(Google_Service_Sheets_TextPosition $position)
@@ -85,6 +103,20 @@ class Google_Service_Sheets_BaselineValueFormat extends Google_Model
   public function getPositiveColor()
   {
     return $this->positiveColor;
+  }
+  /**
+   * @param Google_Service_Sheets_ColorStyle
+   */
+  public function setPositiveColorStyle(Google_Service_Sheets_ColorStyle $positiveColorStyle)
+  {
+    $this->positiveColorStyle = $positiveColorStyle;
+  }
+  /**
+   * @return Google_Service_Sheets_ColorStyle
+   */
+  public function getPositiveColorStyle()
+  {
+    return $this->positiveColorStyle;
   }
   /**
    * @param Google_Service_Sheets_TextFormat

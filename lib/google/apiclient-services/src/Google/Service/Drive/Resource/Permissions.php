@@ -34,14 +34,19 @@ class Google_Service_Drive_Resource_Permissions extends Google_Service_Resource
    *
    * @opt_param string emailMessage A plain text custom message to include in the
    * notification email.
+   * @opt_param bool enforceSingleParent Deprecated. See moveToNewOwnersRoot for
+   * details.
+   * @opt_param bool moveToNewOwnersRoot This parameter will only take effect if
+   * the item is not in a shared drive and the request is attempting to transfer
+   * the ownership of the item. If set to true, the item will be moved to the new
+   * owner's My Drive root folder and all prior parents removed. If set to false,
+   * parents are not changed.
    * @opt_param bool sendNotificationEmail Whether to send a notification email
    * when sharing to users or groups. This defaults to true for users and groups,
    * and is not allowed for other requests. It must not be disabled for ownership
    * transfers.
-   * @opt_param bool supportsAllDrives Deprecated - Whether the requesting
-   * application supports both My Drives and shared drives. This parameter will
-   * only be effective until June 1, 2020. Afterwards all applications are assumed
-   * to support shared drives.
+   * @opt_param bool supportsAllDrives Whether the requesting application supports
+   * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.
    * @opt_param bool transferOwnership Whether to transfer ownership to the
    * specified user and downgrade the current owner to a writer. This parameter is
@@ -65,10 +70,8 @@ class Google_Service_Drive_Resource_Permissions extends Google_Service_Resource
    * @param string $permissionId The ID of the permission.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool supportsAllDrives Deprecated - Whether the requesting
-   * application supports both My Drives and shared drives. This parameter will
-   * only be effective until June 1, 2020. Afterwards all applications are assumed
-   * to support shared drives.
+   * @opt_param bool supportsAllDrives Whether the requesting application supports
+   * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.
    * @opt_param bool useDomainAdminAccess Issue the request as a domain
    * administrator; if set to true, then the requester will be granted access if
@@ -88,10 +91,8 @@ class Google_Service_Drive_Resource_Permissions extends Google_Service_Resource
    * @param string $permissionId The ID of the permission.
    * @param array $optParams Optional parameters.
    *
-   * @opt_param bool supportsAllDrives Deprecated - Whether the requesting
-   * application supports both My Drives and shared drives. This parameter will
-   * only be effective until June 1, 2020. Afterwards all applications are assumed
-   * to support shared drives.
+   * @opt_param bool supportsAllDrives Whether the requesting application supports
+   * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.
    * @opt_param bool useDomainAdminAccess Issue the request as a domain
    * administrator; if set to true, then the requester will be granted access if
@@ -111,6 +112,8 @@ class Google_Service_Drive_Resource_Permissions extends Google_Service_Resource
    * @param string $fileId The ID of the file or shared drive.
    * @param array $optParams Optional parameters.
    *
+   * @opt_param string includePermissionsForView Specifies which additional view's
+   * permissions to include in the response. Only 'published' is supported.
    * @opt_param int pageSize The maximum number of permissions to return per page.
    * When not set for files in a shared drive, at most 100 results will be
    * returned. When not set for files that are not in a shared drive, the entire
@@ -118,10 +121,8 @@ class Google_Service_Drive_Resource_Permissions extends Google_Service_Resource
    * @opt_param string pageToken The token for continuing a previous list request
    * on the next page. This should be set to the value of 'nextPageToken' from the
    * previous response.
-   * @opt_param bool supportsAllDrives Deprecated - Whether the requesting
-   * application supports both My Drives and shared drives. This parameter will
-   * only be effective until June 1, 2020. Afterwards all applications are assumed
-   * to support shared drives.
+   * @opt_param bool supportsAllDrives Whether the requesting application supports
+   * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.
    * @opt_param bool useDomainAdminAccess Issue the request as a domain
    * administrator; if set to true, then the requester will be granted access if
@@ -144,10 +145,8 @@ class Google_Service_Drive_Resource_Permissions extends Google_Service_Resource
    * @param array $optParams Optional parameters.
    *
    * @opt_param bool removeExpiration Whether to remove the expiration date.
-   * @opt_param bool supportsAllDrives Deprecated - Whether the requesting
-   * application supports both My Drives and shared drives. This parameter will
-   * only be effective until June 1, 2020. Afterwards all applications are assumed
-   * to support shared drives.
+   * @opt_param bool supportsAllDrives Whether the requesting application supports
+   * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.
    * @opt_param bool transferOwnership Whether to transfer ownership to the
    * specified user and downgrade the current owner to a writer. This parameter is

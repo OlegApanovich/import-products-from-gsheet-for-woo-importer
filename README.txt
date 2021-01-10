@@ -3,7 +3,7 @@ Contributors: mrdollar4444
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K9NTJ6E2RQN3A&source=url
 Tags: woocommerce, importer, google sheet
 Requires at least: 4.7
-Tested up to: 5.3
+Tested up to: 5.6
 Stable tag: trunk
 Requires PHP: 5.6
 License: GPLv3 or later
@@ -58,6 +58,12 @@ Also you can follow instructions on a screenshots below.
 11. If you properly set your setting then after all you can find additional import button near standard import woocommerce button on a product page.
 
 == Changelog ==
+
+= 1.1 =
+* Fix - Fix PHP fatal error on a log activity #9
+* Fix - Fix PHP warnings on setting plugin page.
+* Fix - Fix link to setting page.
+* Dev - Add WP v-5.6 and PHP v-8 compatibility.
 
 = 1.0 =
 * Initial release.

@@ -7,7 +7,7 @@
  * Plugin Name:  GSheet For Woo Importer
  * Plugin URI:   https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
  * Description:  Import woocommerce products from google sheet by using native woocommerce importer
- * Version:      1.0.0
+ * Version:      1.1.0
  * Author:       Oleg Apanovich
  * Author URI:   https://github.com/OlegApanovich
  * License:      GPL-3.0+
@@ -116,7 +116,7 @@ final class GSWOO_Plugin {
 	 */
 	public function includes() {
 		if ( $this->is_request( 'admin' ) ) {
-			include_once GSWOO_URI_ABSPATH . 'lib/autoload.php';
+			include_once GSWOO_URI_ABSPATH . 'vendor/autoload.php';
 			include_once GSWOO_URI_ABSPATH . 'includes/class-gswoo-admin-settings.php';
 			include_once GSWOO_URI_ABSPATH . 'woocommerce-importer/class-gswoo-wc-admin-importers.php';
 			include_once GSWOO_URI_ABSPATH . 'includes/class-gswoo-wrapper-api-google-drive.php';

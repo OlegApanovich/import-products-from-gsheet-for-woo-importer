@@ -24,7 +24,6 @@ ehthumbs.db
 
 # Composer #
 ############
-vendor/
 composer.lock
 
 # Other #

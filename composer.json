@@ -1,7 +1,4 @@
 {
-	"config": {
-		"vendor-dir": "lib"
-	},
 	"require": {
 		"google/apiclient": "^2.0",
 		"asimlqt/php-google-spreadsheet-client": "3.0.*"

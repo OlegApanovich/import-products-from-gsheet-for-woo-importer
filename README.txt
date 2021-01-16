@@ -59,13 +59,7 @@ Also you can follow instructions on a screenshots below.
 
 == Changelog ==
 
-= 1.1.2 =
-* Dev - Fix remove redundant vendor libraries
-
-= 1.1.1 =
-* Fix - Fix PHP fatal error
-
-= 1.1 =
+= 1.1.5 =
 * Fix - Fix PHP fatal error on a log activity #9
 * Fix - Fix PHP warnings on setting plugin page.
 * Fix - Fix link to setting page.

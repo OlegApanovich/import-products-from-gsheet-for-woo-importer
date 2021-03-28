@@ -10,8 +10,8 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
-        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
+        'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
     );
 
@@ -39,6 +39,7 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
             'GuzzleHttp\\' => 11,
             'Google\\Auth\\' => 12,
             'Google\\' => 7,
+            'GSWOO\\' => 6,
         ),
         'F' => 
         array (
@@ -99,6 +100,10 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
         array (
             0 => __DIR__ . '/..' . '/asimlqt/php-google-spreadsheet-client/src/Google',
             1 => __DIR__ . '/..' . '/google/apiclient/src',
+        ),
+        'GSWOO\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'Firebase\\JWT\\' => 
         array (

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Google_AccessToken_Revoke' => $vendorDir . '/google/apiclient/src/aliases.php',
     'Google_AccessToken_Verify' => $vendorDir . '/google/apiclient/src/aliases.php',
     'Google_AuthHandler_AuthHandlerFactory' => $vendorDir . '/google/apiclient/src/aliases.php',

@@ -18,7 +18,7 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
-            'phpseclib\\' => 10,
+            'phpseclib3\\' => 11,
         ),
         'P' => 
         array (
@@ -26,6 +26,7 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Http\\Client\\' => 16,
             'Psr\\Cache\\' => 10,
+            'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
         array (
@@ -43,10 +44,14 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
         array (
             'Firebase\\JWT\\' => 13,
         ),
+        'D' => 
+        array (
+            'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 55,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpseclib\\' => 
+        'phpseclib3\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
@@ -65,6 +70,10 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
         'Monolog\\' => 
         array (
@@ -95,6 +104,10 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
         array (
             0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
+        'Dealerdirect\\Composer\\Plugin\\Installers\\PHPCodeSniffer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dealerdirect/phpcodesniffer-composer-installer/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -108,6 +121,7 @@ class ComposerStaticInit799c9a35fcd4256e0d24ba8a083b175a
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Google_AccessToken_Revoke' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
         'Google_AccessToken_Verify' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
         'Google_AuthHandler_AuthHandlerFactory' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',

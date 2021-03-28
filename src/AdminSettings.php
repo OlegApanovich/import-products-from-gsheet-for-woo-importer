@@ -5,8 +5,11 @@
  * @since 1.0.0
  *
  * @package GSWOO
- * @subpackage GSWOO/includes
  */
+
+namespace GSWOO;
+
+use Exception;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -15,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class GSWOO_Admin_Settings {
+class AdminSettings {
 
 	/**
 	 * Constructor for admin settings
@@ -37,6 +40,18 @@ class GSWOO_Admin_Settings {
 			'admin_init',
 			array( $this, 'plugin_admin_init_settings' )
 		);
+		add_filter(
+			'plugin_action_links_' . plugin_basename( __FILE__ ),
+			array( $this, 'set_plugin_action_links' ),
+			10,
+			1
+		);
+		add_filter(
+			'woocommerce_screen_ids',
+			array( $this, 'add_woocommerce_screen_ids' ),
+			10,
+			1
+		);
 	}
 
 	/**
@@ -47,8 +62,8 @@ class GSWOO_Admin_Settings {
 	public function add_menu() {
 		add_submenu_page(
 			'woocommerce',
-			esc_html__( 'Import Google Sheet Settings', 'import-products-from-gsheet-for-woo-importer' ),
-			esc_html__( 'Import Google Sheet Settings', 'import-products-from-gsheet-for-woo-importer' ),
+			esc_html__( 'Import Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
+			esc_html__( 'Import Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
 			'manage_options',
 			'woocommerce_import_products_google_sheet_menu',
 			array( $this, 'settings_form' )
@@ -62,7 +77,7 @@ class GSWOO_Admin_Settings {
 	 */
 	public function settings_form() {
 		include_once GSWOO_URI_ABSPATH
-					. 'views/html-admin-settings-form.php';
+					. '/src/Views/html-admin-settings-form.php';
 	}
 
 	/**
@@ -126,7 +141,7 @@ class GSWOO_Admin_Settings {
 			? $options['google_sheet_title'] : '';
 
 		include_once GSWOO_URI_ABSPATH
-					. 'views/html-admin-settings-form-options.php';
+					. '/src/Views/html-admin-settings-form-options.php';
 	}
 
 	/**
@@ -159,7 +174,7 @@ class GSWOO_Admin_Settings {
 	public function check_user_input( $user_input ) {
 		if ( $this->put_key_to_file_access( $user_input ) ) {
 			try {
-				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
+				$google_api_obj = new WrapperApiGoogleDrive();
 				try {
 					$google_api_obj->set_sheet( $user_input['google_sheet_title'] );
 
@@ -197,7 +212,7 @@ class GSWOO_Admin_Settings {
 
 		if ( $this->put_key_to_file_access( $valid_input ) ) {
 			try {
-				$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
+				$google_api_obj = new WrapperApiGoogleDrive();
 				// fall in catch exception if error retrieve.
 				$google_api_obj->set_sheet( $valid_input['google_sheet_title'] );
 				$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
@@ -310,6 +325,41 @@ class GSWOO_Admin_Settings {
 
 		return $options;
 	}
-}
 
-new GSWOO_Admin_Settings();
+	/**
+	 * Add plugin provided screen to woocommerce admin area.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $screen_ids Screen id list.
+	 *
+	 * @return array $screen_ids
+	 */
+	public function add_woocommerce_screen_ids( $screen_ids ) {
+		$screen_ids[] = 'product_page_product_importer_google_sheet';
+
+		return $screen_ids;
+	}
+
+	/**
+	 * Set additional links on a plugin admin dashboard page.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $links all links.
+	 *
+	 * @return array
+	 */
+	public function set_plugin_action_links( $links ) {
+		return array_merge(
+			array(
+				'<a href="' .
+				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) .
+				'">' .
+				esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' ) .
+				'</a>',
+			),
+			$links
+		);
+	}
+}

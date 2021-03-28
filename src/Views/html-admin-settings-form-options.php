@@ -8,7 +8,6 @@
  * @var string $google_sheet_title
  *
  * @package GSWOO
- * @subpackage GSWOO/views
  */
 
 defined( 'ABSPATH' ) || exit;

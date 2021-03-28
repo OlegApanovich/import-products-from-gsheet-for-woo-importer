@@ -10,5 +10,11 @@
 	},
 	"autoload": {
 		"psr-4": {"GSWOO\\": "src/"}
+	},
+	"scripts": {
+		"pre-command-run": [
+			"cp config/hooks/pre-commit .git/hooks/pre-commit",
+			"chmod +x .git/hooks/pre-commit"
+		]
 	}
 }

@@ -9,23 +9,26 @@
 	<exclude-pattern>lib</exclude-pattern>
 	<exclude-pattern>vendor</exclude-pattern>
 	<exclude-pattern>languages</exclude-pattern>
-	<exclude-pattern>woocommerce-importer</exclude-pattern>
+	<exclude-pattern>src/WoocommerceImporter</exclude-pattern>
+
+	<!-- Exclude due to PSR-4 autoload intagration -->
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+	</rule>
+	<!-- Exclude due to PSR-4 autoload intagration -->
+	<rule ref="WordPress">
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+	</rule>
 
 
-	<rule ref="WordPress.Files.FileName.InvalidClassFileName">
-		<exclude-pattern>import-products-from-gsheet-for-woo-importer.php</exclude-pattern>
-	</rule>
-	<rule ref="Squiz.Commenting.FileComment.MissingPackageTag">
-		<exclude-pattern>import-products-from-gsheet-for-woo-importer.php</exclude-pattern>
-	</rule>
 
 	<!-- TODO: remove it when new google sheet notification system will be integrated -->
 	<rule ref="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents">
-		<exclude-pattern>includes/class-gswoo-admin-settings.php</exclude-pattern>
+		<exclude-pattern>src/AdminSettings.php</exclude-pattern>
 	</rule>
 	<!-- TODO: remove it when new google sheet notification system will be integrated -->
 	<rule ref="WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_putenv">
-		<exclude-pattern>includes/class-gswoo-wrapper-api-google-drive.php</exclude-pattern>
+		<exclude-pattern>src/WrapperApiGoogleDrive.php</exclude-pattern>
 	</rule>
 	<!-- TODO: maybe replace with another plugin update vertification system -->
 	<rule ref="WordPress.Security.NonceVerification.Recommended">

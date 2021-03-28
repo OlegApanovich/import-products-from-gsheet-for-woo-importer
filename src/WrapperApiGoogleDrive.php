@@ -5,21 +5,24 @@
  * @since 1.0.0
  *
  * @package GSWOO
- * @subpackage GSWOO/includes
  */
+
+namespace GSWOO;
 
 defined( 'ABSPATH' ) || exit;
 
 use Google\Spreadsheet\DefaultServiceRequest;
 use Google\Spreadsheet\Exception\SpreadsheetNotFoundException;
 use Google\Spreadsheet\ServiceRequestFactory;
+use Google\Spreadsheet\SpreadsheetService;
+use Google_Client;
 
 /**
  * Wrapper for a Google APIs Client Library for PHP
  *
  * @since 1.0.0
  */
-class GSWOO_Wrapper_Api_Google_Drive {
+class WrapperApiGoogleDrive {
 
 	/**
 	 * The instance of the SpreadsheetService.
@@ -73,7 +76,7 @@ class GSWOO_Wrapper_Api_Google_Drive {
 	 * @throws SpreadsheetNotFoundException Not fount spreadsheet.
 	 */
 	public function set_sheet( $sheet_title ) {
-		$this->spreadsheet = ( new Google\Spreadsheet\SpreadsheetService() )
+		$this->spreadsheet = ( new SpreadsheetService() )
 			->getSpreadsheetFeed()
 			->getByTitle( $sheet_title );
 

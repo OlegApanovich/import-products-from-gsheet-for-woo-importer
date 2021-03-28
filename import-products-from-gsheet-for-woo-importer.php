@@ -3,6 +3,7 @@
  * The plugin bootstrap file
  *
  * @since 1.0.0
+ * @package GSWOO
  *
  * Plugin Name:  GSheet For Woo Importer
  * Plugin URI:   https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
@@ -18,6 +19,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+use GSWOO\AdminSettings;
+
 /**
  * Main Plugin Class.
  *
@@ -32,6 +35,15 @@ final class GSWOO_Plugin {
 	 * @since  1.0.0
 	 */
 	protected static $instance = null;
+
+	/**
+	 * The single instance of admin settings class.
+	 *
+	 * @var    GSWOO_Plugin
+	 * @access public
+	 * @since  2.0.0
+	 */
+	public $admin_settings;
 
 	/**
 	 * Main plugin instance.
@@ -57,21 +69,45 @@ final class GSWOO_Plugin {
 	 */
 	public function __construct() {
 
-		require_once __DIR__ . '/includes/helpers.php';
+		if ( ! $this->is_request( 'admin' ) ) {
+			return;
+		}
 
-		// Check if woocommerce is already active.
-		$woocommerce_check = gswoo_is_plugin_active(
+		$this->includes();
+
+		if ( ! $this->is_woocommerce() ) {
+			return;
+		}
+
+		$this->define_constants();
+		$this->init_hooks();
+
+		$this->admin_settings = new AdminSettings();
+	}
+
+	/**
+	 * Check if woocommerce already activated.
+	 *
+	 * @return bool
+	 */
+	public function is_woocommerce() {
+
+		return gswoo_is_plugin_active(
 			'GSheet For Woo Importer',
 			'WooCommerce',
 			'woocommerce/woocommerce.php',
 			'3.1.0'
 		);
+	}
 
-		if ( $woocommerce_check ) {
-			// Add woocommerce activation checkup.
-			$this->define_constants();
-			$this->init_hooks();
-		}
+	/**
+	 * Include required plugin core files
+	 *
+	 * @since 1.0.0
+	 */
+	public function includes() {
+		require_once __DIR__ . '/includes/helpers.php';
+		require_once __DIR__ . '/vendor/autoload.php';
 	}
 
 	/**
@@ -92,35 +128,18 @@ final class GSWOO_Plugin {
 	 * @since 1.0.0
 	 */
 	private function init_hooks() {
-		add_action( 'init', array( $this, 'includes' ) );
 		add_action( 'init', array( $this, 'init' ), 0 );
-		add_action( 'admin_init', array( $this, 'init_frontend' ), 0 );
-		add_filter(
-			'plugin_action_links_' . plugin_basename( __FILE__ ),
-			array( $this, 'set_plugin_action_links' ),
-			10,
-			1
-		);
-		add_filter(
-			'woocommerce_screen_ids',
-			array( $this, 'add_woocommerce_screen_ids' ),
-			10,
-			1
-		);
+		add_action( 'init', array( $this, 'inject_woocommerce_import' ) );
+		add_action( 'admin_init', array( $this, 'init_scripts' ), 0 );
 	}
 
 	/**
-	 * Include required plugin core files
+	 * Initialize plugin woocommerce import injection
 	 *
-	 * @since 1.0.0
+	 * @since 2.0
 	 */
-	public function includes() {
-		if ( $this->is_request( 'admin' ) ) {
-			include_once GSWOO_URI_ABSPATH . 'vendor/autoload.php';
-			include_once GSWOO_URI_ABSPATH . 'includes/class-gswoo-admin-settings.php';
-			include_once GSWOO_URI_ABSPATH . 'woocommerce-importer/class-gswoo-wc-admin-importers.php';
-			include_once GSWOO_URI_ABSPATH . 'includes/class-gswoo-wrapper-api-google-drive.php';
-		}
+	public function inject_woocommerce_import() {
+		new GSWOO\WoocommerceImporter\WcAdminImporters();
 	}
 
 	/**
@@ -156,9 +175,9 @@ final class GSWOO_Plugin {
 	/**
 	 * Init frontend files.
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 */
-	public function init_frontend() {
+	public function init_scripts() {
 		wp_register_script(
 			'wc_import_google_sheet_admin',
 			GSWOO_URI . '/assets/js/admin.js',
@@ -186,8 +205,7 @@ final class GSWOO_Plugin {
 			$params
 		);
 
-		$settings = new GSWOO_Admin_Settings();
-		$check    = $settings->check_user_input( $settings->get_plugin_options() );
+		$check = $this->admin_settings->check_user_input( $this->admin_settings->get_plugin_options() );
 
 		if ( $check ) {
 			wp_enqueue_script( 'wc_import_google_sheet_admin' );
@@ -195,7 +213,7 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * What type of request is this?
+	 * What type of request is this scripts?
 	 *
 	 * @since 1.0.0
 	 *
@@ -221,43 +239,6 @@ final class GSWOO_Plugin {
 		}
 
 		return $is_type;
-	}
-
-	/**
-	 * Add plugin provided screen to woocommerce admin area
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $screen_ids all screen ids.
-	 *
-	 * @return array $screen_ids
-	 */
-	public function add_woocommerce_screen_ids( $screen_ids ) {
-		$screen_ids[] = 'product_page_product_importer_google_sheet';
-
-		return $screen_ids;
-	}
-
-	/**
-	 * Set additional links on a plugin admin dashboard page
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param array $links all links.
-	 *
-	 * @return array
-	 */
-	public function set_plugin_action_links( $links ) {
-		return array_merge(
-			array(
-				'<a href="' .
-				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) .
-				'">' .
-				esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' ) .
-				'</a>',
-			),
-			$links
-		);
 	}
 }
 

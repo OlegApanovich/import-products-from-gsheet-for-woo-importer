@@ -5,8 +5,11 @@
  * @since 1.0.0
  *
  * @package GSWOO
- * @subpackage GSWOO/woocommerce-importer
  */
+
+namespace GSWOO\WoocommerceImporter;
+
+use WC_Admin_Importers;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -15,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 1.0.0
  */
-class GSWOO_WC_Admin_Importers extends WC_Admin_Importers {
+class WcAdminImporters extends WC_Admin_Importers {
 
 	/**
 	 * Constructor.
@@ -50,11 +53,8 @@ class GSWOO_WC_Admin_Importers extends WC_Admin_Importers {
 
 		include_once GSWOO_WC_ABSPATH . 'includes/admin/importers/class-wc-product-csv-importer-controller.php';
 		include_once GSWOO_WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
-		include_once GSWOO_URI_ABSPATH . 'woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php';
 
-		$importer = new GSWOO_WC_Product_CSV_Importer_Controller();
+		$importer = new WcProductCsvImporterController();
 		$importer->dispatch();
 	}
 }
-
-new GSWOO_WC_Admin_Importers();

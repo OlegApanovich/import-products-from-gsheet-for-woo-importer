@@ -5,10 +5,14 @@
  * @since 1.0.0
  *
  * @package GSWOO
- * @subpackage GSWOO/woocommerce-importer
  */
 
+namespace GSWOO\WoocommerceImporter;
+
 use Google\Spreadsheet\Exception\SpreadsheetNotFoundException;
+use GSWOO\WrapperApiGoogleDrive;
+use WC_Product_CSV_Importer_Controller;
+use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -21,7 +25,7 @@ if ( ! class_exists( 'WP_Importer' ) ) {
  *
  * @since 1.0.0
  */
-class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_Controller {
+class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller {
 	/**
 	 * Output information about the uploading process.
 	 *
@@ -37,20 +41,19 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 		$google_sheet_title = html_entity_decode( htmlentities( $options['google_sheet_title'] ) );
 
 		// Include plugin custom import form.
-		include dirname( __FILE__ ) . '/views/html-product-csv-import-form.php';
+		include dirname( __FILE__ ) . '/Views/html-product-csv-import-form.php';
 	}
 
 	/**
 	 * Handles the CSV upload and initial parsing of the file to prepare for
 	 * displaying author import options.
 	 *
+	 * @return string|WP_Error
+	 * @throws SpreadsheetNotFoundException
+	 *
 	 * @since 1.0.0
 	 *
 	 * @noinspection PhpUnusedLocalVariableInspection
-	 *
-	 * @throws SpreadsheetNotFoundException
-	 *
-	 * @return string|WP_Error
 	 */
 	public function handle_upload() {
 		// phpcs:disable WordPress.CSRF.NonceVerification.NoNonceVerification -- Nonce already verified in WC_Product_CSV_Importer_Controller::upload_form_handler()
@@ -163,10 +166,9 @@ class GSWOO_WC_Product_CSV_Importer_Controller extends WC_Product_CSV_Importer_C
 	 * @return string
 	 * @throws SpreadsheetNotFoundException
 	 * @since 1.0.0
-	 *
 	 */
 	public function google_sheet_get_csv_file( $file_name ) {
-		$google_api_obj = new GSWOO_Wrapper_Api_Google_Drive();
+		$google_api_obj = new WrapperApiGoogleDrive();
 		$google_api_obj->set_sheet( $file_name );
 
 		return $google_api_obj->get_sheet_csv();

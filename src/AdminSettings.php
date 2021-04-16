@@ -41,7 +41,7 @@ class AdminSettings {
 			array( $this, 'plugin_admin_init_settings' )
 		);
 		add_filter(
-			'plugin_action_links_' . plugin_basename( __FILE__ ),
+			'plugin_action_links_' . plugin_basename( GSWOO_PLUGIN_FILE ),
 			array( $this, 'set_plugin_action_links' ),
 			10,
 			1
@@ -336,6 +336,7 @@ class AdminSettings {
 	 * @return array $screen_ids
 	 */
 	public function add_woocommerce_screen_ids( $screen_ids ) {
+
 		$screen_ids[] = 'product_page_product_importer_google_sheet';
 
 		return $screen_ids;

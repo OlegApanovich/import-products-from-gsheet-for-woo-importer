@@ -272,7 +272,7 @@ class SFTP extends SSH2
      * @var array
      * @access private
      */
-    var $requestBuffer = array();
+    private $requestBuffer = array();
 
     /**
      * Preserve timestamps on file downloads / uploads
@@ -282,7 +282,7 @@ class SFTP extends SSH2
      * @var bool
      * @access private
      */
-    var $preserveTime = false;
+    private $preserveTime = false;
 
     /**
      * Default Constructor.
@@ -2973,7 +2973,6 @@ class SFTP extends SSH2
 
         $tempLength = $length;
         $tempLength-= strlen($this->packet_buffer);
-
 
         // 256 * 1024 is what SFTP_MAX_MSG_LENGTH is set to in OpenSSH's sftp-common.h
         if ($tempLength > 256 * 1024) {

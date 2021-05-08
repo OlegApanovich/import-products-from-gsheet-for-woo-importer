@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'c0bbece2f01d42c6dc5b9f5331d0fe1a91274ddd',
+    'reference' => '183db1d340fdc3faa452c352a61f75bd16c54450',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'c0bbece2f01d42c6dc5b9f5331d0fe1a91274ddd',
+      'reference' => '183db1d340fdc3faa452c352a61f75bd16c54450',
     ),
     'asimlqt/php-google-spreadsheet-client' => 
     array (
@@ -58,21 +58,21 @@
     ),
     'google/apiclient-services' => 
     array (
-      'pretty_version' => 'v0.165.0',
-      'version' => '0.165.0.0',
+      'pretty_version' => 'v0.173.0',
+      'version' => '0.173.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c8d7ff2c9cb6cad6e88bc5825491c47b8b2e52fd',
+      'reference' => '9034b5ba3e25c9ad8e49b6457b9cad21fd9d9847',
     ),
     'google/auth' => 
     array (
-      'pretty_version' => 'v1.15.0',
-      'version' => '1.15.0.0',
+      'pretty_version' => 'v1.15.1',
+      'version' => '1.15.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b346c07de6613e26443d7b4830e5e1933b830dc4',
+      'reference' => '4e0c9367719df9703e96f5ad613041b87742471c',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -94,12 +94,12 @@
     ),
     'guzzlehttp/psr7' => 
     array (
-      'pretty_version' => '1.8.1',
-      'version' => '1.8.1.0',
+      'pretty_version' => '1.8.2',
+      'version' => '1.8.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '35ea11d335fd638b5882ff1725228b3d35496ab1',
+      'reference' => 'dc960a912984efb74d0a90222870c72c87f10c91',
     ),
     'monolog/monolog' => 
     array (
@@ -130,12 +130,12 @@
     ),
     'phpseclib/phpseclib' => 
     array (
-      'pretty_version' => '3.0.6',
-      'version' => '3.0.6.0',
+      'pretty_version' => '3.0.8',
+      'version' => '3.0.8.0',
       'aliases' => 
       array (
       ),
-      'reference' => '906a5fafabe5e6ba51ef3dc65b2722a677908837',
+      'reference' => 'd9615a6fb970d9933866ca8b4036ec3407b020b6',
     ),
     'psr/cache' => 
     array (
@@ -180,12 +180,12 @@
     ),
     'psr/log' => 
     array (
-      'pretty_version' => '1.1.3',
-      'version' => '1.1.3.0',
+      'pretty_version' => '1.1.4',
+      'version' => '1.1.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '0f73288fd15629204f9d42b7055f72dacbe811fc',
+      'reference' => 'd49695b909c3b7628b6289db5479a1c204601f11',
     ),
     'psr/log-implementation' => 
     array (
@@ -205,12 +205,12 @@
     ),
     'squizlabs/php_codesniffer' => 
     array (
-      'pretty_version' => '3.5.8',
-      'version' => '3.5.8.0',
+      'pretty_version' => '3.6.0',
+      'version' => '3.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9d583721a7157ee997f235f327de038e7ea6dac4',
+      'reference' => 'ffced0d2c8fa8e6cdc4d695a743271fab6c38625',
     ),
     'wp-coding-standards/wpcs' => 
     array (

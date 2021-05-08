@@ -47,6 +47,13 @@ class MultipleStatementAlignmentSniff implements Sniff
      */
     public $maxPadding = 1000;
 
+    /**
+     * Controls which side of the assignment token is used for alignment.
+     *
+     * @var boolean
+     */
+    public $alignAtEnd = true;
+
 
     /**
      * Returns an array of tokens this test wants to listen for.
@@ -140,11 +147,25 @@ class MultipleStatementAlignmentSniff implements Sniff
                 break;
             }
 
-            if (isset($scopes[$tokens[$assign]['code']]) === true
-                && isset($tokens[$assign]['scope_opener']) === true
+            if (isset($tokens[$assign]['scope_opener']) === true
                 && $tokens[$assign]['level'] === $tokens[$stackPtr]['level']
             ) {
-                break;
+                if (isset($scopes[$tokens[$assign]['code']]) === true) {
+                    // This type of scope indicates that the assignment block is over.
+                    break;
+                }
+
+                // Skip over the scope block because it is seen as part of the assignment block,
+                // but also process any assignment blocks that are inside as well.
+                $nextAssign = $phpcsFile->findNext($find, ($assign + 1), ($tokens[$assign]['scope_closer'] - 1));
+                if ($nextAssign !== false) {
+                    $assign = $this->checkAlignment($phpcsFile, $nextAssign);
+                } else {
+                    $assign = $tokens[$assign]['scope_closer'];
+                }
+
+                $lastCode = $assign;
+                continue;
             }
 
             if ($assign === $arrayEnd) {
@@ -253,6 +274,10 @@ class MultipleStatementAlignmentSniff implements Sniff
             // padding length if they aligned with us.
             $varEnd    = $tokens[($var + 1)]['column'];
             $assignLen = $tokens[$assign]['length'];
+            if ($this->alignAtEnd !== true) {
+                $assignLen = 1;
+            }
+
             if ($assign !== $stackPtr) {
                 if ($prevAssign === null) {
                     // Processing an inner block but no assignments found.

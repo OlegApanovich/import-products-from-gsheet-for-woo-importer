@@ -15,6 +15,13 @@
 		"pre-command-run": [
 			"cp config/hooks/pre-commit .git/hooks/pre-commit",
 			"chmod +x .git/hooks/pre-commit"
+		],
+		"post-update-cmd": "Google\\Task\\Composer::cleanup"
+	},
+	"extra": {
+		"google/apiclient-services": [
+			"Drive",
+			"Sheets"
 		]
 	}
 }

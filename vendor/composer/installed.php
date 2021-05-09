@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '183db1d340fdc3faa452c352a61f75bd16c54450',
+    'reference' => '442adedf4c1e691b36588700a17dde38ccbfd125',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '183db1d340fdc3faa452c352a61f75bd16c54450',
+      'reference' => '442adedf4c1e691b36588700a17dde38ccbfd125',
     ),
     'asimlqt/php-google-spreadsheet-client' => 
     array (

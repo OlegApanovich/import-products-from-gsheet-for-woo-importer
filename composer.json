@@ -21,7 +21,8 @@
 	"extra": {
 		"google/apiclient-services": [
 			"Drive",
-			"Sheets"
+			"Sheets",
+			"Oauth2"
 		]
 	}
 }

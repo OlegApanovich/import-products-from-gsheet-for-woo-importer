@@ -24,7 +24,7 @@
 
 	<!-- TODO: remove it when new google sheet notification system will be integrated -->
 	<rule ref="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents">
-		<exclude-pattern>src/AdminSettings.php</exclude-pattern>
+		<exclude-pattern>src/AdminSettingsHandler.php</exclude-pattern>
 	</rule>
 	<!-- TODO: remove it when new google sheet notification system will be integrated -->
 	<rule ref="WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_putenv">

@@ -1,25 +1,27 @@
 <?php
+
 /**
  * The plugin bootstrap file
  *
  * @since 1.0.0
  * @package GSWOO
  *
- * Plugin Name:  GSheet For Woo Importer
- * Plugin URI:   https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
- * Description:  Import woocommerce products from google sheet by using native woocommerce importer
- * Version:      1.1.5
- * Author:       Oleg Apanovich
- * Author URI:   https://github.com/OlegApanovich
- * License:      GPL-3.0+
- * License URI:  http://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain:  import-products-from-gsheet-for-woo-importer
- * Domain Path:  /languages
+ * Plugin Name: GSheet For Woo Importer
+ * Plugin URI:  https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
+ * Description: Import woocommerce products from google sheet by using native woocommerce importer
+ * Version:     1.1.5
+ * Author:      Oleg Apanovich
+ * Author URI:  https://github.com/OlegApanovich
+ * License:     GPL-3.0+
+ * License URI: http://www.gnu.org/licenses/gpl-3.0.txt
+ * Text Domain: import-products-from-gsheet-for-woo-importer
+ * Domain Path: /languages
  */
 
 defined( 'ABSPATH' ) || exit;
 
 use GSWOO\AdminSettings;
+use GSWOO\AdminSettingsHandler;
 
 /**
  * Main Plugin Class.
@@ -44,6 +46,15 @@ final class GSWOO_Plugin {
 	 * @since  2.0.0
 	 */
 	public $admin_settings;
+
+	/**
+	 * The single instance of admin settings handler class.
+	 *
+	 * @var    GSWOO_Plugin
+	 * @access public
+	 * @since  2.0.0
+	 */
+	public $admin_settings_handler;
 
 	/**
 	 * Main plugin instance.
@@ -82,7 +93,8 @@ final class GSWOO_Plugin {
 		$this->define_constants();
 		$this->init_hooks();
 
-		$this->admin_settings = new AdminSettings();
+		$this->admin_settings         = new AdminSettings();
+		$this->admin_settings_handler = new AdminSettingsHandler();
 	}
 
 	/**
@@ -205,7 +217,7 @@ final class GSWOO_Plugin {
 			$params
 		);
 
-		$check = $this->admin_settings->check_user_input( $this->admin_settings->get_plugin_options() );
+		$check = $this->admin_settings_handler->check_user_input( $this->admin_settings_handler->get_plugin_options() );
 
 		if ( $check ) {
 			wp_enqueue_script( 'wc_import_google_sheet_admin' );
@@ -216,6 +228,8 @@ final class GSWOO_Plugin {
 	 * What type of request is this scripts?
 	 *
 	 * @since 1.0.0
+	 *
+	 * @noinspection PhpSameParameterValueInspection
 	 *
 	 * @param  string $type admin, ajax, cron or frontend.
 	 *

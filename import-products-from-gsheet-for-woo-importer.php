@@ -21,6 +21,7 @@ defined( 'ABSPATH' ) || exit;
 
 use GSWOO\AdminSettings;
 use GSWOO\AdminSettingsHandler;
+use GSWOO\WoocommerceImporter\WcAdminImporters;
 
 /**
  * Main Plugin Class.
@@ -40,20 +41,18 @@ final class GSWOO_Plugin {
 	/**
 	 * The single instance of admin settings class.
 	 *
-	 * @var    GSWOO_Plugin
-	 * @access public
 	 * @since  2.0.0
+	 * @var    AdminSettings object
 	 */
-	public $admin_settings;
+	public $gswoo_settings;
 
 	/**
 	 * The single instance of admin settings handler class.
 	 *
-	 * @var    GSWOO_Plugin
-	 * @access public
 	 * @since  2.0.0
+	 * @var    AdminSettingsHandler object
 	 */
-	public $admin_settings_handler;
+	public $gswoo_settings_handler;
 
 	/**
 	 * Main plugin instance.
@@ -92,8 +91,8 @@ final class GSWOO_Plugin {
 		$this->define_constants();
 		$this->init_hooks();
 
-		$this->admin_settings         = new AdminSettings();
-		$this->admin_settings_handler = new AdminSettingsHandler();
+		$this->gswoo_settings_handler = new AdminSettingsHandler();
+		$this->gswoo_settings         = new AdminSettings( $this->gswoo_settings_handler );
 	}
 
 	/**
@@ -141,7 +140,6 @@ final class GSWOO_Plugin {
 	private function init_hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'inject_woocommerce_import' ) );
-		add_action( 'admin_init', array( $this, 'init_scripts' ), 0 );
 	}
 
 	/**
@@ -150,7 +148,7 @@ final class GSWOO_Plugin {
 	 * @since 2.0
 	 */
 	public function inject_woocommerce_import() {
-		new GSWOO\WoocommerceImporter\WcAdminImporters();
+		new WcAdminImporters();
 	}
 
 	/**
@@ -181,46 +179,6 @@ final class GSWOO_Plugin {
 			false,
 			GSWOO_URI_ABSPATH . '/languages'
 		);
-	}
-
-	/**
-	 * Init frontend files.
-	 *
-	 * @since 2.0.0
-	 */
-	public function init_scripts() {
-		wp_register_script(
-			'wc_import_google_sheet_admin',
-			GSWOO_URI . '/assets/js/admin.js',
-			array( 'jquery' ),
-			true,
-			true
-		);
-
-		$params = array(
-			'urls'    => array(
-				'import_products_google_sheet' =>
-					current_user_can( 'import' )
-					? esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_importer_google_sheet' ) )
-					: null,
-			),
-			'strings' => array(
-				'import_products_google_sheet' =>
-				esc_html__( 'Import From Google Sheet', 'import-products-from-gsheet-for-woo-importer' ),
-			),
-		);
-
-		wp_localize_script(
-			'wc_import_google_sheet_admin',
-			'woocommerce_import_google_sheet_admin',
-			$params
-		);
-
-		$check = $this->admin_settings_handler->check_user_input( $this->admin_settings_handler->get_plugin_options() );
-
-		if ( $check ) {
-			wp_enqueue_script( 'wc_import_google_sheet_admin' );
-		}
 	}
 
 	/**

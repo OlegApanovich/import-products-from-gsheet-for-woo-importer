@@ -167,3 +167,71 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 		return $success;
 	}
 endif;
+
+if ( ! function_exists( 'gswoo_check_screen' ) ) :
+	/**
+	 * Check current screen.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return bool
+	 */
+	function gswoo_check_screen( $get_request_name, $get_request_value ) {
+		return ! empty( $_GET[ $get_request_name ] ) && $get_request_value == $_GET[ $get_request_name ];
+	}
+endif;
+
+if ( ! function_exists( 'gswoo_is_plugin_settings_screen' ) ) :
+	/**
+	 * Check if current screen is plugin import screen in admin area.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return bool
+	 */
+	function gswoo_is_plugin_settings_screen() {
+		return gswoo_check_screen( 'page', 'woocommerce_import_products_google_sheet_menu' );
+	}
+endif;
+
+if ( ! function_exists( 'gswoo_is_plugin_importer_screen' ) ) :
+	/**
+	 * Check if current screen is plugin import screen in admin area.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return bool
+	 */
+	function gswoo_is_plugin_importer_screen() {
+		return gswoo_check_screen( 'page', 'product_importer_google_sheet' );
+	}
+endif;
+
+if ( ! function_exists( 'gswoo_is_woocommerce_product_screen' ) ) :
+	/**
+	 * Check if current screen is woocommerce product screen in admin area.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return bool
+	 */
+	function gswoo_is_woocommerce_product_screen() {
+		return gswoo_check_screen( 'post_type', 'product' );
+	}
+endif;
+
+if ( ! function_exists( 'gswoo_is_woocommerce_product_list_screen' ) ) :
+	/**
+	 * Check if current screen is woocommerce edit product screen in admin area.
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return bool
+	 */
+	function gswoo_is_woocommerce_product_list_screen() {
+		$screen = get_current_screen();
+
+		return ! empty( $screen->id ) && 'edit-product' == $screen->id;
+	}
+endif;
+

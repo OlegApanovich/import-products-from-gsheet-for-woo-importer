@@ -11,6 +11,12 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
 }
 
-$option_name = 'plugin_wc_import_google_sheet_options';
+$option_list = array(
+	'plugin_wc_import_google_sheet_options',
+	'plugin_wc_import_google_sheet_gs_token',
+);
 
-delete_option( $option_name );
+foreach ( $option_list as $option_name ) {
+	delete_option( $option_name );
+}
+

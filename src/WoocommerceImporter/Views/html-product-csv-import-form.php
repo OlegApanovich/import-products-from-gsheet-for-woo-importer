@@ -34,36 +34,11 @@ defined( 'ABSPATH' ) || exit;
 							<?php
 						} else {
 							?>
-								<?php
-								if ( ! empty( $options['google_sheet_title'] ) ) {
-									?>
-									<select name="file">
-										<option value="<?php echo $google_sheet_title; ?>">
-											<?php echo $google_sheet_title; ?>
-										</option>
-									</select>
-									<?php
-								} else {
-									$menu_page_url = menu_page_url( 'woocommerce_import_products_google_sheet_menu', false );
-									?>
-									<p style='color: red;'>
-										<?php
-										echo wp_kses(
-											printf(
-												// translators: %$s: plugin settings page url.
-												__(
-													"You do not set any google sheet titles for import, please go to <a href='%s'>plugin option page</a> and set it",
-													'import-products-from-gsheet-for-woo-importer'
-												),
-												$menu_page_url
-											),
-											array( 'a' => array() )
-										);
-										?>
-									</p>
-									<?php
-								}
-								?>
+                            <select name="file">
+                                <option value="<?php echo $google_sheet_title; ?>">
+                                    <?php echo $google_sheet_title; ?>
+                                </option>
+                            </select>
 
 							<input type="hidden" name="action" value="save" />
 							<input type="hidden" name="max_file_size" value="<?php echo esc_attr( $bytes ); ?>" />

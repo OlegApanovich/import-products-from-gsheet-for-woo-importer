@@ -55,6 +55,9 @@ class WcAdminImporters extends WC_Admin_Importers {
 		include_once GSWOO_WC_ABSPATH . 'includes/import/class-wc-product-csv-importer.php';
 
 		$importer = new WcProductCsvImporterController();
-		$importer->dispatch();
+		// display plugin import form only on plugin import page
+		if ( gswoo_is_plugin_importer_screen() ) {
+			$importer->dispatch();
+		}
 	}
 }

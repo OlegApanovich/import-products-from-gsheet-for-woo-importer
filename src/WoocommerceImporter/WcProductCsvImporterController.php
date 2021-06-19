@@ -103,19 +103,11 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 					if ( $options['google_auth_type'] == 'oauth2_tab' ) {
 
 						$token = $gswoo_settings_handler->get_plugin_option_oauth2_token();
-
 						ServiceRequestFactory::setInstance(
 							new DefaultServiceRequest( $token['access_token'] )
 						);
 
-						$spreadsheet = ( new SpreadsheetService() )
-							->getSpreadsheetFeed()
-							->getByTitle( $google_sheet_title );
-
-						$worksheets = $spreadsheet->getWorksheetFeed()->getEntries();
-						$worksheet  = $worksheets[0];
-
-						$file_content = $worksheet->getCsv();
+						$file_content = $wrapper_api_google_drive->get_sheet_csv( $google_sheet_title );
 					} else {
 						$file_content = $wrapper_api_google_drive->get_sheet_csv( $google_sheet_title );
 					}

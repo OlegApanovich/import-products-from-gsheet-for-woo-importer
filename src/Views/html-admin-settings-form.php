@@ -26,10 +26,10 @@ defined( 'ABSPATH' ) || exit;
 <form action="options.php" method="post">
 
 	<h2 class="nav-tab-wrapper">
-		<a href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=oauth2_tab" class="nav-tab <?php echo $active_tab == 'oauth2_tab' ? 'nav-tab-active' : ''; ?> ?>">
+		<a href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=auth_code_method_tab" class="nav-tab <?php echo $active_tab == 'auth_code_method_tab' ? 'nav-tab-active' : ''; ?> ?>">
 			<?php _e( 'One Click Auto Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</a>
-		<a href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=api_key_tab" class="nav-tab <?php echo $active_tab == 'api_key_tab' ? 'nav-tab-active' : ''; ?> ?>">
+		<a href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=assertion_method_tab" class="nav-tab <?php echo $active_tab == 'assertion_method_tab' ? 'nav-tab-active' : ''; ?> ?>">
 			<?php _e( 'Manual Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</a>
 	</h2>
@@ -37,9 +37,9 @@ defined( 'ABSPATH' ) || exit;
 	<?php settings_fields( 'plugin_wc_import_google_sheet_options' ); ?>
 
 	<?php
-	if ( 'oauth2_tab' == $active_tab ) {
+	if ( 'auth_code_method_tab' == $active_tab ) {
 		do_settings_sections( 'oauth2_page' );
-	} elseif ( 'api_key_tab' == $active_tab ) {
+	} elseif ( 'assertion_method_tab' == $active_tab ) {
 		do_settings_sections( 'api_key_page' );
 	}
 

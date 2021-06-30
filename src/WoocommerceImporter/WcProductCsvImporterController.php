@@ -100,7 +100,7 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 
 				if ( $google_sheet_title == $_REQUEST['file'] ) {
 
-					if ( $options['google_auth_type'] == 'oauth2_tab' ) {
+					if ( $options['google_auth_type'] == 'auth_code_method_tab' ) {
 
 						$token = $gswoo_settings_handler->get_plugin_option_oauth2_token();
 						ServiceRequestFactory::setInstance(

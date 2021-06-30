@@ -19,8 +19,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-use GSWOO\AdminSettings;
-use GSWOO\AdminSettingsHandler;
+use GSWOO\Actions\AdminSettingsAction;
 use GSWOO\WoocommerceImporter\WcAdminImporters;
 
 /**
@@ -42,7 +41,7 @@ final class GSWOO_Plugin {
 	 * The single instance of admin settings class.
 	 *
 	 * @since  2.0.0
-	 * @var    AdminSettings object
+	 * @var    AdminSettingsAction object
 	 */
 	public $gswoo_settings;
 
@@ -91,8 +90,7 @@ final class GSWOO_Plugin {
 		$this->define_constants();
 		$this->init_hooks();
 
-		$this->gswoo_settings_handler = new AdminSettingsHandler();
-		$this->gswoo_settings         = new AdminSettings( $this->gswoo_settings_handler );
+		$this->gswoo_settings = new AdminSettingsAction();
 	}
 
 	/**

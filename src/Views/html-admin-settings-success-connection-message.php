@@ -4,7 +4,7 @@
  *
  * @since 2.0.0
  *
- * @var bool $response
+ * @var array $response
  *
  * @package GSWOO
  */
@@ -12,7 +12,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<h3 style="color:<?php echo $response['is_success'] ? 'green' : 'red'; ?>">
+<h3 style="color: green;">
 	<?php
 	echo wp_kses( $response['message'], array( 'a' => array( 'href' => array() ) ) );
 	?>

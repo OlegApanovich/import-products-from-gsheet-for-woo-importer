@@ -4,11 +4,11 @@
  *
  * @since 2.0.0
  *
- * @var string $google_code_oauth2
- * @var string $google_sheet_title_oauth2
- * @var string $active_tab
- * @var string $message
- * @var array $all_sheets
+ * @var array $options
+ * @var array $response
+ * @var array $sheets_list
+ *
+ * @noinspection PhpIncludeInspection
  *
  * @package GSWOO
  */
@@ -28,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
 	</strong>
 </button>
 
-<input readonly type="password" id="plugin_google_oauth2_code" name="plugin_wc_import_google_sheet_options[google_code_oauth2]" size="40" value="<?php echo esc_html( $google_code_oauth2 ); ?>">
+<input readonly type="password" id="plugin_google_oauth2_code" name="plugin_wc_import_google_sheet_options[google_code_oauth2]" size="40" value="<?php echo esc_html( $options['google_code_oauth2'] ); ?>">
 
 <br>
 
@@ -39,16 +39,16 @@ defined( 'ABSPATH' ) || exit;
 </h3>
 
 <?php
-if ( is_array( $all_sheets ) ) {
+if ( ! empty( $sheets_list ) && is_array( $sheets_list ) ) {
 	?>
 	<select id="plugin_google_sheet_title_oauth2" name="plugin_wc_import_google_sheet_options[google_sheet_title_oauth2]">
 		<option disabled selected value>
 			<?php esc_html_e( '-- select an option --', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</option>
 		<?php
-		foreach ( $all_sheets as $sheet ) {
+		foreach ( $sheets_list as $sheet ) {
 			$selected = '';
-			if ( $google_sheet_title_oauth2 == $sheet['title'] ) {
+			if ( $options['google_sheet_title_oauth2'] == $sheet['title'] ) {
 				$selected = 'selected';
 			}
 			?>
@@ -66,7 +66,9 @@ if ( is_array( $all_sheets ) ) {
 <input type="hidden" name="plugin_wc_import_google_sheet_options[google_code_oauth2_restore]" value="false">
 
 <?php
-echo $message;
+if ( $response ) {
+	include GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-' . $response['status'] . '-connection-message.php';
+}
 ?>
 
 <script>

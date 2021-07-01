@@ -34,11 +34,14 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	 */
 	public function set_client() {
 		try {
-
 			$this->client->useApplicationDefaultCredentials();
 			$this->client->setApplicationName( 'Something to do with my representatives' );
-			$this->client->setScopes( Google_Service_Sheets::SPREADSHEETS );
-			$this->client->setScopes( Google_Service_Drive::DRIVE_METADATA_READONLY );
+			$this->client->setScopes(
+				array(
+					'https://www.googleapis.com/auth/drive',
+					'https://spreadsheets.google.com/feeds',
+				)
+			);
 		} catch ( Exception $e ) {
 			$this->token_error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}

@@ -227,6 +227,13 @@ class AdminSettingsAction {
 			'common_page',
 			'common_section'
 		);
+		add_settings_field(
+			'plugin_sheet_data',
+			'',
+			array( $this->settings_controller, 'display_common_section' ),
+			'common_page',
+			'common_section'
+		);
 	}
 
 	/**
@@ -274,7 +281,7 @@ class AdminSettingsAction {
 		$valid_input['google_sheet_title']         = esc_html( $input['google_sheet_title'] );
 		$valid_input['google_api_key']             = esc_html( $input['google_api_key'] );
 		$valid_input['google_code_oauth2']         = sanitize_text_field( $input['google_code_oauth2'] );
-		$valid_input['google_sheet_title_oauth2']  = esc_html( $input['google_sheet_title_oauth2'] );
+		$valid_input['google_sheet_data']          = esc_html( $input['google_sheet_data'] );
 		$valid_input['google_auth_type']           = esc_html( $input['google_auth_type'] );
 		$valid_input['google_code_oauth2_restore'] = filter_var(
 			esc_html( $input['google_code_oauth2_restore'] ),
@@ -294,8 +301,7 @@ class AdminSettingsAction {
 	 */
 	public function resolve_options_logic_dependencies( $valid_input ) {
 		if ( ! empty( $valid_input['google_code_oauth2_restore'] ) ) {
-			$valid_input['google_sheet_title_oauth2'] = '';
-			$valid_input['google_code_oauth2']        = '';
+			$valid_input['google_code_oauth2'] = '';
 		}
 
 		return $valid_input;

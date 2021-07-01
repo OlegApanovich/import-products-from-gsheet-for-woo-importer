@@ -40,7 +40,7 @@ abstract class GoogleApiTokenAbstract {
 	 *
 	 * @since 2.0.0
 	 */
-	public $token_error = false;
+	public $token_error;
 
 	/**
 	 * GoogleApiTokenAbstract constructor.

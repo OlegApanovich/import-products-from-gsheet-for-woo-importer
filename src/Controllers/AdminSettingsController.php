@@ -30,10 +30,19 @@ class AdminSettingsController {
 	public $settings_model;
 
 	/**
+	 * Instance of SheetInterplayService class.
+	 *
+	 * @since  2.0.0
+	 * @var object SheetInterplayService
+	 */
+	public $sheet_interplay_service;
+
+	/**
 	 * AdminSettingsController constructor.
 	 */
 	public function __construct() {
-		$this->settings_model = new AdminSettingsModel();
+		$this->settings_model          = new AdminSettingsModel();
+		$this->sheet_interplay_service = new SheetInterplayService();
 	}
 
 	/**
@@ -58,6 +67,18 @@ class AdminSettingsController {
 	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_common_section() {
+		$options = $this->settings_model->get_plugin_options();
+
+		$response = $this->settings_model->process_connection( $options );
+
+		// if ( $this->settings_model->is_response_error( $response ) || ! empty( $options['google_api_key'] ) ) {
+		// $sheets_list =
+		// $this->
+		// sheet_interplay_service->
+		// set_api_connect( $response['token'] )->
+		// get_google_drive_sheets_list();
+		// }
+
 		$google_auth_type = $this->settings_model->get_active_auth_tab();
 
 		include_once GSWOO_URI_ABSPATH
@@ -74,10 +95,6 @@ class AdminSettingsController {
 
 		$options = $this->settings_model->get_plugin_options();
 
-		$options['google_auth_type'] = 'assertion_method_tab';
-
-		$response = $this->settings_model->process_connection( $options );
-
 		include_once GSWOO_URI_ABSPATH
 					 . '/src/Views/html-admin-settings-assertion-method-section.php';
 	}
@@ -86,25 +103,15 @@ class AdminSettingsController {
 	 * Prerequisites and display section settings
 	 *
 	 * @since 2.0.0
-	 *
-	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_settings_auth_code_method_section() {
 
 		$options = $this->settings_model->get_plugin_options();
 
-		$options['google_auth_type'] = 'auth_code_method_tab';
-
-		$response = $this->settings_model->process_connection( $options );
-
-		if ( ! empty( $response['status'] ) && 'error' == $response['status'] || empty( $options['google_code_oauth2'] ) ) {
+		if ( empty( $options['google_code_oauth2'] ) ) {
 			include_once GSWOO_URI_ABSPATH
 						 . '/src/Views/html-admin-settings-auth-code-method-section-receive.php';
 		} else {
-
-			$sheet_interplay_service = new SheetInterplayService( $response['token'] );
-			$sheets_list             = $sheet_interplay_service->get_google_drive_sheets_list();
-
 			include_once GSWOO_URI_ABSPATH
 						 . '/src/Views/html-admin-settings-auth-code-method-section-restore.php';
 		}

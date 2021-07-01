@@ -5,9 +5,6 @@
  * @since 2.0.0
  *
  * @var array $options
- * @var array $response
- *
- * @noinspection PhpIncludeInspection
  *
  * @package GSWOO
  */
@@ -27,8 +24,3 @@ defined( 'ABSPATH' ) || exit;
 
 <input type="password" id="plugin_google_oauth2_code" placeholder="Enter Code" name="plugin_wc_import_google_sheet_options[google_code_oauth2]" size="40" value="<?php echo esc_html( $options['google_code_oauth2'] ); ?>">
 
-<?php
-if ( $response ) {
-	include GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-' . $response['status'] . '-connection-message.php';
-}
-?>

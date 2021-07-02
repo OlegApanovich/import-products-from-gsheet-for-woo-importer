@@ -9,8 +9,6 @@
 
 namespace GSWOO\Abstracts;
 
-use Google\Spreadsheet\DefaultServiceRequest;
-use Google\Spreadsheet\ServiceRequestFactory;
 use Google_Client;
 use WP_Error;
 
@@ -40,7 +38,7 @@ abstract class GoogleApiTokenAbstract {
 	 *
 	 * @since 2.0.0
 	 */
-	public $token_error;
+	public $error;
 
 	/**
 	 * GoogleApiTokenAbstract constructor.
@@ -99,52 +97,26 @@ abstract class GoogleApiTokenAbstract {
 		$this->set_client();
 
 		if ( $this->token = $this->get_token() ) {
-			// ob_start();
-			// var_dump( $this->token );
-			// var_dump( 1 );
-			// $imp_to_file = ob_get_clean();
-			// file_put_contents( '/var/www/html/test.html', $imp_to_file, FILE_APPEND );
 			$this->client->setAccessToken( $this->token );
 		}
 
 		// If there is previous token and it is not expired.
 		if ( ! $this->client->isAccessTokenExpired() ) {
-			// ob_start();
-			// var_dump( $this->token );
-			// var_dump( 2 );
-			// $imp_to_file = ob_get_clean();
-			// file_put_contents( '/var/www/html/test.html', $imp_to_file, FILE_APPEND );
 			return;
 		}
 
 		// Refresh the token if possible, else fetch a new one.
 		if ( $this->client->getRefreshToken() ) {
 			$token = $this->client->fetchAccessTokenWithRefreshToken( $this->client->getRefreshToken() );
-			// ob_start();
-			// var_dump( $token );
-			// var_dump( 3 );
-			// $imp_to_file = ob_get_clean();
-			// file_put_contents( '/var/www/html/test.html', $imp_to_file, FILE_APPEND );
 		} else {
 			$token = $this->fetch_token();
-			// ob_start();
-			// var_dump( $token );
-			// var_dump( 4 );
-			// $imp_to_file = ob_get_clean();
-			// file_put_contents( '/var/www/html/test.html', $imp_to_file, FILE_APPEND );
 		}
 
 		// Check to see if there was an error.
 		if ( is_array( $token ) && array_key_exists( 'error', $token ) ) {
-			$this->token_error = new WP_Error( 'token_error', join( ', ', $token ) );
+			$this->error = new WP_Error( 'token_error', join( ', ', $token ) );
 			return;
 		}
-
-		// ob_start();
-		// var_dump( $this->token );
-		// var_dump( 5 );
-		// $imp_to_file = ob_get_clean();
-		// file_put_contents( '/var/www/html/test.html', $imp_to_file, FILE_APPEND );
 
 		$this->token = json_encode( $token );
 		$this->save_token();

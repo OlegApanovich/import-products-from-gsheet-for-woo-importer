@@ -11,7 +11,7 @@
 		function() {
 
 			var $product_screen = $( '.edit-php.post-type-product' ),
-				$title_action       = $product_screen.find( '.page-title-action:first' ),
+				$title_action   = $product_screen.find( '.page-title-action:first' ),
 
 				form =
 				'<form method="post" style="display: inline"><a href="' +

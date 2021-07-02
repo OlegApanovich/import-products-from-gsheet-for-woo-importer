@@ -26,10 +26,10 @@ defined( 'ABSPATH' ) || exit;
 <form action="options.php" method="post">
 
 	<h2 class="nav-tab-wrapper">
-		<a href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=auth_code_method_tab" class="nav-tab <?php echo $active_tab == 'auth_code_method_tab' ? 'nav-tab-active' : ''; ?> ?>">
+		<a id="auth_code_method_tab" href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=auth_code_method_tab" class=" nav-tab <?php echo $active_tab == 'auth_code_method_tab' ? 'nav-tab-active' : ''; ?>">
 			<?php _e( 'One Click Auto Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</a>
-		<a href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=assertion_method_tab" class="nav-tab <?php echo $active_tab == 'assertion_method_tab' ? 'nav-tab-active' : ''; ?> ?>">
+		<a id="assertion_method_tab" href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=assertion_method_tab" class="nav-tab <?php echo $active_tab == 'assertion_method_tab' ? 'nav-tab-active' : ''; ?>">
 			<?php _e( 'Manual Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</a>
 	</h2>

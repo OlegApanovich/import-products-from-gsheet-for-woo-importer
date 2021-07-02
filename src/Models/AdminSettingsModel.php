@@ -13,6 +13,7 @@ namespace GSWOO\Models;
 use GSWOO\Services\GoogleApiTokenAssertionMethodService;
 use GSWOO\Services\GoogleApiTokenAuthCodeMethodService;
 use GSWOO\Abstracts\GoogleApiTokenAbstract;
+use GSWOO\Services\SheetInterplayService;
 
 defined( 'ABSPATH' ) || exit;
 
@@ -22,6 +23,21 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.0.0
  */
 class AdminSettingsModel {
+
+	/**
+	 * Instance of SheetInterplayService class.
+	 *
+	 * @since  2.0.0
+	 * @var object SheetInterplayService
+	 */
+	public $sheet_interplay_service;
+
+	/**
+	 * AdminSettingsModel constructor.
+	 */
+	public function __construct() {
+		$this->sheet_interplay_service = new SheetInterplayService();
+	}
 
 	/**
 	 * Get currently activated Google API Connect Method options tab
@@ -56,34 +72,11 @@ class AdminSettingsModel {
 	public function get_plugin_options() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );
 
-		// if ( is_array( $options ) ) {
-		// foreach ( $options as $options_name => $option_value ) {
-		// $options[ $options_name ] = wp_specialchars_decode( $option_value, ENT_QUOTES );
-		// }
-		// }
-		//
-		// we must predefined some options even if we do not have it in db
-		// $predefined_option_list = array(
-		// 'google_api_key',
-		// 'google_code_oauth2',
-		// 'google_auth_type' => '',
-		// );
-
-		// foreach ( $predefined_option_list as $predefined_option_name => $predefined_option_value ) {
-		//
-		// if ( empty( $predefined_option_value ) ) {
-		// $predefined_option_value = '';
-		// }
-		//
-		// if ( empty( $options[ $predefined_option_name ] ) ) {
-		// $options[ $predefined_option_name ] = $predefined_option_value;
-		// }
-		// }
-
-		ob_start();
-		var_dump( $options );
-		$imp_to_file = ob_get_clean();
-		file_put_contents( '/var/www/html/test.html', $imp_to_file, FILE_APPEND );
+		if ( is_array( $options ) ) {
+			foreach ( $options as $options_name => $option_value ) {
+				$options[ $options_name ] = wp_specialchars_decode( $option_value, ENT_QUOTES );
+			}
+		}
 
 		return $options;
 	}
@@ -113,14 +106,30 @@ class AdminSettingsModel {
 			return $response;
 		}
 
-		$token_service = $this->get_token_service( $options );
-
-		if ( is_wp_error( $token_service->token_error ) ) {
-			$error = reset( $token_service->token_error->errors );
-			return $this->get_error_connection_message( $error[0] );
+		if ( ! empty( $options['google_code_oauth2_restore'] ) ) {
+			$this->delete_options();
+			return $response;
 		}
 
-		return $this->get_success_connection_message( $token_service );
+		$token_service = $this->get_token_service( $options );
+
+		if ( is_wp_error( $token_service->error ) ) {
+			$error = reset( $token_service->error->errors );
+			return $this->get_error_connection_response( $error[0] );
+		}
+
+		$sheets_list =
+			$this->
+			sheet_interplay_service->
+			set_api_connect( $token_service->token )->
+			get_google_drive_sheets_list();
+
+		if ( is_wp_error( $sheets_list->error ) ) {
+			$error = reset( $sheets_list->error->errors );
+			return $this->get_error_connection_response( $error[0] );
+		}
+
+		return $this->get_success_connection_response( $token_service );
 	}
 
 	/**
@@ -162,16 +171,11 @@ class AdminSettingsModel {
 		} else {
 			switch ( $options['google_auth_type'] ) {
 				case 'assertion_method_tab':
-					if ( ! $options['google_sheet_title'] && ! $options['google_api_key'] ) {
+					if ( ! $options['google_api_key'] ) {
 						$is_empty = true;
 					}
 					break;
 				case 'auth_code_method_tab':
-					if ( ! empty( $options['google_code_oauth2_restore'] ) ) {
-						$this->delete_options();
-						$is_empty = true;
-					}
-
 					if ( empty( $options['google_code_oauth2'] ) ) {
 						$is_empty = true;
 					}
@@ -191,7 +195,7 @@ class AdminSettingsModel {
 	 *
 	 * @return array
 	 */
-	public function get_error_connection_message( $error ) {
+	public function get_error_connection_response( $error ) {
 		$return['status'] = 'error';
 
 		$return['message'] = sprintf(
@@ -216,7 +220,7 @@ class AdminSettingsModel {
 	 *
 	 * @return array
 	 */
-	public function get_success_connection_message( $token_service ) {
+	public function get_success_connection_response( $token_service ) {
 		$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
 
 		$token = json_decode( $token_service->token );
@@ -248,15 +252,14 @@ class AdminSettingsModel {
 		delete_option( 'plugin_wc_import_google_sheet_options' );
 	}
 
-
 	/**
-	 * Check if processing google api request response has error.
+	 * Check if processing google api request response is success.
 	 *
 	 * @param array $response
 	 *
 	 * @return bool
 	 */
-	public function is_response_error( $response ) {
-		return ! empty( $response['status'] ) && 'error' == $response['status'];
+	public function is_response_success( $response ) {
+		return ! empty( $response['status'] ) && 'error' != $response['status'];
 	}
 }

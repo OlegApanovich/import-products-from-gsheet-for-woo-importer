@@ -68,6 +68,11 @@ class AdminSettingsAction {
 			array( $this, 'init_admin_settings_fields_common_section' )
 		);
 
+		add_action(
+			'wp_ajax_restore_action',
+			array( $this, 'process_ajax_restore_action' )
+		);
+
 		add_filter(
 			'plugin_action_links_' . plugin_basename( GSWOO_PLUGIN_FILE ),
 			array( $this, 'set_plugin_action_links' ),
@@ -115,6 +120,21 @@ class AdminSettingsAction {
 			true
 		);
 		wp_enqueue_script( 'gswoo-select2-js' );
+
+		wp_enqueue_script(
+			'gswoo-admin-settings-ajax',
+			GSWOO_URI . '/assets/js/admin-settings-ajax.js',
+			array( 'jquery' ),
+			true,
+			true
+		);
+		wp_localize_script(
+			'gswoo-admin-settings-ajax',
+			'gswoo_admin_ajax',
+			array(
+				'url' => admin_url( 'admin-ajax.php' ),
+			)
+		);
 	}
 
 	/**
@@ -278,15 +298,26 @@ class AdminSettingsAction {
 	 * @return array
 	 */
 	public function sanitize_options( $input ) {
-		$valid_input['google_sheet_title']         = esc_html( $input['google_sheet_title'] );
-		$valid_input['google_api_key']             = esc_html( $input['google_api_key'] );
-		$valid_input['google_code_oauth2']         = sanitize_text_field( $input['google_code_oauth2'] );
-		$valid_input['google_sheet_data']          = esc_html( $input['google_sheet_data'] );
-		$valid_input['google_auth_type']           = esc_html( $input['google_auth_type'] );
-		$valid_input['google_code_oauth2_restore'] = filter_var(
-			esc_html( $input['google_code_oauth2_restore'] ),
-			FILTER_VALIDATE_BOOLEAN
-		);
+		$valid_input['google_api_key']
+			= isset( $input['google_api_key'] ) ? esc_html( $input['google_api_key'] ) : '';
+
+		$valid_input['google_code_oauth2']
+			= isset( $input['google_code_oauth2'] ) ? sanitize_text_field( $input['google_code_oauth2'] ) : '';
+
+		$valid_input['google_sheet_data']
+			= isset( $input['google_sheet_data'] ) ? esc_html( $input['google_sheet_data'] ) : '';
+
+		$valid_input['google_auth_type']
+			= isset( $input['google_auth_type'] ) ? esc_html( $input['google_auth_type'] ) : '';
+
+		if ( isset( $input['google_code_oauth2_restore'] ) ) {
+			$valid_input['google_code_oauth2_restore'] = filter_var(
+				esc_html( $input['google_code_oauth2_restore'] ),
+				FILTER_VALIDATE_BOOLEAN
+			);
+		} else {
+			$valid_input['google_code_oauth2_restore'] = false;
+		}
 
 		// after sanitizing we produce some logic dependency resolving
 		return $this->resolve_options_logic_dependencies( $valid_input );
@@ -300,7 +331,7 @@ class AdminSettingsAction {
 	 * @return array
 	 */
 	public function resolve_options_logic_dependencies( $valid_input ) {
-		if ( ! empty( $valid_input['google_code_oauth2_restore'] ) ) {
+		if ( $valid_input['google_code_oauth2_restore'] ) {
 			$valid_input['google_code_oauth2'] = '';
 		}
 
@@ -352,5 +383,15 @@ class AdminSettingsAction {
 	 */
 	public function plugin_section_text() {
 		echo '<p></p>';
+	}
+
+	/**
+	 * Function callback for a add_settings_section
+	 *
+	 * @since 2.0.0
+	 */
+	public function process_ajax_restore_action() {
+		$this->settings_controller->settings_model->delete_options();
+		wp_die();
 	}
 }

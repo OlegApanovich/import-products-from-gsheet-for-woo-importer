@@ -43,7 +43,7 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 				)
 			);
 		} catch ( Exception $e ) {
-			$this->token_error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
+			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}
 	}
 
@@ -64,8 +64,8 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 
 			$token = $this->client->fetchAccessTokenWithAssertion();
 		} catch ( Exception $e ) {
-			$token             = '';
-			$this->token_error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
+			$token       = '';
+			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}
 
 		return $token;
@@ -86,11 +86,11 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 				$this->google_api_key
 			);
 		} catch ( Exception $e ) {
-			$this->token_error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
+			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}
 
 		if ( empty( $try_file_put ) ) {
-			$this->token_error = new WP_Error(
+			$this->error = new WP_Error(
 				'token_error',
 				'(' . __METHOD__ . ')' . __( 'Put file content error', 'import-products-from-gsheet-for-woo-importer' ),
 			);

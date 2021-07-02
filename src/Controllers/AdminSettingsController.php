@@ -30,19 +30,19 @@ class AdminSettingsController {
 	public $settings_model;
 
 	/**
-	 * Instance of SheetInterplayService class.
+	 * Plugin options.
 	 *
 	 * @since  2.0.0
-	 * @var object SheetInterplayService
+	 * @var array
 	 */
-	public $sheet_interplay_service;
+	public $options;
 
 	/**
 	 * AdminSettingsController constructor.
 	 */
 	public function __construct() {
-		$this->settings_model          = new AdminSettingsModel();
-		$this->sheet_interplay_service = new SheetInterplayService();
+		$this->settings_model = new AdminSettingsModel();
+		$this->options        = $this->settings_model->get_plugin_options();
 	}
 
 	/**
@@ -67,17 +67,8 @@ class AdminSettingsController {
 	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_common_section() {
-		$options = $this->settings_model->get_plugin_options();
 
-		$response = $this->settings_model->process_connection( $options );
-
-		// if ( $this->settings_model->is_response_error( $response ) || ! empty( $options['google_api_key'] ) ) {
-		// $sheets_list =
-		// $this->
-		// sheet_interplay_service->
-		// set_api_connect( $response['token'] )->
-		// get_google_drive_sheets_list();
-		// }
+		$response = $this->settings_model->process_connection( $this->options );
 
 		$google_auth_type = $this->settings_model->get_active_auth_tab();
 
@@ -89,14 +80,15 @@ class AdminSettingsController {
 	 * Prerequisites and display section settings
 	 *
 	 * @since 2.0.0
-	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_settings_assertion_method_section() {
-
-		$options = $this->settings_model->get_plugin_options();
-
-		include_once GSWOO_URI_ABSPATH
-					 . '/src/Views/html-admin-settings-assertion-method-section.php';
+		if ( empty( $this->options['google_api_key'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
+			include_once GSWOO_URI_ABSPATH
+						 . '/src/Views/html-admin-settings-assertion-method-section-receive.php';
+		} else {
+			include_once GSWOO_URI_ABSPATH
+						 . '/src/Views/html-admin-settings-assertion-method-section-restore.php';
+		}
 	}
 
 	/**
@@ -106,9 +98,7 @@ class AdminSettingsController {
 	 */
 	public function display_settings_auth_code_method_section() {
 
-		$options = $this->settings_model->get_plugin_options();
-
-		if ( empty( $options['google_code_oauth2'] ) ) {
+		if ( empty( $this->options['google_code_oauth2'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
 			include_once GSWOO_URI_ABSPATH
 						 . '/src/Views/html-admin-settings-auth-code-method-section-receive.php';
 		} else {

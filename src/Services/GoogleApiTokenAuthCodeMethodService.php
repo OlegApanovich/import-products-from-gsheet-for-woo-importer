@@ -71,7 +71,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 			$this->client->setScopes( Google_Service_Drive::DRIVE_METADATA_READONLY );
 			$this->client->setAccessType( 'offline' );
 		} catch ( Exception $e ) {
-			$this->token_error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
+			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}
 	}
 
@@ -87,8 +87,8 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 			$this->client->fetchAccessTokenWithAuthCode( $this->google_code );
 			$token = $this->client->getAccessToken();
 		} catch ( Exception $e ) {
-			$this->token_error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
-			$token             = '';
+			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
+			$token       = '';
 		}
 
 		return $token;

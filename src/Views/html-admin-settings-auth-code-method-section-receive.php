@@ -22,5 +22,5 @@ defined( 'ABSPATH' ) || exit;
 	<strong><?php _e( 'Get Code', 'import-products-from-gsheet-for-woo-importer' ); ?></strong>
 </a>
 
-<input type="password" id="plugin_google_oauth2_code" placeholder="Enter Code" name="plugin_wc_import_google_sheet_options[google_code_oauth2]" size="40" value="<?php echo esc_html( $options['google_code_oauth2'] ); ?>">
+<input type="password" id="plugin_google_oauth2_code" placeholder="Enter Code" name="plugin_wc_import_google_sheet_options[google_code_oauth2]" size="40" value="">
 

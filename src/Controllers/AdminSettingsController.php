@@ -22,10 +22,10 @@ defined( 'ABSPATH' ) || exit;
 class AdminSettingsController {
 
 	/**
-	 * Instance of AdminSettingsController class.
+	 * Instance of AdminSettingsModel class.
 	 *
 	 * @since  2.0.0
-	 * @var object AdminSettingsController
+	 * @var object AdminSettingsModel
 	 */
 	public $settings_model;
 
@@ -42,7 +42,7 @@ class AdminSettingsController {
 	 */
 	public function __construct() {
 		$this->settings_model = new AdminSettingsModel();
-		$this->options        = $this->settings_model->get_plugin_options();
+		$this->options        = $this->settings_model->options;
 	}
 
 	/**
@@ -54,7 +54,9 @@ class AdminSettingsController {
 	 */
 	public function settings_form() {
 
-		$active_tab = $this->settings_model->get_active_auth_tab();
+		$active_tab =
+			$this->settings_model->
+			get_active_google_auth_type();
 
 		include_once GSWOO_URI_ABSPATH
 					 . '/src/Views/html-admin-settings-form.php';
@@ -68,9 +70,13 @@ class AdminSettingsController {
 	 */
 	public function display_common_section() {
 
-		$response = $this->settings_model->process_connection( $this->options );
+		$response =
+			$this->settings_model->
+			process_connection();
 
-		$google_auth_type = $this->settings_model->get_active_auth_tab();
+		$auth_type =
+			$this->settings_model->
+			get_active_google_auth_type();
 
 		include_once GSWOO_URI_ABSPATH
 					 . '/src/Views/html-admin-settings-common-section.php';
@@ -82,6 +88,7 @@ class AdminSettingsController {
 	 * @since 2.0.0
 	 */
 	public function display_settings_assertion_method_section() {
+
 		if ( empty( $this->options['google_api_key'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
 			include_once GSWOO_URI_ABSPATH
 						 . '/src/Views/html-admin-settings-assertion-method-section-receive.php';

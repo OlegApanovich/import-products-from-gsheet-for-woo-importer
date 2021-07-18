@@ -38,9 +38,9 @@ defined( 'ABSPATH' ) || exit;
 
 	<?php
 	if ( 'auth_code_method_tab' == $active_tab ) {
-		do_settings_sections( 'oauth2_page' );
+		do_settings_sections( 'auth_code_method_page' );
 	} elseif ( 'assertion_method_tab' == $active_tab ) {
-		do_settings_sections( 'api_key_page' );
+		do_settings_sections( 'assertion_method_page' );
 	}
 
 	do_settings_sections( 'common_page' );

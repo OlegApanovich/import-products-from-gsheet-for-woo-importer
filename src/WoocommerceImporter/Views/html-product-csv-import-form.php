@@ -34,11 +34,15 @@ defined( 'ABSPATH' ) || exit;
 							<?php
 						} else {
 							?>
-                            <select name="file">
-                                <option value="<?php echo $google_sheet_title; ?>">
-                                    <?php echo $google_sheet_title; ?>
-                                </option>
-                            </select>
+
+							<select name="gswoo-file">
+								<?php
+								$sheet_id = $this->settings_model->options['google_sheet_data'];
+								?>
+								<option value="<?php echo $sheet_id ?>">
+									<?php echo $this->settings_model->get_sheet_title_from_sheet_list( $sheet_id, $response['sheets_list'] ); ?>
+								</option>
+							</select>
 
 							<input type="hidden" name="action" value="save" />
 							<input type="hidden" name="max_file_size" value="<?php echo esc_attr( $bytes ); ?>" />

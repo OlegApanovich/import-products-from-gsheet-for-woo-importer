@@ -4,9 +4,8 @@
  *
  * @since 2.0.0
  *
- * @var array $sheets_list
  * @var array $response
- * @var string $google_auth_type
+ * @var string $auth_type
  *
  * @package GSWOO
  */
@@ -14,10 +13,10 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<input name="plugin_wc_import_google_sheet_options[google_auth_type]" type="hidden" value="<?php echo esc_html( $google_auth_type ); ?>">
+<input name="plugin_wc_import_google_sheet_options[google_auth_type]" type="hidden" value="<?php echo esc_html( $auth_type ); ?>">
 
 <?php
-if ( ! empty( $sheets_list ) ) {
+if ( ! empty( $response['sheets_list'] ) ) {
 	?>
 	<h3>
 		<label for="plugin_google_sheet_data">
@@ -31,7 +30,7 @@ if ( ! empty( $sheets_list ) ) {
 		</option>
 		<?php
 
-		foreach ( $sheets_list as $sheet ) {
+		foreach ( $response['sheets_list'] as $sheet ) {
 			$selected = '';
 			if ( $this->options['google_sheet_data'] == $sheet['id'] ) {
 				$selected = 'selected';
@@ -46,9 +45,8 @@ if ( ! empty( $sheets_list ) ) {
 	</select>
 	<?php
 }
-?>
 
-<?php
+
 if ( $response ) {
 	include GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-' . $response['status'] . '-connection-message.php';
 }

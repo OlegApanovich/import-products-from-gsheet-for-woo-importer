@@ -40,11 +40,12 @@ class AdminSettingsAction {
 	}
 
 	/**
-	 * Init admin settings
+	 * Fire up actions and filter
 	 *
 	 * @since 1.0.0
 	 */
 	public function init() {
+
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
 
 		add_action(
@@ -87,14 +88,26 @@ class AdminSettingsAction {
 			1
 		);
 
-		// if ( $this->settings_controller->is_api_connection_success_by_current_options() ) {
-		// add_action( 'init', array( $this, 'init_import_button' ), 0 );
-		// } else {
-		// add_action( 'admin_notices', array( $this->settings_controller, 'display_settings_require_admin_notice' ) );
-		// }
-
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_settings_assets' ) );
+
+		$this->set_conditional_init();
 	}
+
+	/**
+	 * Fire up actions and filter with conditional init
+	 *
+	 * @since 2.0.0
+	 */
+	public function set_conditional_init() {
+		if ( gswoo_is_woocommerce_product_screen() ) {
+			if ( $this->settings_controller->settings_model->is_api_connection_success_by_current_options() ) {
+				add_action( 'init', array( $this, 'init_import_button' ), 0 );
+			} else {
+				add_action( 'admin_notices', array( $this->settings_controller, 'display_settings_require_admin_notice' ) );
+			}
+		}
+	}
+
 
 	/**
 	 * Enqueue assets for plugin setting page
@@ -215,16 +228,16 @@ class AdminSettingsAction {
 	 */
 	public function init_plugin_admin_settings_sections() {
 		add_settings_section(
-			'auth_api_key_section',
+			'auth_assertion_method_section',
 			'',
 			array( $this, 'plugin_section_text' ),
-			'api_key_page'
+			'assertion_method_page'
 		);
 		add_settings_section(
-			'oauth2_section',
+			'oauth_code_method_section',
 			'',
 			array( $this, 'plugin_section_text' ),
-			'oauth2_page'
+			'auth_code_method_page'
 		);
 		add_settings_section(
 			'common_section',
@@ -257,7 +270,7 @@ class AdminSettingsAction {
 	}
 
 	/**
-	 * Init plugin settings fields for auth_api_key_section
+	 * Init plugin settings fields for auth_assertion_method_section
 	 *
 	 * @since 2.0.0
 	 */
@@ -266,13 +279,13 @@ class AdminSettingsAction {
 			'plugin_google_api_key',
 			'',
 			array( $this->settings_controller, 'display_settings_assertion_method_section' ),
-			'api_key_page',
-			'auth_api_key_section'
+			'assertion_method_page',
+			'auth_assertion_method_section'
 		);
 	}
 
 	/**
-	 * Init plugin settings fields for oauth2_section
+	 * Init plugin settings fields for oauth_code_method_section
 	 *
 	 * @since 2.0.0
 	 */
@@ -281,8 +294,8 @@ class AdminSettingsAction {
 			'plugin_google_oauth2_code',
 			'',
 			array( $this->settings_controller, 'display_settings_auth_code_method_section' ),
-			'oauth2_page',
-			'oauth2_section'
+			'auth_code_method_page',
+			'oauth_code_method_section'
 		);
 	}
 
@@ -298,6 +311,7 @@ class AdminSettingsAction {
 	 * @return array
 	 */
 	public function sanitize_options( $input ) {
+
 		$valid_input['google_api_key']
 			= isset( $input['google_api_key'] ) ? esc_html( $input['google_api_key'] ) : '';
 

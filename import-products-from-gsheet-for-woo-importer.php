@@ -46,14 +46,6 @@ final class GSWOO_Plugin {
 	public $gswoo_settings;
 
 	/**
-	 * The single instance of admin settings handler class.
-	 *
-	 * @since  2.0.0
-	 * @var    AdminSettingsHandler object
-	 */
-	public $gswoo_settings_handler;
-
-	/**
 	 * Main plugin instance.
 	 *
 	 * Ensures only one instance of plugin is loaded or can be loaded.

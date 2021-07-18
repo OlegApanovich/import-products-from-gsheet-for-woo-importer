@@ -9,13 +9,7 @@
 
 namespace GSWOO\WoocommerceImporter;
 
-use Google\Exception;
-use Google\Spreadsheet\DefaultServiceRequest;
-use Google\Spreadsheet\Exception\SpreadsheetNotFoundException;
-use Google\Spreadsheet\ServiceRequestFactory;
-use Google\Spreadsheet\SpreadsheetService;
-use GSWOO\AdminSettingsHandler;
-use GSWOO\WrapperApiGoogleDrive;
+use GSWOO\Models\AdminSettingsModel;
 use WC_Product_CSV_Importer_Controller;
 use WP_Error;
 
@@ -31,6 +25,24 @@ if ( ! class_exists( 'WP_Importer' ) ) {
  * @since 1.0.0
  */
 class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller {
+
+	/**
+	 * Instance of AdminSettingsModel class.
+	 *
+	 * @since  2.0.0
+	 * @var object AdminSettingsModel
+	 */
+	public $settings_model;
+
+	/**
+	 * AdminSettingsController constructor.
+	 */
+	public function __construct() {
+		parent::__construct();
+
+		$this->settings_model = new AdminSettingsModel();
+	}
+
 	/**
 	 * Output information about the uploading process.
 	 *
@@ -42,23 +54,12 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 		$size       = size_format( $bytes );
 		$upload_dir = wp_upload_dir();
 
-		$settingsHandler = new AdminSettingsHandler();
-		$options         = $settingsHandler->get_plugin_options();
-		$response        = $settingsHandler->get_api_connection_with_plugin_options( $options );
-		$menu_page_url = menu_page_url( 'woocommerce_import_products_google_sheet_menu', false );
+		$response =
+			$this->settings_model->
+			process_connection();
 
-		if ( $settingsHandler->is_api_connection_success_by_current_options() ) {
-
-			$google_sheet_title = $settingsHandler->get_option_sheet_title( $options );
-			if ( $google_sheet_title ) {
-				// Include plugin custom import form.
-				include dirname( __FILE__ ) . '/Views/html-product-csv-import-form.php';
-			} else {
-				include_once GSWOO_URI_ABSPATH
-				             . '/src/Views/html-admin-wc-form-sheet-title-demand-error-message.php';
-			}
-
-
+		if (  $this->settings_model->is_response_success( $response ) ) {
+			include dirname( __FILE__ ) . '/Views/html-product-csv-import-form.php';
 		} else {
 			include_once GSWOO_URI_ABSPATH
 			             . '/src/Views/html-admin-wc-form-connection-error-message.php';
@@ -70,7 +71,6 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 	 * displaying author import options.
 	 *
 	 * @return string|WP_Error
-	 * @throws SpreadsheetNotFoundException
 	 *
 	 * @since 1.0.0
 	 *
@@ -81,63 +81,25 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 		$file_url = isset( $_POST['file_url'] ) ? wc_clean( wp_unslash( $_POST['file_url'] ) ) : '';
 
 		if ( empty( $file_url ) ) {
-			if ( ! isset( $_REQUEST['file'] ) ) {
-				return new WP_Error(
-					'woocommerce_product_csv_importer_upload_file_empty',
-					__(
-						'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.',
-						'import-products-from-gsheet-for-woo-importer'
-					)
-				);
+			if ( ! isset( $_REQUEST['gswoo-file'] ) ) {
+				return new WP_Error( 'woocommerce_product_csv_importer_upload_file_empty', __( 'File is empty. Please upload something more substantial. This error could also be caused by uploads being disabled in your php.ini or by post_max_size being defined as smaller than upload_max_filesize in php.ini.', 'import-products-from-gsheet-for-woo-importer' ) );
 			}
 
-			if ( $_REQUEST['file'] ) {
-				$gswoo_settings_handler = new AdminSettingsHandler();
-				$wrapper_api_google_drive  = new WrapperApiGoogleDrive();
-				$options = $gswoo_settings_handler->get_plugin_options();
+			$upload_dir_arr  = wp_upload_dir();
+			$file_name       = sanitize_file_name( $_REQUEST['gswoo-file'] );
+			$gswoo_file_sheet_url  = $upload_dir_arr['url'] . '/' . $file_name . '.csv';
+			$gswoo_file_sheet_path = $upload_dir_arr['path'] . '/' . $file_name . '.csv';
 
-				$google_sheet_title = $gswoo_settings_handler->get_option_sheet_title( $options );
+			$result =
+				$this->settings_model->
+				replace_import_file_with_gsheet_content( $_REQUEST['gswoo-file'], $gswoo_file_sheet_path );
 
-				if ( $google_sheet_title == $_REQUEST['file'] ) {
 
-					if ( $options['google_auth_type'] == 'auth_code_method_tab' ) {
-
-						$token = $gswoo_settings_handler->get_plugin_option_oauth2_token();
-						ServiceRequestFactory::setInstance(
-							new DefaultServiceRequest( $token['access_token'] )
-						);
-
-						$file_content = $wrapper_api_google_drive->get_sheet_csv( $google_sheet_title );
-					} else {
-						$file_content = $wrapper_api_google_drive->get_sheet_csv( $google_sheet_title );
-					}
-
-					$upload_dir_arr = wp_upload_dir();
-					$file_name       = sanitize_file_name( $_REQUEST['file'] );
-					$file_sheet_url  = $upload_dir_arr['url'] . '/' . $file_name . '.csv';
-					$file_sheet_path = $upload_dir_arr['path'] . '/' . $file_name . '.csv';
-
-					file_put_contents( $file_sheet_path, $file_content );
-				} else {
-					return new WP_Error(
-						'woocommerce_product_csv_importer_upload_file_invalid',
-						__(
-							"Your current chosen google sheet title don't set in plugin google sheet title option, please update plugin options and try to import again.",
-							'import-products-from-gsheet-for-woo-importer'
-						)
-					);
-				}
-			} else {
-				return new WP_Error(
-					'woocommerce_product_csv_importer_upload_file_invalid',
-					__(
-						"You don't set google style sheet title setting, please set it and return again",
-						'import-products-from-gsheet-for-woo-importer'
-					)
-				);
+			if ( is_wp_error( $result ) ) {
+				return $result;
 			}
 
-			if ( ! self::is_file_valid_csv( wc_clean( wp_unslash( array_slice( explode( '/', $file_sheet_url ), -1 )[0] ) ), false ) ) {
+			if ( ! self::is_file_valid_csv( wc_clean( wp_unslash( array_slice( explode( '/', $gswoo_file_sheet_url ), -1 )[0] ) ), false ) ) {
 				return new WP_Error(
 					'woocommerce_product_csv_importer_upload_file_invalid',
 					__(
@@ -152,11 +114,11 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 				'mimes'     => self::get_valid_csv_filetypes(),
 			);
 
-			$import = $file_sheet_path; // WPCS: sanitization ok, input var ok.
+			$import = $gswoo_file_sheet_path; // WPCS: sanitization ok, input var ok.
 
 			$upload = array(
-				'file' => $file_sheet_path,
-				'url'  => $file_sheet_url,
+				'file' => $gswoo_file_sheet_path,
+				'url'  => $gswoo_file_sheet_url,
 				'type' => 'text/csv',
 			);
 

@@ -45,8 +45,8 @@ class AdminSettingsModel {
 	 * AdminSettingsModel constructor.
 	 */
 	public function __construct() {
-		$this->options                 = $this->get_plugin_options();
 		$this->sheet_interplay_service = new SheetInterplayService();
+		$this->options                 = $this->get_plugin_options();
 	}
 
 	/**
@@ -59,15 +59,17 @@ class AdminSettingsModel {
 	public function get_active_google_auth_type() {
 
 		if ( isset( $_GET['auth_tab'] ) ) {
-			return $_GET['auth_tab'];
+			$auth_type = $_GET['auth_tab'];
+		} else {
+			if ( empty( $this->options['google_auth_type'] ) ) {
+				// fallback for default method
+				$auth_type = 'auth_code_method_tab';
+			} else {
+				$auth_type = $this->options['google_auth_type'];
+			}
 		}
 
-		// fallback for default method
-		if ( empty( $this->options['google_auth_type'] ) ) {
-			return 'auth_code_method_tab';
-		}
-
-		return $this->options['google_auth_type'];
+		return apply_filters( 'gswoo_get_active_google_auth_type', $auth_type, $this->options );
 	}
 
 	/**
@@ -80,10 +82,25 @@ class AdminSettingsModel {
 	public function get_plugin_options() {
 		$options = get_option( 'plugin_wc_import_google_sheet_options' );
 
-		if ( is_array( $options ) ) {
-			foreach ( $options as $options_name => $option_value ) {
-				$options[ $options_name ] = wp_specialchars_decode( $option_value, ENT_QUOTES );
-			}
+		$options = $this->decode_plugin_options( $options );
+
+		return apply_filters( 'gswoo_get_plugin_options', $options, $this );
+	}
+
+	/**
+	 * Decode special chars in plugin options.
+	 *
+	 * @param array $options
+	 *
+	 * @return array
+	 */
+	public function decode_plugin_options( $options ) {
+		if ( ! is_array( $options ) ) {
+			return $options;
+		}
+
+		foreach ( $options as $options_name => $option_value ) {
+			$options[ $options_name ] = wp_specialchars_decode( $option_value, ENT_QUOTES );
 		}
 
 		return $options;
@@ -121,8 +138,8 @@ class AdminSettingsModel {
 			set_api_connect( $token_service->token )->
 			get_google_drive_sheets_list();
 
-		if ( ! empty( $sheets_list->error ) && is_wp_error( $sheets_list->error ) ) {
-			return $this->get_error_connection_response( $sheets_list->error );
+		if ( is_wp_error( $sheets_list ) ) {
+			return $this->get_error_connection_response( $sheets_list );
 		}
 
 		if ( empty( $this->options['google_sheet_data'] ) ) {
@@ -167,6 +184,7 @@ class AdminSettingsModel {
 	public function is_empty_response() {
 
 		$is_empty = false;
+
 		if ( empty( $this->options['google_auth_type'] ) ) {
 			$is_empty = true;
 		} else {
@@ -184,7 +202,7 @@ class AdminSettingsModel {
 			}
 		}
 
-		return $is_empty;
+		return apply_filters( 'gswoo_get_empty_response', $is_empty, $this );
 	}
 
 	/**
@@ -229,7 +247,6 @@ class AdminSettingsModel {
 
 		return $return;
 	}
-
 
 	/**
 	 * Return message after success access to google api by provided user credentials.

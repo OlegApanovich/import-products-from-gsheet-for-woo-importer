@@ -20,6 +20,7 @@
 defined( 'ABSPATH' ) || exit;
 
 use GSWOO\Actions\AdminSettingsAction;
+use GSWOO\Actions\BackwardCompatibilityAction;
 use GSWOO\WoocommerceImporter\WcAdminImporters;
 
 /**
@@ -81,8 +82,7 @@ final class GSWOO_Plugin {
 
 		$this->define_constants();
 		$this->init_hooks();
-
-		$this->gswoo_settings = new AdminSettingsAction();
+		$this->init_actions();
 	}
 
 	/**
@@ -130,6 +130,16 @@ final class GSWOO_Plugin {
 	private function init_hooks() {
 		add_action( 'init', array( $this, 'init' ), 0 );
 		add_action( 'init', array( $this, 'inject_woocommerce_import' ) );
+	}
+
+	/**
+	 * Fire up all wp actions and filters injections.
+	 *
+	 * @since 2.0.0
+	 */
+	private function init_actions() {
+		new BackwardCompatibilityAction();
+		$this->gswoo_settings = new AdminSettingsAction();
 	}
 
 	/**

@@ -1,24 +1,38 @@
 <?php
+/**
+ * Obtain google API token service with assertion method.
+ *
+ * @since 2.0.0
+ *
+ * @package GSWOO\Services
+ */
 
 namespace GSWOO\Services;
 
 use Exception;
-use Google_Service_Drive;
-use Google_Service_Sheets;
 use GSWOO\Abstracts\GoogleApiTokenAbstract;
 use WP_Error;
 
+/**
+ * Class GoogleApiTokenAssertionMethodService
+ *
+ * @since 2.0.0
+ * @package GSWOO\Services
+ */
 class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 
 	/**
 	 * Json assertion api key.
 	 *
-	 * @var string $valid_input
+	 * @since 2.0.0
+	 * @var string
 	 */
 	public $google_api_key;
 
 	/**
 	 * GoogleApiTokenAssertionMethodService constructor.
+	 *
+	 * @since 2.0.0
 	 *
 	 * @param string $google_api_key
 	 */
@@ -48,7 +62,7 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	}
 
 	/**
-	 * Get access token
+	 * Get access token.
 	 *
 	 * @since 2.0.0
 	 *
@@ -72,7 +86,7 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	}
 
 	/**
-	 * Try to set file access
+	 * Try to put key to access file.
 	 *
 	 * @since 2.0.0
 	 *

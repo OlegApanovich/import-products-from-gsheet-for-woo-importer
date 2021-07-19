@@ -1,6 +1,6 @@
 <?php
 /**
- * Admin View: Product import settings
+ * Admin View
  *
  * @since 2.0.0
  *
@@ -23,4 +23,3 @@ defined( 'ABSPATH' ) || exit;
 </a>
 
 <input type="password" id="plugin_google_oauth2_code" placeholder="Enter Code" name="plugin_wc_import_google_sheet_options[google_code_oauth2]" size="40" value="">
-

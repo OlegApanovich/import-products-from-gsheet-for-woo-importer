@@ -15,6 +15,7 @@ use WP_Error;
 /**
  * Class GoogleApiTokenAbstract
  *
+ * @since 2.0.0
  * @package GSWOO\Abstracts
  */
 abstract class GoogleApiTokenAbstract {

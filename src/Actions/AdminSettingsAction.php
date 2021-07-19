@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Admin settings
  *
- * @since 1.0.0
+ * @since 2.0.0
  */
 class AdminSettingsAction {
 
@@ -31,7 +31,7 @@ class AdminSettingsAction {
 	/**
 	 * Constructor for admin settings
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 */
 	public function __construct() {
 		$this->settings_controller = new AdminSettingsController();
@@ -42,7 +42,7 @@ class AdminSettingsAction {
 	/**
 	 * Fire up actions and filter
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 */
 	public function init() {
 
@@ -107,7 +107,6 @@ class AdminSettingsAction {
 			}
 		}
 	}
-
 
 	/**
 	 * Enqueue assets for plugin setting page
@@ -195,7 +194,7 @@ class AdminSettingsAction {
 	/**
 	 * Add submenu to woocommerce admin menu
 	 *
-	 * @since 1.0.0
+	 * @since 2.0.0
 	 */
 	public function add_menu() {
 		add_submenu_page(

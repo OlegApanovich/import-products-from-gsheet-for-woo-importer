@@ -19,7 +19,7 @@ use WP_Error;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Admin settings controller
+ * Admin settings model
  *
  * @since 2.0.0
  */
@@ -157,6 +157,8 @@ class AdminSettingsModel {
 	/**
 	 * Initialize google API token service.
 	 *
+	 * @since 2.0.0
+	 *
 	 * @noinspection PhpUndefinedVariableInspection
 	 *
 	 * @return GoogleApiTokenAbstract
@@ -239,7 +241,7 @@ class AdminSettingsModel {
 		$return['message'] = sprintf(
 		// translators: %s: plugin import page url.
 			__(
-				"We can't set connection with google API by your provided credentials. Error: %s",
+				"We can't set connection with google API by your provided credentials, Please check your setting and internet connection and try again. Error: %s",
 				'import-products-from-gsheet-for-woo-importer'
 			),
 			$error

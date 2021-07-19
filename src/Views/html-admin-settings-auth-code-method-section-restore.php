@@ -6,8 +6,6 @@
  *
  * @var array $options
  *
- * @noinspection PhpIncludeInspection
- *
  * @package GSWOO
  */
 

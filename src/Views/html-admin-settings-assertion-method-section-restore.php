@@ -1,12 +1,10 @@
 <?php
 /**
- * Admin View: Product import form
+ * Admin View
  *
  * @since 2.0.0
  *
  * @var array $options
- *
- * @noinspection PhpIncludeInspection
  *
  * @package GSWOO
  */

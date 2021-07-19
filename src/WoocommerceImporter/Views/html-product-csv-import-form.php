@@ -4,6 +4,10 @@
  *
  * @since 1.0.0
  *
+ * @var array $response
+ * @var int $bytes
+ * @var float $size
+ *
  * @package GSWOO
  */
 

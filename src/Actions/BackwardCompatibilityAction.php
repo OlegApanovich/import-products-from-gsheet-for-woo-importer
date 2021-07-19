@@ -11,7 +11,6 @@ namespace GSWOO\Actions;
 
 defined( 'ABSPATH' ) || exit;
 
-
 /**
  * Class BackwardCompatibilityAction
  *

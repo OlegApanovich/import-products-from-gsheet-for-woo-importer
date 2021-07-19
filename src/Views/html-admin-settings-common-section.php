@@ -1,8 +1,10 @@
-<?php /** @noinspection PhpIncludeInspection */
+<?php
 /**
- * Admin View: Product import settings
+ * Admin View
  *
  * @since 2.0.0
+ *
+ * @noinspection PhpIncludeInspection
  *
  * @var array $response
  * @var string $auth_type
@@ -45,7 +47,6 @@ if ( ! empty( $response['sheets_list'] ) ) {
 	</select>
 	<?php
 }
-
 
 if ( $response ) {
 	include GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-' . $response['status'] . '-connection-message.php';

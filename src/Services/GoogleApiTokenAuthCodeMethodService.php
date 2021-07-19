@@ -1,4 +1,11 @@
 <?php
+/**
+ * Obtain google API token service with auth code method.
+ *
+ * @since 2.0.0
+ *
+ * @package GSWOO\Services
+ */
 
 namespace GSWOO\Services;
 
@@ -8,6 +15,12 @@ use Google_Service_Sheets;
 use Google_Service_Drive;
 use WP_Error;
 
+/**
+ * Class GoogleApiTokenAuthCodeMethodService
+ *
+ * @since 2.0.0
+ * @package GSWOO\Services
+ */
 class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 
 	/**
@@ -48,6 +61,8 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 
 	/**
 	 * GoogleApiTokenAuthCodeMethodService constructor.
+	 *
+	 * @since  2.0.0
 	 *
 	 * @param string $google_code
 	 */

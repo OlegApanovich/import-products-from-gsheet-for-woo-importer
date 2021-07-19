@@ -1,3 +1,13 @@
+<?php
+/**
+ * Admin View
+ *
+ * @since 2.0.0
+ *
+ * @package GSWOO
+ */
+?>
+
 <button class="restore-button button-primary" onclick="add_hidden_restore_field(this);">
 	<strong>
 		<?php _e( 'Restore', 'import-products-from-gsheet-for-woo-importer' ); ?>

@@ -1,10 +1,8 @@
 <?php
 /**
- * Plugin connection google API error message on WC import form screen
+ * Plugin connection google API error message.
  *
  * @since 2.0.0
- *
- * @var string $menu_page_url
  *
  * @package GSWOO
  */

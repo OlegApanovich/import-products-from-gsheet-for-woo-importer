@@ -88,10 +88,10 @@ final class GSWOO_Plugin {
 	/**
 	 * Check if woocommerce already activated.
 	 *
+	 * @since 1.0.0
 	 * @return bool
 	 */
 	public function is_woocommerce() {
-
 		return gswoo_is_plugin_active(
 			'GSheet For Woo Importer',
 			'WooCommerce',
@@ -101,7 +101,7 @@ final class GSWOO_Plugin {
 	}
 
 	/**
-	 * Include required plugin core files
+	 * Include required plugin core files.
 	 *
 	 * @since 1.0.0
 	 */

@@ -57,8 +57,7 @@ class AdminSettingsController {
 			$this->settings_model->
 			get_active_google_auth_type();
 
-		include_once GSWOO_URI_ABSPATH
-					 . '/src/Views/html-admin-settings-form.php';
+		include_once GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-form.php';
 	}
 
 	/**
@@ -77,8 +76,7 @@ class AdminSettingsController {
 			$this->settings_model->
 			get_active_google_auth_type();
 
-		include_once GSWOO_URI_ABSPATH
-					 . '/src/Views/html-admin-settings-common-section.php';
+		include_once GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-common-section.php';
 	}
 
 	/**
@@ -89,11 +87,11 @@ class AdminSettingsController {
 	public function display_settings_assertion_method_section() {
 
 		if ( empty( $this->options['google_api_key'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
-			include_once GSWOO_URI_ABSPATH
-						 . '/src/Views/html-admin-settings-assertion-method-section-receive.php';
+			include_once GSWOO_URI_ABSPATH .
+				'/src/Views/html-admin-settings-assertion-method-section-receive.php';
 		} else {
-			include_once GSWOO_URI_ABSPATH
-						 . '/src/Views/html-admin-settings-assertion-method-section-restore.php';
+			include_once GSWOO_URI_ABSPATH .
+				'/src/Views/html-admin-settings-assertion-method-section-restore.php';
 		}
 	}
 
@@ -105,11 +103,11 @@ class AdminSettingsController {
 	public function display_settings_auth_code_method_section() {
 
 		if ( empty( $this->options['google_code_oauth2'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
-			include_once GSWOO_URI_ABSPATH
-						 . '/src/Views/html-admin-settings-auth-code-method-section-receive.php';
+			include_once GSWOO_URI_ABSPATH .
+				'/src/Views/html-admin-settings-auth-code-method-section-receive.php';
 		} else {
-			include_once GSWOO_URI_ABSPATH
-						 . '/src/Views/html-admin-settings-auth-code-method-section-restore.php';
+			include_once GSWOO_URI_ABSPATH .
+				'/src/Views/html-admin-settings-auth-code-method-section-restore.php';
 		}
 	}
 
@@ -128,7 +126,7 @@ class AdminSettingsController {
 
 		$menu_page_url = menu_page_url( 'woocommerce_import_products_google_sheet_menu', false );
 
-		include_once GSWOO_URI_ABSPATH
-					 . '/src/Views/html-admin-settings-require-admin-notice.php';
+		include_once GSWOO_URI_ABSPATH .
+			'/src/Views/html-admin-settings-require-admin-notice.php';
 	}
 }

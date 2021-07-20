@@ -35,6 +35,8 @@ class SheetInterplayService {
 	public $spread_sheet_feed;
 
 	/**
+	 * Error aggregator.
+	 *
 	 * @var object Wp_Error
 	 *
 	 * @since 2.0.0
@@ -61,9 +63,9 @@ class SheetInterplayService {
 		}
 
 		try {
-			$token          = $this->get_access_token_from_json_data( $token );
-			$serviceRequest = new DefaultServiceRequest( $token );
-			ServiceRequestFactory::setInstance( $serviceRequest );
+			$token           = $this->get_access_token_from_json_data( $token );
+			$service_request = new DefaultServiceRequest( $token );
+			ServiceRequestFactory::setInstance( $service_request );
 			$spread_sheet_service    = new SpreadsheetService();
 			$this->spread_sheet_feed = $spread_sheet_service->getSpreadsheetFeed();
 		} catch ( Exception $e ) {
@@ -83,7 +85,7 @@ class SheetInterplayService {
 	 *
 	 * @return  array | object WP_Error
 	 */
-	function get_google_drive_sheets_list() {
+	public function get_google_drive_sheets_list() {
 		if ( $this->error ) {
 			return $this->error;
 		}
@@ -93,7 +95,8 @@ class SheetInterplayService {
 
 			$sheet_entries_list = $this->spread_sheet_feed->getEntries();
 
-			for ( $i = 0; $i < count( $sheet_entries_list ); $i++ ) {
+			$count_sheet_entries = count( $sheet_entries_list );
+			for ( $i = 0; $i < $count_sheet_entries; $i++ ) {
 				$sheets_list[ $i ]['id']    = $sheet_entries_list[ $i ]->getId();
 				$sheets_list[ $i ]['title'] = $sheet_entries_list[ $i ]->getTitle();
 			}
@@ -115,9 +118,11 @@ class SheetInterplayService {
 	 * @noinspection PhpReturnDocTypeMismatchInspection
 	 * @noinspection PhpUndefinedVariableInspection*
 	 *
+	 * @param string $sheet_id
+	 *
 	 * @return string|WP_Error
 	 */
-	function get_sheet_csv( $sheet_id ) {
+	public function get_sheet_csv( $sheet_id ) {
 		if ( $this->error ) {
 			return $this->error;
 		}
@@ -144,7 +149,7 @@ class SheetInterplayService {
 	/**
 	 * Try to pick access token from response token data.
 	 *
-	 * @param string $token Json response data
+	 * @param string $token Json response data.
 	 *
 	 * @throws Exception
 	 * @return string

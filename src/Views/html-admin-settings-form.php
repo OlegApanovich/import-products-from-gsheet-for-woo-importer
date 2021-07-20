@@ -24,22 +24,21 @@ defined( 'ABSPATH' ) || exit;
 
 <!--suppress HtmlUnknownTarget -->
 <form action="options.php" method="post">
-
 	<h2 class="nav-tab-wrapper">
-		<a id="auth_code_method_tab" href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=auth_code_method_tab" class=" nav-tab <?php echo $active_tab == 'auth_code_method_tab' ? 'nav-tab-active' : ''; ?>">
-			<?php _e( 'One Click Auto Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
+		<a id="auth_code_method_tab" href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=auth_code_method_tab" class=" nav-tab <?php echo 'auth_code_method_tab' === $active_tab ? 'nav-tab-active' : ''; ?>">
+			<?php esc_html_e( 'One Click Auto Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</a>
-		<a id="assertion_method_tab" href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=assertion_method_tab" class="nav-tab <?php echo $active_tab == 'assertion_method_tab' ? 'nav-tab-active' : ''; ?>">
-			<?php _e( 'Manual Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
+		<a id="assertion_method_tab" href="?page=woocommerce_import_products_google_sheet_menu&auth_tab=assertion_method_tab" class="nav-tab <?php echo 'assertion_method_tab' === $active_tab ? 'nav-tab-active' : ''; ?>">
+			<?php esc_html_e( 'Manual Connect', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</a>
 	</h2>
 
 	<?php settings_fields( 'plugin_wc_import_google_sheet_options' ); ?>
 
 	<?php
-	if ( 'auth_code_method_tab' == $active_tab ) {
+	if ( 'auth_code_method_tab' === $active_tab ) {
 		do_settings_sections( 'auth_code_method_page' );
-	} elseif ( 'assertion_method_tab' == $active_tab ) {
+	} elseif ( 'assertion_method_tab' === $active_tab ) {
 		do_settings_sections( 'assertion_method_page' );
 	}
 

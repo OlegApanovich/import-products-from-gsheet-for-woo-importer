@@ -57,12 +57,11 @@ class AdminSettingsModel {
 	 * @return string
 	 */
 	public function get_active_google_auth_type() {
-
 		if ( isset( $_GET['auth_tab'] ) ) {
-			$auth_type = $_GET['auth_tab'];
+			$auth_type = sanitize_text_field( wp_unslash( $_GET['auth_tab'] ) );
 		} else {
 			if ( empty( $this->options['google_auth_type'] ) ) {
-				// fallback for default method
+				// fallback for default method.
 				$auth_type = 'auth_code_method_tab';
 			} else {
 				$auth_type = $this->options['google_auth_type'];
@@ -177,7 +176,7 @@ class AdminSettingsModel {
 	}
 
 	/**
-	 * Check user data and set empty response if data has empty fields.
+	 * Check user data for empty fields.
 	 *
 	 * @since 2.0.0
 	 *
@@ -187,7 +186,7 @@ class AdminSettingsModel {
 
 		$is_empty = false;
 
-		if ( empty( $this->options['google_auth_type'] ) ) {
+		if ( empty( $this->options ) || empty( $this->options['google_auth_type'] ) ) {
 			$is_empty = true;
 		} else {
 			switch ( $this->options['google_auth_type'] ) {
@@ -228,7 +227,7 @@ class AdminSettingsModel {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @var object WP_Error $errors
+	 * @param object $wp_error WP_Error.
 	 *
 	 * @return array
 	 */
@@ -255,7 +254,7 @@ class AdminSettingsModel {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param object $token_service GoogleApiTokenAbstract
+	 * @param object $token_service GoogleApiTokenAbstract.
 	 * @param array  $sheets_list
 	 *
 	 * @return array
@@ -326,7 +325,7 @@ class AdminSettingsModel {
 	 * @return bool
 	 */
 	public function is_response_success( $response ) {
-		return ! empty( $response['status'] ) && 'success' == $response['status'];
+		return ! empty( $response['status'] ) && 'success' === $response['status'];
 	}
 
 	/**
@@ -343,7 +342,7 @@ class AdminSettingsModel {
 		$sheet_title = '';
 
 		foreach ( $sheet_list as $sheet ) {
-			if ( ! empty( $sheet['id'] ) && $sheet['id'] == $sheet_id ) {
+			if ( ! empty( $sheet['id'] ) && $sheet['id'] === $sheet_id ) {
 				$sheet_title = $sheet['title'];
 			}
 		}
@@ -400,22 +399,6 @@ class AdminSettingsModel {
 					$file_sheet_path
 				)
 			);
-		}
-	}
-
-	/**
-	 * Check Api connection by current plugin options
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return bool
-	 */
-	public function is_api_connection_success_by_current_options() {
-		$token_service = $this->get_token_service();
-		if ( is_wp_error( $token_service->error ) ) {
-			return false;
-		} else {
-			return true;
 		}
 	}
 }

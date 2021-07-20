@@ -174,10 +174,13 @@ if ( ! function_exists( 'gswoo_check_screen' ) ) :
 	 *
 	 * @since  2.0.0
 	 *
+	 * @param string $get_request_name
+	 * @param string $get_request_value
+	 *
 	 * @return bool
 	 */
 	function gswoo_check_screen( $get_request_name, $get_request_value ) {
-		return ! empty( $_GET[ $get_request_name ] ) && $get_request_value == $_GET[ $get_request_name ];
+		return ! empty( $_GET[ $get_request_name ] ) && $get_request_value === $_GET[ $get_request_name ];
 	}
 endif;
 
@@ -231,7 +234,7 @@ if ( ! function_exists( 'gswoo_is_woocommerce_product_list_screen' ) ) :
 	function gswoo_is_woocommerce_product_list_screen() {
 		$screen = get_current_screen();
 
-		return ! empty( $screen->id ) && 'edit-product' == $screen->id;
+		return ! empty( $screen->id ) && 'edit-product' === $screen->id;
 	}
 endif;
 

@@ -100,10 +100,10 @@ class AdminSettingsAction {
 	 */
 	public function set_conditional_init() {
 		if ( gswoo_is_woocommerce_product_screen() ) {
-			if ( $this->settings_controller->settings_model->is_api_connection_success_by_current_options() ) {
-				add_action( 'init', array( $this, 'init_import_button' ), 0 );
-			} else {
+			if ( $this->settings_controller->settings_model->is_empty_response() ) {
 				add_action( 'admin_notices', array( $this->settings_controller, 'display_settings_require_admin_notice' ) );
+			} else {
+				add_action( 'init', array( $this, 'init_import_button' ), 0 );
 			}
 		}
 	}
@@ -121,6 +121,8 @@ class AdminSettingsAction {
 		wp_register_style(
 			'gswoo-select2-css',
 			GSWOO_URI . '/assets/lib/select2/css/select2.min.css',
+			array(),
+			true
 		);
 		wp_enqueue_style( 'gswoo-select2-css' );
 
@@ -187,7 +189,7 @@ class AdminSettingsAction {
 			$params
 		);
 
-		// show plugin import button
+		// Show plugin import button.
 		wp_enqueue_script( 'gswoo-import-button' );
 	}
 
@@ -332,7 +334,7 @@ class AdminSettingsAction {
 			$valid_input['google_code_oauth2_restore'] = false;
 		}
 
-		// after sanitizing we produce some logic dependency resolving
+		// After sanitizing we produce some logic dependency resolving.
 		return $this->resolve_options_logic_dependencies( $valid_input );
 	}
 

@@ -19,18 +19,28 @@
 	<rule ref="WordPress">
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
 	</rule>
-
-
-
-	<!-- TODO: remove it when new google sheet notification system will be integrated -->
-	<rule ref="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents">
-		<exclude-pattern>src/AdminSettingsHandler.php</exclude-pattern>
+	<!-- We do not comment params in functions doc block of our project -->
+	<rule ref="WordPress">
+		<exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"/>
 	</rule>
-	<!-- TODO: remove it when new google sheet notification system will be integrated -->
+	<!-- We do not comment trows in functions doc block of our project -->
+	<rule ref="WordPress">
+		<exclude name="Squiz.Commenting.FunctionComment.EmptyThrows"/>
+	</rule>
+	<!-- We allow to use php standard file interaction functions -->
+	<rule ref="WordPress">
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents"/>
+	</rule>
+
+	<!-- Single line rule configuration -->
 	<rule ref="WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_putenv">
-		<exclude-pattern>src/WrapperApiGoogleDrive.php</exclude-pattern>
+		<exclude-pattern>src/Services/GoogleApiTokenAssertionMethodService.php</exclude-pattern>
 	</rule>
-	<!-- TODO: maybe replace with another plugin update vertification system -->
+	<!-- Nonce settings tab -->
+	<rule ref="WordPress.Security.NonceVerification.Recommended">
+		<exclude-pattern>src/Models/AdminSettingsModel.php</exclude-pattern>
+	</rule>
+	<!-- Nonce settings tab -->
 	<rule ref="WordPress.Security.NonceVerification.Recommended">
 		<exclude-pattern>includes/helpers.php</exclude-pattern>
 	</rule>

@@ -101,7 +101,7 @@ class BackwardCompatibilityAction {
 			get_google_drive_sheets_list();
 
 		foreach ( $sheets_list as $sheet ) {
-			if ( $sheet['title'] == $options['google_sheet_title'] ) {
+			if ( $sheet['title'] === $options['google_sheet_title'] ) {
 				$options['google_sheet_data'] = $sheet['id'];
 			}
 		}

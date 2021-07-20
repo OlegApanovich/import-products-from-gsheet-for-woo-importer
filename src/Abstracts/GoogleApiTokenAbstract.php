@@ -21,6 +21,8 @@ use WP_Error;
 abstract class GoogleApiTokenAbstract {
 
 	/**
+	 * Google_Client instance.
+	 *
 	 * @var object Google_Client
 	 *
 	 * @since 2.0.0
@@ -28,6 +30,8 @@ abstract class GoogleApiTokenAbstract {
 	public $client;
 
 	/**
+	 * Google API access token.
+	 *
 	 * @var string
 	 *
 	 * @since 2.0.0
@@ -35,6 +39,8 @@ abstract class GoogleApiTokenAbstract {
 	public $token;
 
 	/**
+	 * Error aggregator.
+	 *
 	 * @var object Wp_Error
 	 *
 	 * @since 2.0.0
@@ -58,7 +64,7 @@ abstract class GoogleApiTokenAbstract {
 	 * @return string
 	 */
 	public function get_token() {
-		 return get_option( 'plugin_wc_import_google_sheet_gs_token' );
+		return get_option( 'plugin_wc_import_google_sheet_gs_token' );
 	}
 
 	/**
@@ -89,7 +95,7 @@ abstract class GoogleApiTokenAbstract {
 	abstract public function fetch_token();
 
 	/**
-	 * initialize access token
+	 * Initialize access token.
 	 *
 	 * @since 2.0.0
 	 */
@@ -97,7 +103,8 @@ abstract class GoogleApiTokenAbstract {
 
 		$this->set_client();
 
-		if ( $this->token = $this->get_token() ) {
+		$this->token = $this->get_token();
+		if ( $this->token ) {
 			$this->client->setAccessToken( $this->token );
 		}
 
@@ -119,7 +126,7 @@ abstract class GoogleApiTokenAbstract {
 			return;
 		}
 
-		$this->token = json_encode( $token );
+		$this->token = wp_json_encode( $token );
 		$this->save_token();
 	}
 }

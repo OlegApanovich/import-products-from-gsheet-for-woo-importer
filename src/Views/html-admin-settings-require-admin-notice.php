@@ -16,12 +16,13 @@ defined( 'ABSPATH' ) || exit;
 	<p>
 		<?php
 		echo sprintf(
-		// translators: %s: plugin import page url.
-			__(
-				'We can not show you import google sheet plugin button because you do not set google api connection, please go to <a href="%s">plugin settings page</a> and try to set it again.',
+		// translators: %1s: plugin import page link, %2s: close link tag.
+			esc_html__(
+				'We can not show you import google sheet plugin button because you do not set google api connection, please go to %1$1s plugin settings page %2$2s and try to set it again.',
 				'import-products-from-gsheet-for-woo-importer'
 			),
-			$menu_page_url
+			'<a href="' . esc_url( $menu_page_url ) . '">',
+			'</a>'
 		)
 		?>
 	</p>

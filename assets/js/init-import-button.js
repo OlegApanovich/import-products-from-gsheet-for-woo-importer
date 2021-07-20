@@ -7,7 +7,7 @@
 
 ( function( $, woocommerce_import_google_sheet_admin ) {
 	$(
-		// add additional plugin import button to CPT products main page
+		// Add additional plugin import button to CPT products main page.
 		function() {
 
 			var $product_screen = $( '.edit-php.post-type-product' ),

@@ -34,11 +34,11 @@ if ( ! empty( $response['sheets_list'] ) ) {
 
 		foreach ( $response['sheets_list'] as $sheet ) {
 			$selected = '';
-			if ( $this->options['google_sheet_data'] == $sheet['id'] ) {
+			if ( $this->options['google_sheet_data'] === $sheet['id'] ) {
 				$selected = 'selected';
 			}
 			?>
-			<option value="<?php echo esc_html( $sheet['id'] ); ?>" <?php echo $selected; ?>>
+			<option value="<?php echo esc_html( $sheet['id'] ); ?>" <?php echo esc_html( $selected ); ?>>
 				<?php echo esc_html( $sheet['title'] ); ?>
 			</option>
 			<?php

@@ -214,7 +214,7 @@ class AdminSettingsModel {
 	 * @return bool
 	 */
 	public function is_process_restore_response() {
-		if ( empty( $this->options['google_code_oauth2_restore'] ) ) {
+		if ( empty( $this->options['settings_auth_restore'] ) ) {
 			return false;
 		} else {
 			$this->delete_options();

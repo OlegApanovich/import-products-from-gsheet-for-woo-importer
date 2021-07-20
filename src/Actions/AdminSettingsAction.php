@@ -325,29 +325,13 @@ class AdminSettingsAction {
 		$valid_input['google_auth_type']
 			= isset( $input['google_auth_type'] ) ? esc_html( $input['google_auth_type'] ) : '';
 
-		if ( isset( $input['google_code_oauth2_restore'] ) ) {
-			$valid_input['google_code_oauth2_restore'] = filter_var(
-				esc_html( $input['google_code_oauth2_restore'] ),
+		if ( isset( $input['settings_auth_restore'] ) ) {
+			$valid_input['settings_auth_restore'] = filter_var(
+				esc_html( $input['settings_auth_restore'] ),
 				FILTER_VALIDATE_BOOLEAN
 			);
 		} else {
-			$valid_input['google_code_oauth2_restore'] = false;
-		}
-
-		// After sanitizing we produce some logic dependency resolving.
-		return $this->resolve_options_logic_dependencies( $valid_input );
-	}
-
-	/**
-	 * Resolve options dependencies
-	 *
-	 * @param array $valid_input
-	 *
-	 * @return array
-	 */
-	public function resolve_options_logic_dependencies( $valid_input ) {
-		if ( $valid_input['google_code_oauth2_restore'] ) {
-			$valid_input['google_code_oauth2'] = '';
+			$valid_input['settings_auth_restore'] = false;
 		}
 
 		return $valid_input;

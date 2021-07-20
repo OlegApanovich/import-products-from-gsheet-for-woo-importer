@@ -13,7 +13,7 @@
 	echo sprintf(
 		// translators: %s1: plugin import page url, %s2: closing link tag.
 		esc_html__(
-			'You do not set plugin google API connection assets properly, please go to %1$1s plugin settings page %2$2s and try to set it again.',
+			'You do not set plugin google API connection settings properly, please go to %1$1s plugin settings page %2$2s and try to set it again.',
 			'import-products-from-gsheet-for-woo-importer'
 		),
 		'<a href="' . esc_url( menu_page_url( 'woocommerce_import_products_google_sheet_menu', false ) ) . '">',

@@ -86,7 +86,7 @@ class AdminSettingsController {
 	 */
 	public function display_settings_assertion_method_section() {
 
-		if ( empty( $this->options['google_api_key'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
+		if ( empty( $this->options['google_api_key'] ) || ! empty( $this->options['settings_auth_restore'] ) ) {
 			include_once GSWOO_URI_ABSPATH .
 				'/src/Views/html-admin-settings-assertion-method-section-receive.php';
 		} else {
@@ -102,7 +102,7 @@ class AdminSettingsController {
 	 */
 	public function display_settings_auth_code_method_section() {
 
-		if ( empty( $this->options['google_code_oauth2'] ) || ! empty( $this->options['google_code_oauth2_restore'] ) ) {
+		if ( empty( $this->options['google_code_oauth2'] ) || ! empty( $this->options['settings_auth_restore'] ) ) {
 			include_once GSWOO_URI_ABSPATH .
 				'/src/Views/html-admin-settings-auth-code-method-section-receive.php';
 		} else {

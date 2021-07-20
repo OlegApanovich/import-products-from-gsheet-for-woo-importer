@@ -109,8 +109,10 @@ abstract class GoogleApiTokenAbstract {
 		}
 
 		// If there is previous token and it is not expired.
-		if ( ! $this->client->isAccessTokenExpired() ) {
-			return;
+		if ( ! $this->is_token_null_value() ) {
+			if ( ! $this->client->isAccessTokenExpired() ) {
+				return;
+			}
 		}
 
 		// Refresh the token if possible, else fetch a new one.
@@ -128,5 +130,20 @@ abstract class GoogleApiTokenAbstract {
 
 		$this->token = wp_json_encode( $token );
 		$this->save_token();
+	}
+
+	/**
+	 * Check for token with empty value
+	 *
+	 * @since 2.0.0
+	 *
+	 * @return bool
+	 */
+	public function is_token_null_value() {
+		if ( 'null' === $this->token || '{"access_token":"null"}' === $this->token ) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

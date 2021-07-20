@@ -106,7 +106,7 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 		if ( empty( $try_file_put ) ) {
 			$this->error = new WP_Error(
 				'token_error',
-				'(' . __METHOD__ . ')' . __( 'Put file content error', 'import-products-from-gsheet-for-woo-importer' ),
+				'(' . __METHOD__ . ')' . __( 'Put file content error', 'import-products-from-gsheet-for-woo-importer' )
 			);
 		}
 

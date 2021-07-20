@@ -25,24 +25,24 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => 'dev-master',
-    'version' => 'dev-master',
+    'pretty_version' => 'dev-2.0.0-beta.3',
+    'version' => 'dev-2.0.0-beta.3',
     'aliases' => 
     array (
     ),
-    'reference' => '442adedf4c1e691b36588700a17dde38ccbfd125',
+    'reference' => '843fd4627f789967a8a16a7ef973fbe806b7450f',
     'name' => '__root__',
   ),
   'versions' => 
   array (
     '__root__' => 
     array (
-      'pretty_version' => 'dev-master',
-      'version' => 'dev-master',
+      'pretty_version' => 'dev-2.0.0-beta.3',
+      'version' => 'dev-2.0.0-beta.3',
       'aliases' => 
       array (
       ),
-      'reference' => '442adedf4c1e691b36588700a17dde38ccbfd125',
+      'reference' => '843fd4627f789967a8a16a7ef973fbe806b7450f',
     ),
     'asimlqt/php-google-spreadsheet-client' => 
     array (
@@ -64,48 +64,48 @@ private static $installed = array (
     ),
     'firebase/php-jwt' => 
     array (
-      'pretty_version' => 'v5.2.1',
-      'version' => '5.2.1.0',
+      'pretty_version' => 'v5.4.0',
+      'version' => '5.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f42c9110abe98dd6cfe9053c49bc86acc70b2d23',
+      'reference' => 'd2113d9b2e0e349796e72d2a63cf9319100382d2',
     ),
     'google/apiclient' => 
     array (
-      'pretty_version' => 'v2.9.1',
-      'version' => '2.9.1.0',
+      'pretty_version' => 'v2.10.1',
+      'version' => '2.10.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2fb6e702aca5d68203fa737f89f6f774022494c6',
+      'reference' => '11871e94006ce7a419bb6124d51b6f9ace3f679b',
     ),
     'google/apiclient-services' => 
     array (
-      'pretty_version' => 'v0.173.0',
-      'version' => '0.173.0.0',
+      'pretty_version' => 'v0.204.0',
+      'version' => '0.204.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9034b5ba3e25c9ad8e49b6457b9cad21fd9d9847',
+      'reference' => 'c718661b22f9b92e0d89520dbb8f16c62307885a',
     ),
     'google/auth' => 
     array (
-      'pretty_version' => 'v1.15.1',
-      'version' => '1.15.1.0',
+      'pretty_version' => 'v1.16.0',
+      'version' => '1.16.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '4e0c9367719df9703e96f5ad613041b87742471c',
+      'reference' => 'c747738d2dd450f541f09f26510198fbedd1c8a0',
     ),
     'guzzlehttp/guzzle' => 
     array (
-      'pretty_version' => '7.3.0',
-      'version' => '7.3.0.0',
+      'pretty_version' => '6.5.5',
+      'version' => '6.5.5.0',
       'aliases' => 
       array (
       ),
-      'reference' => '7008573787b430c1c1f650e3722d9bba59967628',
+      'reference' => '9d4290de1cfd701f38099ef7e183b64b4b7b0c5e',
     ),
     'guzzlehttp/promises' => 
     array (
@@ -127,39 +127,39 @@ private static $installed = array (
     ),
     'monolog/monolog' => 
     array (
-      'pretty_version' => '2.2.0',
-      'version' => '2.2.0.0',
+      'pretty_version' => '1.26.1',
+      'version' => '1.26.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1cb1cde8e8dd0f70cc0fe51354a59acad9302084',
+      'reference' => 'c6b00f05152ae2c9b04a448f99c7590beb6042f5',
     ),
     'paragonie/constant_time_encoding' => 
     array (
-      'pretty_version' => 'v2.4.0',
-      'version' => '2.4.0.0',
+      'pretty_version' => 'v1.0.4',
+      'version' => '1.0.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f34c2b11eb9d2c9318e13540a1dbc2a3afbd939c',
+      'reference' => '2132f0f293d856026d7d11bd81b9f4a23a1dc1f6',
     ),
     'paragonie/random_compat' => 
     array (
-      'pretty_version' => 'v9.99.100',
-      'version' => '9.99.100.0',
+      'pretty_version' => 'v2.0.20',
+      'version' => '2.0.20.0',
       'aliases' => 
       array (
       ),
-      'reference' => '996434e5492cb4c3edcb9168db6fbb1359ef965a',
+      'reference' => '0f1f60250fccffeaf5dda91eea1c018aed1adc2a',
     ),
     'phpseclib/phpseclib' => 
     array (
-      'pretty_version' => '3.0.8',
-      'version' => '3.0.8.0',
+      'pretty_version' => '3.0.9',
+      'version' => '3.0.9.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'd9615a6fb970d9933866ca8b4036ec3407b020b6',
+      'reference' => 'a127a5133804ff2f47ae629dd529b129da616ad7',
     ),
     'psr/cache' => 
     array (
@@ -169,22 +169,6 @@ private static $installed = array (
       array (
       ),
       'reference' => 'd11b50ad223250cf17b86e38383413f5a6764bf8',
-    ),
-    'psr/http-client' => 
-    array (
-      'pretty_version' => '1.0.1',
-      'version' => '1.0.1.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '2dfb5f6c5eff0e91e20e913f8c5452ed95b86621',
-    ),
-    'psr/http-client-implementation' => 
-    array (
-      'provided' => 
-      array (
-        0 => '1.0',
-      ),
     ),
     'psr/http-message' => 
     array (
@@ -235,6 +219,42 @@ private static $installed = array (
       array (
       ),
       'reference' => 'ffced0d2c8fa8e6cdc4d695a743271fab6c38625',
+    ),
+    'symfony/polyfill-intl-idn' => 
+    array (
+      'pretty_version' => 'v1.19.0',
+      'version' => '1.19.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4ad5115c0f5d5172a9fe8147675ec6de266d8826',
+    ),
+    'symfony/polyfill-intl-normalizer' => 
+    array (
+      'pretty_version' => 'v1.19.0',
+      'version' => '1.19.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '8db0ae7936b42feb370840cf24de1a144fb0ef27',
+    ),
+    'symfony/polyfill-php70' => 
+    array (
+      'pretty_version' => 'v1.19.0',
+      'version' => '1.19.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '3fe414077251a81a1b15b1c709faf5c2fbae3d4e',
+    ),
+    'symfony/polyfill-php72' => 
+    array (
+      'pretty_version' => 'v1.19.0',
+      'version' => '1.19.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'beecef6b463b06954638f02378f52496cb84bacc',
     ),
     'wp-coding-standards/wpcs' => 
     array (

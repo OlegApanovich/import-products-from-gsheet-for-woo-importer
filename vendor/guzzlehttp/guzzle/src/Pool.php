@@ -2,7 +2,6 @@
 namespace GuzzleHttp;
 
 use GuzzleHttp\Promise\EachPromise;
-use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Promise\PromisorInterface;
 use Psr\Http\Message\RequestInterface;
 
@@ -72,8 +71,7 @@ class Pool implements PromisorInterface
 
     /**
      * Get promise
-     *
-     * @return PromiseInterface
+     * @return GuzzleHttp\Promise\Promise
      */
     public function promise()
     {

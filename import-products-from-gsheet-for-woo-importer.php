@@ -8,7 +8,7 @@
  * Plugin Name: GSheet For Woo Importer
  * Plugin URI:  https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
  * Description: Import woocommerce products from google sheet by using native woocommerce importer
- * Version:     1.1.5
+ * Version:     2.0.2
  * Author:      Oleg Apanovich
  * Author URI:  https://github.com/OlegApanovich
  * License:     GPL-3.0+

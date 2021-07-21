@@ -3,8 +3,8 @@ Contributors: mrdollar4444
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K9NTJ6E2RQN3A&source=url
 Tags: woocommerce, importer, google sheet
 Requires at least: 4.7
-Tested up to: 5.6
-Stable tag: 1.1.5
+Tested up to: 5.8
+Stable tag: 2.0.2
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -20,7 +20,6 @@ Standard woocommerce import, that was introduced by woocommerce team since versi
 Full instruction about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer) or in a section with screenshots below.
 
 == Installation ==
-
 1. Upload the plugin folder to the ‘/wp-content/plugins/’ directory
 2. Activate the Woocommerce Import Products Google Sheet plugin through the ‘Plugins’ menu in WordPress
 3. Go to Woocommerce Import Products Google Sheet Settings menu to make main settings.
@@ -58,6 +57,11 @@ Also you can follow instructions on a screenshots below.
 11. If you properly set your setting then after all you can find additional import button near standard import woocommerce button on a product page.
 
 == Changelog ==
+
+= 2.0.2 =
+* Dev - Add new google API connection "Auth Code" method.
+* Dev - Add notice on product page if plugin setting do not set completely.
+* Dev - Add new system error notification.
 
 = 1.1.5 =
 * Fix - Fix PHP fatal error on a log activity #9

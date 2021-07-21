@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GSheet For Woo Importer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-24 13:51+0000\n"
+"POT-Creation-Date: 2021-07-21 05:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,60 +15,76 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.1; wp-5.1.1"
 
-#: includes/class-gswoo-admin-settings.php:226
+#. %1$s: current plugin name.
+#: includes/helpers.php:70 includes/helpers.php:143
 #, php-format
-msgid " API return responce error \"%s\""
+msgid "%1$1s%2$2s has been deactivated%3$3s"
 msgstr ""
 
-#: includes/helpers.php:64 includes/helpers.php:116
-#, php-format
-msgid "<strong>%s has been deactivated</strong>"
+#: src/Views/html-admin-settings-common-section.php:31
+msgid "-- select an option --"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:81
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:78
 msgid "Alternatively, enter the path to a CSV file on your server:"
 msgstr ""
 
-#: includes/class-gswoo-admin-settings.php:196
-msgid "assets directory has write permission"
-msgstr ""
-
-#: woocommerce-importer/views/html-product-csv-import-form.php:31
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:35
 msgid ""
 "Before you can upload your import file, you will need to fix the following "
 "error:"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:23
+#: src/Models/AdminSettingsModel.php:354
+msgid ""
+"Can't find predefined sheet on a Google drive, please reset your setting and "
+"try to set them again"
+msgstr ""
+
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:27
 msgid "Choose Google Sheet title:"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:117
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:114
 msgid "Continue"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:90
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:87
 msgid "CSV Delimiter"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:76
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:73
 msgid ""
 "Existing products that match by ID or SKU will be updated. Products that do "
 "not exist will be skipped."
 msgstr ""
 
-#: woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php:52
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:85
 msgid ""
 "File is empty. Please upload something more substantial. This error could "
 "also be caused by uploads being disabled in your php.ini or by post_max_size "
 "being defined as smaller than upload_max_filesize in php.ini."
 msgstr ""
 
-#: views/html-admin-settings-form-options.php:11
+#: src/Views/html-admin-settings-auth-code-method-section-receive.php:22
+msgid "Get Code"
+msgstr ""
+
+#: src/Views/html-admin-settings-auth-code-method-section-restore.php:17
+#: src/Views/html-admin-settings-auth-code-method-section-receive.php:17
+msgid "Google Access Code"
+msgstr ""
+
+#: src/Views/html-admin-settings-form.php:22
+msgid "Google API Connect Method"
+msgstr ""
+
+#: src/Views/html-admin-settings-assertion-method-section-receive.php:19
+#: src/Views/html-admin-settings-assertion-method-section-restore.php:17
 msgid "Google drive API client_secret json"
 msgstr ""
 
-#: views/html-admin-settings-form-options.php:16
+#: src/Views/html-admin-settings-common-section.php:25
 msgid "Google sheet title"
 msgstr ""
 
@@ -76,7 +92,7 @@ msgstr ""
 msgid "GSheet For Woo Importer"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:116
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:113
 msgid "Hide advanced options"
 msgstr ""
 
@@ -89,16 +105,16 @@ msgid ""
 "https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer"
 msgstr ""
 
-#: import-products-from-gsheet-for-woo-importer.php:168
+#: src/Actions/AdminSettingsAction.php:182
 msgid "Import From Google Sheet"
 msgstr ""
 
-#: includes/class-gswoo-admin-settings.php:41
-#: includes/class-gswoo-admin-settings.php:42
-msgid "Import Google Sheet Settings"
+#: src/Actions/AdminSettingsAction.php:204
+#: src/Actions/AdminSettingsAction.php:205
+msgid "Import Google Sheet"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:14
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:18
 msgid "Import products from a Google Sheet"
 msgstr ""
 
@@ -108,17 +124,21 @@ msgid ""
 "importer"
 msgstr ""
 
-#: views/html-admin-settings-form.php:14
-msgid "Import Woocommerce Produts Google Sheet Plugin Options Page"
-msgstr ""
-
-#: woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php:87
-#: woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php:129
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:105
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:147
 msgid "Invalid file type. The importer supports CSV and TXT file formats."
 msgstr ""
 
+#: src/Services/SheetInterplayService.php:161
+msgid "Invalid token access data json format"
+msgstr ""
+
+#: src/Views/html-admin-settings-form.php:32
+msgid "Manual Connect"
+msgstr ""
+
 #. %s: maximum upload size
-#: woocommerce-importer/views/html-product-csv-import-form.php:61
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:58
 #, php-format
 msgid "Maximum size: %s"
 msgstr ""
@@ -127,84 +147,115 @@ msgstr ""
 msgid "Oleg Apanovich"
 msgstr ""
 
-#: woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php:136
+#: src/Views/html-admin-settings-form.php:29
+msgid "One Click Auto Connect"
+msgstr ""
+
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:154
 msgid "Please upload or provide the link to a valid CSV file."
 msgstr ""
 
-#: woocommerce-importer/class-gswoo-wc-admin-importers.php:33
-msgid "Product Import Goole Sheet"
+#: src/Views/html-admin-settings-form.php:16
+msgid "Plugin Options Page"
 msgstr ""
 
-#: import-products-from-gsheet-for-woo-importer.php:249
+#: src/WoocommerceImporter/WcAdminImporters.php:41
+msgid "Product Import Google Sheet"
+msgstr ""
+
+#: src/Services/GoogleApiTokenAssertionMethodService.php:109
+msgid "Put file content error"
+msgstr ""
+
+#: src/Views/html-admin-settings-restore-button.php:14
+msgid "Restore"
+msgstr ""
+
+#: src/Views/html-admin-settings-form.php:51
+msgid "Save Options"
+msgstr ""
+
+#: src/Actions/AdminSettingsAction.php:371
 msgid "Settings"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:116
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:113
 msgid "Show advanced options"
 msgstr ""
 
-#: includes/helpers.php:106
+#. %1$s: current plugin name,%2$s plugin version to check, %3$s plugin name that current plugin dependent on.
+#: includes/helpers.php:129
 #, php-format
 msgid ""
-"The plugin <strong>\"%s\"</strong> needs the <strong>version %s</strong> or "
-"newer of <strong>\"%s\"</strong>"
+"The plugin <strong>\"%1$s\"</strong> needs the <strong>version %2$s</strong> "
+"or newer of <strong>\"%3$s\"</strong>"
 msgstr ""
 
-#: includes/helpers.php:56
+#. %1$s: current plugin name, %2$s plugin name that current plugin dependent on.
+#: includes/helpers.php:57
 #, php-format
 msgid ""
-"The plugin <strong>\"%s\"</strong> needs the plugin <strong>\"%s\"</strong> "
-"active"
+"The plugin <strong>\"%1$s\"</strong> needs the plugin <strong>"
+"\"%2$s\"</strong> active"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:15
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:19
 msgid ""
 "This tool allows you to import (or merge) product data to your store from a "
 "Google Sheet created on your Google Drive."
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:72
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:69
 msgid "Update existing products"
 msgstr ""
 
-#: woocommerce-importer/views/html-product-csv-import-form.php:94
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:91
 msgid "Use previous column mapping preferences?"
 msgstr ""
 
-#: includes/class-gswoo-admin-settings.php:218
-msgid ""
-"We can't recieve spreeadsheet by your provided settings, please check "
-"settings and try it again"
-msgstr ""
-
-#: includes/class-gswoo-admin-settings.php:234
-msgid ""
-"We can't set connection to google API by your client_secret json setting, "
-"please check it and try again"
-msgstr ""
-
-#: woocommerce-importer/views/html-product-csv-import-form.php:49
+#. %1s: plugin import page link, %2s: close link tag.
+#: src/Views/html-admin-settings-require-admin-notice.php:20
 #, php-format
 msgid ""
-"You do not set any google sheet titles for import, please go to <a href='%s'>"
-"plugin option page</a> and set it"
+"We can not show you import google sheet plugin button because you do not set "
+"google api connection, please go to %1$1s plugin settings page %2$2s and try "
+"to set it again."
 msgstr ""
 
-#: woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php:80
-msgid ""
-"You don't set google style sheet title setting, please set it and return "
-"again"
-msgstr ""
-
-#: woocommerce-importer/class-gswoo-wc-product-csv-importer-controller.php:73
-msgid ""
-"Your current chosen google sheet title don't set in plugin google sheet "
-"title option, please update plugin options and return to import again.."
-msgstr ""
-
-#: includes/class-gswoo-admin-settings.php:211
+#. %s: file path.
+#: src/Models/AdminSettingsModel.php:395
 #, php-format
 msgid ""
-"Your settings was recived successfully, now you can go to <a href=\"%s\">"
+"We can't replace import file content with google sheet content, please check "
+"your server file write permissions to file: %s"
+msgstr ""
+
+#. %s: plugin import page url.
+#: src/Models/AdminSettingsModel.php:242
+#, php-format
+msgid ""
+"We can't set connection with google API by your provided credentials, Please "
+"check your setting and internet connection and try again. Error: %s"
+msgstr ""
+
+#: src/Models/AdminSettingsModel.php:300
+msgid ""
+"We successfully connected to google API by your provided credentials. Please "
+"select google sheet title for import process."
+msgstr ""
+
+#. %s1: plugin import page url, %s2: closing link tag.
+#: src/Views/html-admin-wc-form-connection-error-message.php:15
+#, php-format
+msgid ""
+"You do not set plugin google API connection settings properly, please go to "
+"%1$1s plugin settings page %2$2s and try to set it again."
+msgstr ""
+
+#. %s: plugin import page url.
+#: src/Models/AdminSettingsModel.php:276
+#, php-format
+msgid ""
+"Your settings was received successfully, now you can go to <a href=\"%s\">"
 "import products spread sheet page</a> and try import"
 msgstr ""

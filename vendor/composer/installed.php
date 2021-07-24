@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => 'daf69fb0ca996b5bca8c0e6f11086560f5b6759b',
+    'reference' => '46451934e5d8f8711ba2566c969c588274eeb4bd',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => 'daf69fb0ca996b5bca8c0e6f11086560f5b6759b',
+      'reference' => '46451934e5d8f8711ba2566c969c588274eeb4bd',
     ),
     'asimlqt/php-google-spreadsheet-client' => 
     array (
@@ -49,12 +49,12 @@
     ),
     'google/apiclient' => 
     array (
-      'pretty_version' => 'v2.10.1',
-      'version' => '2.10.1.0',
+      'pretty_version' => 'v2.7.2',
+      'version' => '2.7.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '11871e94006ce7a419bb6124d51b6f9ace3f679b',
+      'reference' => '9df720d72c59456b5466e3f66e1e78cfe422a5ba',
     ),
     'google/apiclient-services' => 
     array (
@@ -110,32 +110,14 @@
       ),
       'reference' => 'c6b00f05152ae2c9b04a448f99c7590beb6042f5',
     ),
-    'paragonie/constant_time_encoding' => 
-    array (
-      'pretty_version' => 'v1.0.4',
-      'version' => '1.0.4.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '2132f0f293d856026d7d11bd81b9f4a23a1dc1f6',
-    ),
-    'paragonie/random_compat' => 
-    array (
-      'pretty_version' => 'v2.0.20',
-      'version' => '2.0.20.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => '0f1f60250fccffeaf5dda91eea1c018aed1adc2a',
-    ),
     'phpseclib/phpseclib' => 
     array (
-      'pretty_version' => '3.0.9',
-      'version' => '3.0.9.0',
+      'pretty_version' => '2.0.32',
+      'version' => '2.0.32.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'a127a5133804ff2f47ae629dd529b129da616ad7',
+      'reference' => 'f5c4c19880d45d0be3e7d24ae8ac434844a898cd',
     ),
     'psr/cache' => 
     array (

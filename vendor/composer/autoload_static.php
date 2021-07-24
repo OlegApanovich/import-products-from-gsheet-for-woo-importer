@@ -4,30 +4,27 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6
+class ComposerStaticInite6faf9371a5e265a05e4bb8489abc50a
 {
     public static $files = array (
-        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
-        'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
     );
 
     public static $prefixLengthsPsr4 = array (
         'p' => 
         array (
-            'phpseclib3\\' => 11,
+            'phpseclib\\' => 10,
         ),
         'P' => 
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
             'Psr\\Cache\\' => 10,
-            'ParagonIE\\ConstantTime\\' => 23,
         ),
         'M' => 
         array (
@@ -54,7 +51,7 @@ class ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6
     );
 
     public static $prefixDirsPsr4 = array (
-        'phpseclib3\\' => 
+        'phpseclib\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
@@ -69,10 +66,6 @@ class ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6
         'Psr\\Cache\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/cache/src',
-        ),
-        'ParagonIE\\ConstantTime\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
         'Monolog\\' => 
         array (
@@ -101,7 +94,6 @@ class ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6
         'Google\\' => 
         array (
             0 => __DIR__ . '/..' . '/asimlqt/php-google-spreadsheet-client/src/Google',
-            1 => __DIR__ . '/..' . '/google/apiclient/src',
         ),
         'GSWOO\\' => 
         array (
@@ -117,37 +109,29 @@ class ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'G' => 
+        array (
+            'Google_' => 
+            array (
+                0 => __DIR__ . '/..' . '/google/apiclient/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'Google_AccessToken_Revoke' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_AccessToken_Verify' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_AuthHandler_AuthHandlerFactory' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_AuthHandler_Guzzle5AuthHandler' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_AuthHandler_Guzzle6AuthHandler' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_AuthHandler_Guzzle7AuthHandler' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Client' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Collection' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Exception' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Http_Batch' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Http_MediaFileUpload' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Http_REST' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Model' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Service' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Service_Exception' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Service_Resource' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Task_Composer' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Task_Exception' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Task_Retryable' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Task_Runner' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
-        'Google_Utils_UriTemplate' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
+        'Google_Service_Exception' => __DIR__ . '/..' . '/google/apiclient/src/Google/Service/Exception.php',
+        'Google_Service_Resource' => __DIR__ . '/..' . '/google/apiclient/src/Google/Service/Resource.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInite9aef007fa7a21fdc389e00729b85ba6::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInite6faf9371a5e265a05e4bb8489abc50a::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInite6faf9371a5e265a05e4bb8489abc50a::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInite6faf9371a5e265a05e4bb8489abc50a::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInite6faf9371a5e265a05e4bb8489abc50a::$classMap;
 
         }, null, ClassLoader::class);
     }

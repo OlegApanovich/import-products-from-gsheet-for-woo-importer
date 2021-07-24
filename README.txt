@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, importer, google sheet
 Requires at least: 4.7
 Tested up to: 5.8
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -13,9 +13,11 @@ Plugin that extends woocommerce import products functionality and lets you impor
 
 == Description ==
 
-This is a wordpress plugin that extends standard woocommerce import products functionality and lets you import, not only from a local file, but also from your google sheet file which you store on your google drive and can be edited by any member of your store team.
+Import woocommerce products from google sheet by using native woocommerce importer.
 
 Standard woocommerce import, that was introduced by woocommerce team since version 3.1, became a great plugin feature that lets you not use additional plugins and extensions for product import processes. However, if it’s a pain every time when you’re loading csv import files from your local machine, then import-products-from-gsheet-for-woo-importer is a great choice that lets you not to do it anymore. Just set your google sheet name that you store on your google drive once and in the future you will only have to press the button "Import" as usual. Plugin itself will pull the new data from the specified google sheet table.
+
+This plugin that extends standard woocommerce import products functionality and lets you import, not only from a local file, but also from your google sheet file which you store on your google drive and can be edited by any member of your store team.
 
 Full instruction about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer) or in a section with screenshots below.
 
@@ -57,6 +59,9 @@ Also you can follow instructions on a screenshots below.
 11. If you properly set your setting then after all you can find additional import button near standard import woocommerce button on a product page.
 
 == Changelog ==
+
+= 2.0.3 =
+* Fix - Php warnings with not stable google API library.
 
 = 2.0.2 =
 * Dev - Add new google API connection "Auth Code" method.

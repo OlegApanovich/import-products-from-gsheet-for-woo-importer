@@ -21,7 +21,7 @@ After plugin installation we need to set connection with google API. In a plugin
 
 You need to set connection once and in the feature you can process import woocommerce product with your google sheet file every time you need.
 
-### 1 "One Click Auto Connect" method with google auth code
+### 1 method. "One Click Auto Connect" with google auth code
 
 This method is recomended and default in plugin settings area. To set connection with it.
 
@@ -35,7 +35,7 @@ This method is recomended and default in plugin settings area. To set connection
 8. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/screenshot-20.png)
 
 
-### 2 "Manual Connect" method with assertion client_secret json code.
+### 2 method. "Manual Connect" with assertion client_secret json code.
 
 1. Set your standard woocommerce import file to google drive.
 

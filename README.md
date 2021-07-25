@@ -15,7 +15,7 @@ Also as option you can directly install plugin from github repository.
 ## Set plugin options
 
 After plugin installation we need to set connection with google API. In a plugin settings you have two options to set google API connection.
-1. "One Click Auto Connect" method with google auth code ( more sinmple and straightforward connection method ).
+1. "One Click Auto Connect" method with google auth code ( more simple and straightforward connection method ).
 2. "Manual Connect" method with assertion client_secret json code.
 
 

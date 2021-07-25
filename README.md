@@ -23,7 +23,7 @@ You need to set connection once and in the feature you can process import woocom
 
 ### 1 method. "One Click Auto Connect" with google auth code
 
-This method is recomended and default in plugin settings area. To set connection with it.
+This method is recomended and default in plugin settings area. Follow the stemp to set it.
 
 1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab ![](assets/screenshot-12.png)
 2. You will be redirected with new tab in plugin application page on a google service. Please choose google account where you store your google sheet import file on google drive ![](assets/screenshot-13.png)

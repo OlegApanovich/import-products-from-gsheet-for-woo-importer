@@ -14,14 +14,32 @@ Also as option you can directly install plugin from github repository.
 
 ## Set plugin options
 
-After plugin installation we need to get client_secret json from google drive api.
+After plugin installation we need to set connection with google API. In a plugin settings you have two options to set google API connection.
+1."One Click Auto Connect" method with google auth code ( more sinmple and straightforward connection method ).
+2."Manual Connect" method with assertion client_secret json code. 
 
-Below are the instructions on how we can receive client_secret json.
+You need to set connection once and in the feature you can process import woocommerce product with your google sheet file every time you need.
+
+### "One Click Auto Connect" method with google auth code
+
+This method is recomended and default in plugin settings area. To set connection with it.
+
+1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab ![](assets/screenshot-12.png)
+2. You will be redirected with new tab in plugin application page on a google service. Please choose google account where you store your google sheet import file on google drive ![](assets/screenshot-13.png)
+3. In the next page you need provide access "See and download all your Google Drive files." with plugin application. Please check corresponding checkbox and press continue button ![](assets/screenshot-14.png)
+4. In the last page you received google auth code. Please copy this code.![](assets/screenshot-15.png)
+5. After you received code, please return to plugin setting page, paste it to corresponding input and press "Save Options" button.![](assets/screenshot-16.png)
+6. If code valid you will receive message corresponding message ![](assets/screenshot-17.png)
+7. In the last step you need to choose google sheet title ![](assets/screenshot-18.png) that store in your google drive and become your import file for woocommerce import product process ![](assets/screenshot-19.png)
+8. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/screenshot-20.png)
+
+
+### "Manual Connect" method with assertion client_secret json code.
 
 1. Set your standard woocommerce import file to google drive.
 
 2. Click link https://console.developers.google.com where you can find google console developer.
-
+your 
 3. In the search input type "google drive" and click on the first tip "Google Drive API" ![](assets/screenshot-1.png)
 
 4. If it is your first project in google developer console and you have never created a project before, then the system will ask you to create a new one, click button "Create" ![](assets/screenshot-2.png)

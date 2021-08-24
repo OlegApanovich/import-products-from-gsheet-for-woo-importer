@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GSheet For Woo Importer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-21 05:44+0000\n"
+"POT-Creation-Date: 2021-08-24 08:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "-- select an option --"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:78
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:80
 msgid "Alternatively, enter the path to a CSV file on your server:"
 msgstr ""
 
@@ -35,7 +35,7 @@ msgid ""
 "error:"
 msgstr ""
 
-#: src/Models/AdminSettingsModel.php:354
+#: src/Models/AdminSettingsModel.php:322
 msgid ""
 "Can't find predefined sheet on a Google drive, please reset your setting and "
 "try to set them again"
@@ -45,15 +45,15 @@ msgstr ""
 msgid "Choose Google Sheet title:"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:114
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:116
 msgid "Continue"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:87
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:89
 msgid "CSV Delimiter"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:73
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:75
 msgid ""
 "Existing products that match by ID or SKU will be updated. Products that do "
 "not exist will be skipped."
@@ -92,7 +92,7 @@ msgstr ""
 msgid "GSheet For Woo Importer"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:113
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:115
 msgid "Hide advanced options"
 msgstr ""
 
@@ -124,13 +124,9 @@ msgid ""
 "importer"
 msgstr ""
 
-#: src/WoocommerceImporter/WcProductCsvImporterController.php:105
-#: src/WoocommerceImporter/WcProductCsvImporterController.php:147
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:104
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:146
 msgid "Invalid file type. The importer supports CSV and TXT file formats."
-msgstr ""
-
-#: src/Services/SheetInterplayService.php:161
-msgid "Invalid token access data json format"
 msgstr ""
 
 #: src/Views/html-admin-settings-form.php:32
@@ -138,7 +134,7 @@ msgid "Manual Connect"
 msgstr ""
 
 #. %s: maximum upload size
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:58
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:60
 #, php-format
 msgid "Maximum size: %s"
 msgstr ""
@@ -151,7 +147,7 @@ msgstr ""
 msgid "One Click Auto Connect"
 msgstr ""
 
-#: src/WoocommerceImporter/WcProductCsvImporterController.php:154
+#: src/WoocommerceImporter/WcProductCsvImporterController.php:153
 msgid "Please upload or provide the link to a valid CSV file."
 msgstr ""
 
@@ -163,7 +159,7 @@ msgstr ""
 msgid "Product Import Google Sheet"
 msgstr ""
 
-#: src/Services/GoogleApiTokenAssertionMethodService.php:109
+#: src/Services/GoogleApiTokenAssertionMethodService.php:108
 msgid "Put file content error"
 msgstr ""
 
@@ -179,7 +175,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:113
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:115
 msgid "Show advanced options"
 msgstr ""
 
@@ -205,11 +201,11 @@ msgid ""
 "Google Sheet created on your Google Drive."
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:69
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:71
 msgid "Update existing products"
 msgstr ""
 
-#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:91
+#: src/WoocommerceImporter/Views/html-product-csv-import-form.php:93
 msgid "Use previous column mapping preferences?"
 msgstr ""
 
@@ -223,22 +219,36 @@ msgid ""
 msgstr ""
 
 #. %s: file path.
-#: src/Models/AdminSettingsModel.php:395
+#: src/Models/AdminSettingsModel.php:366
 #, php-format
 msgid ""
-"We can't replace import file content with google sheet content, please check "
-"your server file write permissions to file: %s"
+"We can't create import file, please check your server file write permissions "
+"to file: %s"
+msgstr ""
+
+#. %s: file path.
+#: src/Models/AdminSettingsModel.php:384
+#, php-format
+msgid ""
+"We can't insert data to your import file, please check if your spread sheet "
+"is not empty, and your your server has write permission to file: %s"
+msgstr ""
+
+#: src/Services/SheetInterplayService.php:91
+msgid ""
+"We can't receive any data from your google sheet, please check if your "
+"spread sheet is not empty"
 msgstr ""
 
 #. %s: plugin import page url.
-#: src/Models/AdminSettingsModel.php:242
+#: src/Models/AdminSettingsModel.php:216
 #, php-format
 msgid ""
-"We can't set connection with google API by your provided credentials, Please "
-"check your setting and internet connection and try again. Error: %s"
+"We can't set connection with google API by your provided credentials. Please "
+"check your settings and internet connection and try again. Error: %s"
 msgstr ""
 
-#: src/Models/AdminSettingsModel.php:300
+#: src/Models/AdminSettingsModel.php:268
 msgid ""
 "We successfully connected to google API by your provided credentials. Please "
 "select google sheet title for import process."
@@ -253,9 +263,9 @@ msgid ""
 msgstr ""
 
 #. %s: plugin import page url.
-#: src/Models/AdminSettingsModel.php:276
+#: src/Models/AdminSettingsModel.php:244
 #, php-format
 msgid ""
 "Your settings was received successfully, now you can go to <a href=\"%s\">"
-"import products spread sheet page</a> and try import"
+"import products spreadsheet page</a> and try import"
 msgstr ""

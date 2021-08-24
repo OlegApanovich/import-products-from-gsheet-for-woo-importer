@@ -9,6 +9,9 @@
 
 namespace GSWOO\Actions;
 
+use GSWOO\Services\DriveInterplayService;
+use GSWOO\Services\SheetInterplayService;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -94,9 +97,10 @@ class BackwardCompatibilityAction {
 		$options['google_auth_type'] = 'assertion_method_tab';
 		$settings_model->options     = $settings_model->decode_plugin_options( $options );
 
+		$drive_interplay_service = new DriveInterplayService( $settings_model->options );
+
 		$sheets_list =
-			$settings_model->
-			drive_interplay_service->
+			$drive_interplay_service->
 			get_google_drive_sheets_list();
 
 		foreach ( $sheets_list as $sheet ) {

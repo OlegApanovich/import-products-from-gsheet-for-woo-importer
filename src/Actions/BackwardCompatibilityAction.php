@@ -96,8 +96,7 @@ class BackwardCompatibilityAction {
 
 		$sheets_list =
 			$settings_model->
-			sheet_interplay_service->
-			set_api_connect( '', $settings_model )->
+			drive_interplay_service->
 			get_google_drive_sheets_list();
 
 		foreach ( $sheets_list as $sheet ) {

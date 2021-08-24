@@ -1,58 +1,6 @@
 {
     "packages": [
         {
-            "name": "asimlqt/php-google-spreadsheet-client",
-            "version": "v3.0.2",
-            "version_normalized": "3.0.2.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/asimlqt/php-google-spreadsheet-client.git",
-                "reference": "fb82cdc12e6cef559a8f1e42dc26e0905f565055"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/asimlqt/php-google-spreadsheet-client/zipball/fb82cdc12e6cef559a8f1e42dc26e0905f565055",
-                "reference": "fb82cdc12e6cef559a8f1e42dc26e0905f565055",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.6.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "4.4.2"
-            },
-            "time": "2016-11-09T07:43:08+00:00",
-            "type": "library",
-            "installation-source": "dist",
-            "autoload": {
-                "psr-4": {
-                    "Google\\": "src/Google"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Asim Liaquat",
-                    "email": "asimlqt22@gmail.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Google Spreadsheet PHP Client",
-            "homepage": "https://github.com/asimlqt/php-google-spreadsheet-client",
-            "keywords": [
-                "google",
-                "spreadsheet"
-            ],
-            "support": {
-                "issues": "https://github.com/asimlqt/php-google-spreadsheet-client/issues",
-                "source": "https://github.com/asimlqt/php-google-spreadsheet-client/tree/v3.0.2"
-            },
-            "install-path": "../asimlqt/php-google-spreadsheet-client"
-        },
-        {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
             "version": "v0.7.1",
             "version_normalized": "0.7.1.0",
@@ -256,17 +204,17 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.204.0",
-            "version_normalized": "0.204.0.0",
+            "version": "v0.208.0",
+            "version_normalized": "0.208.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "c718661b22f9b92e0d89520dbb8f16c62307885a"
+                "reference": "77fdacfc99f582970dcb3c41233158b02cc4ba5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/c718661b22f9b92e0d89520dbb8f16c62307885a",
-                "reference": "c718661b22f9b92e0d89520dbb8f16c62307885a",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/77fdacfc99f582970dcb3c41233158b02cc4ba5e",
+                "reference": "77fdacfc99f582970dcb3c41233158b02cc4ba5e",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +223,7 @@
             "require-dev": {
                 "phpunit/phpunit": "^5.7||^8.5.13"
             },
-            "time": "2021-07-18T11:18:23+00:00",
+            "time": "2021-08-15T11:18:25+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -297,23 +245,23 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.204.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.208.0"
             },
             "install-path": "../google/apiclient-services"
         },
         {
             "name": "google/auth",
-            "version": "v1.16.0",
-            "version_normalized": "1.16.0.0",
+            "version": "v1.17.0",
+            "version_normalized": "1.17.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "c747738d2dd450f541f09f26510198fbedd1c8a0"
+                "reference": "4da3a850e9d1045918099b6561165d829efbe2b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/c747738d2dd450f541f09f26510198fbedd1c8a0",
-                "reference": "c747738d2dd450f541f09f26510198fbedd1c8a0",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/4da3a850e9d1045918099b6561165d829efbe2b7",
+                "reference": "4da3a850e9d1045918099b6561165d829efbe2b7",
                 "shasum": ""
             },
             "require": {
@@ -329,13 +277,12 @@
                 "kelvinmo/simplejwt": "^0.2.5|^0.5.1",
                 "phpseclib/phpseclib": "^2.0.31",
                 "phpunit/phpunit": "^4.8.36|^5.7",
-                "sebastian/comparator": ">=1.2.3",
-                "squizlabs/php_codesniffer": "^3.5"
+                "sebastian/comparator": ">=1.2.3"
             },
             "suggest": {
                 "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings or for token management. Please require version ^2."
             },
-            "time": "2021-06-22T18:06:03+00:00",
+            "time": "2021-08-18T16:10:00+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -357,7 +304,7 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/master/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.16.0"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.17.0"
             },
             "install-path": "../google/auth"
         },
@@ -662,17 +609,17 @@
         },
         {
             "name": "phpseclib/phpseclib",
-            "version": "2.0.32",
-            "version_normalized": "2.0.32.0",
+            "version": "2.0.33",
+            "version_normalized": "2.0.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpseclib/phpseclib.git",
-                "reference": "f5c4c19880d45d0be3e7d24ae8ac434844a898cd"
+                "reference": "fb53b7889497ec7c1362c94e61d8127ac67ea094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/f5c4c19880d45d0be3e7d24ae8ac434844a898cd",
-                "reference": "f5c4c19880d45d0be3e7d24ae8ac434844a898cd",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/fb53b7889497ec7c1362c94e61d8127ac67ea094",
+                "reference": "fb53b7889497ec7c1362c94e61d8127ac67ea094",
                 "shasum": ""
             },
             "require": {
@@ -689,7 +636,7 @@
                 "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
                 "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
             },
-            "time": "2021-06-12T12:12:59+00:00",
+            "time": "2021-08-16T04:20:12+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -754,7 +701,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpseclib/phpseclib/issues",
-                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.32"
+                "source": "https://github.com/phpseclib/phpseclib/tree/2.0.33"
             },
             "funding": [
                 {

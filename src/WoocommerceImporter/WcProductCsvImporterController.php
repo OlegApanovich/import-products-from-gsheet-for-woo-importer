@@ -92,8 +92,7 @@ class WcProductCsvImporterController extends WC_Product_CSV_Importer_Controller 
 
 			$result =
 				$this->settings_model->
-				replace_import_file_with_gsheet_content( $_REQUEST['gswoo-file'], $gswoo_file_sheet_path );
-
+				replace_import_file_with_gsheet_content( $_REQUEST, $gswoo_file_sheet_path );
 
 			if ( is_wp_error( $result ) ) {
 				return $result;

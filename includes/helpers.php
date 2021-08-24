@@ -86,7 +86,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 
 			$success = false;
 		} else {
-			// If version to check is not defined do nothing.
+			// If version to check is not defined do anything.
 			if ( null === $version_to_check ) {
 				/**
 				 * Allow empty return
@@ -237,4 +237,3 @@ if ( ! function_exists( 'gswoo_is_woocommerce_product_list_screen' ) ) :
 		return ! empty( $screen->id ) && 'edit-product' === $screen->id;
 	}
 endif;
-

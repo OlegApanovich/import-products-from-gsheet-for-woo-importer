@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '46451934e5d8f8711ba2566c969c588274eeb4bd',
+    'reference' => 'c202954a9c0160d4609786fa3a5ff89dae0b6ffc',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,16 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '46451934e5d8f8711ba2566c969c588274eeb4bd',
-    ),
-    'asimlqt/php-google-spreadsheet-client' => 
-    array (
-      'pretty_version' => 'v3.0.2',
-      'version' => '3.0.2.0',
-      'aliases' => 
-      array (
-      ),
-      'reference' => 'fb82cdc12e6cef559a8f1e42dc26e0905f565055',
+      'reference' => 'c202954a9c0160d4609786fa3a5ff89dae0b6ffc',
     ),
     'dealerdirect/phpcodesniffer-composer-installer' => 
     array (
@@ -58,21 +49,21 @@
     ),
     'google/apiclient-services' => 
     array (
-      'pretty_version' => 'v0.204.0',
-      'version' => '0.204.0.0',
+      'pretty_version' => 'v0.208.0',
+      'version' => '0.208.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c718661b22f9b92e0d89520dbb8f16c62307885a',
+      'reference' => '77fdacfc99f582970dcb3c41233158b02cc4ba5e',
     ),
     'google/auth' => 
     array (
-      'pretty_version' => 'v1.16.0',
-      'version' => '1.16.0.0',
+      'pretty_version' => 'v1.17.0',
+      'version' => '1.17.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c747738d2dd450f541f09f26510198fbedd1c8a0',
+      'reference' => '4da3a850e9d1045918099b6561165d829efbe2b7',
     ),
     'guzzlehttp/guzzle' => 
     array (
@@ -112,12 +103,12 @@
     ),
     'phpseclib/phpseclib' => 
     array (
-      'pretty_version' => '2.0.32',
-      'version' => '2.0.32.0',
+      'pretty_version' => '2.0.33',
+      'version' => '2.0.33.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'f5c4c19880d45d0be3e7d24ae8ac434844a898cd',
+      'reference' => 'fb53b7889497ec7c1362c94e61d8127ac67ea094',
     ),
     'psr/cache' => 
     array (

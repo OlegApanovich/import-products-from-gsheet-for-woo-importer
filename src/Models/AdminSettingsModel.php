@@ -10,10 +10,8 @@
 
 namespace GSWOO\Models;
 
-use GSWOO\Services\GoogleApiTokenAssertionMethodService;
-use GSWOO\Services\GoogleApiTokenAuthCodeMethodService;
-use GSWOO\Abstracts\GoogleApiTokenAbstract;
 use GSWOO\Services\SheetInterplayService;
+use GSWOO\Services\DriveInterplayService;
 use WP_Error;
 
 defined( 'ABSPATH' ) || exit;
@@ -45,8 +43,9 @@ class AdminSettingsModel {
 	 * AdminSettingsModel constructor.
 	 */
 	public function __construct() {
-		$this->sheet_interplay_service = new SheetInterplayService();
 		$this->options                 = $this->get_plugin_options();
+		$this->sheet_interplay_service = new SheetInterplayService( $this->options );
+		$this->drive_interplay_service = new DriveInterplayService( $this->options );
 	}
 
 	/**
@@ -113,7 +112,6 @@ class AdminSettingsModel {
 	 * @return array (
 	 *      'status'  => [error, warning, success]
 	 *      'message' => text,
-	 *      'token'   => string
 	 *      'sheets_list' => array
 	 * )
 	 */
@@ -125,16 +123,9 @@ class AdminSettingsModel {
 			return $response;
 		}
 
-		$token_service = $this->get_token_service();
-
-		if ( is_wp_error( $token_service->error ) ) {
-			return $this->get_error_connection_response( $token_service->error );
-		}
-
 		$sheets_list =
 			$this->
-			sheet_interplay_service->
-			set_api_connect( $token_service->token )->
+			drive_interplay_service->
 			get_google_drive_sheets_list();
 
 		if ( is_wp_error( $sheets_list ) ) {
@@ -145,34 +136,17 @@ class AdminSettingsModel {
 			return $this->get_warning_connection_response( $sheets_list );
 		}
 
-		$sheet_title = $this->get_sheet_title_from_sheet_list( $this->options['google_sheet_data'], $sheets_list );
+		$sheet_title =
+			$this->get_sheet_title_from_sheet_list(
+				$this->options['google_sheet_data'],
+				$sheets_list
+			);
+
 		if ( is_wp_error( $sheet_title ) ) {
 			return $this->get_error_connection_response( $sheet_title );
 		}
 
-		return $this->get_success_connection_response( $token_service, $sheets_list );
-	}
-
-	/**
-	 * Initialize google API token service.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @noinspection PhpUndefinedVariableInspection
-	 *
-	 * @return GoogleApiTokenAbstract
-	 */
-	public function get_token_service() {
-		switch ( $this->options['google_auth_type'] ) {
-			case 'assertion_method_tab':
-				$token_service = new GoogleApiTokenAssertionMethodService( $this->options['google_api_key'] );
-				break;
-			case 'auth_code_method_tab':
-				$token_service = new GoogleApiTokenAuthCodeMethodService( $this->options['google_code_oauth2'] );
-				break;
-		}
-
-		return $token_service;
+		return $this->get_success_connection_response( $sheets_list );
 	}
 
 	/**
@@ -240,7 +214,7 @@ class AdminSettingsModel {
 		$return['message'] = sprintf(
 		// translators: %s: plugin import page url.
 			__(
-				"We can't set connection with google API by your provided credentials, Please check your setting and internet connection and try again. Error: %s",
+				"We can't set connection with google API by your provided credentials. Please check your settings and internet connection and try again. Error: %s",
 				'import-products-from-gsheet-for-woo-importer'
 			),
 			$error
@@ -254,18 +228,12 @@ class AdminSettingsModel {
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param object $token_service GoogleApiTokenAbstract.
-	 * @param array  $sheets_list
+	 * @param array $sheets_list
 	 *
 	 * @return array
 	 */
-	public function get_success_connection_response( $token_service, $sheets_list ) {
+	public function get_success_connection_response( $sheets_list ) {
 		$menu_page_url = menu_page_url( 'product_importer_google_sheet', false );
-
-		$token = json_decode( $token_service->token );
-		$token = $token->access_token;
-
-		$return['token'] = $token;
 
 		$return['status'] = 'success';
 
@@ -274,7 +242,7 @@ class AdminSettingsModel {
 		$return['message'] = sprintf(
 		// translators: %s: plugin import page url.
 			__(
-				'Your settings was received successfully, now you can go to <a href="%s">import products spread sheet page</a> and try import',
+				'Your settings was received successfully, now you can go to <a href="%s">import products spreadsheet page</a> and try import',
 				'import-products-from-gsheet-for-woo-importer'
 			),
 			$menu_page_url
@@ -362,43 +330,68 @@ class AdminSettingsModel {
 	}
 
 	/**
-	 * Replace woocommerce import file with google sheet content.
+	 * Replace woocommerce import file with Google sheet content.
 	 *
 	 * @since 2.0.0
 	 *
-	 * @param string $sheet_id
+	 * @param array  $import_form_data
 	 * @param string $file_sheet_path
 	 *
-	 * @return string | WP_Error
+	 * @return bool | WP_Error
 	 */
-	public function replace_import_file_with_gsheet_content( $sheet_id, $file_sheet_path ) {
-		$file_content =
+	public function replace_import_file_with_gsheet_content( $import_form_data, $file_sheet_path ) {
+		$delimiter = $import_form_data['delimiter'] ?: ',';
+
+		$sheet_data =
 			$this->
 			sheet_interplay_service->
-			set_api_connect( '', $this )->
-			get_sheet_csv( $sheet_id );
+			get_sheet_csv( $import_form_data['gswoo-file'], $import_form_data['gswoo-sheet-name'] );
 
-		if ( is_wp_error( $file_content ) ) {
-			return $file_content;
+		if ( is_wp_error( $sheet_data ) ) {
+			return $sheet_data;
 		}
 
-		$is_success = file_put_contents( $file_sheet_path, $file_content );
+		$resource = fopen( $file_sheet_path, 'w' );
 
-		if ( $is_success ) {
-			return true;
-		} else {
+		if ( ! $resource ) {
 			return new WP_Error(
-				'file_replace_content_error',
+				'file_create_content_error',
 				'(' . __METHOD__ . ') ' .
 				sprintf(
 				// translators: %s: file path.
 					__(
-						"We can't replace import file content with google sheet content, please check your server file write permissions to file: %s",
+						"We can't create import file, please check your server file write permissions to file: %s",
 						'import-products-from-gsheet-for-woo-importer'
 					),
 					$file_sheet_path
 				)
 			);
 		}
+
+		$first_string = array_shift( $sheet_data );
+		$is_success   = fputcsv( $resource, $first_string, $delimiter );
+
+		if ( ! $first_string || ! $is_success ) {
+			return new WP_Error(
+				'file_create_content_error',
+				'(' . __METHOD__ . ') ' .
+				sprintf(
+				// translators: %s: file path.
+					__(
+						"We can't insert data to your import file, please check if your spread sheet is not empty, and your your server has write permission to file: %s",
+						'import-products-from-gsheet-for-woo-importer'
+					),
+					$file_sheet_path
+				)
+			);
+		}
+
+		foreach ( $sheet_data as $sheet_string ) {
+			fputcsv( $resource, $sheet_string, $delimiter );
+		}
+
+		fclose( $resource );
+
+		return true;
 	}
 }

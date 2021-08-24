@@ -1,6 +1,6 @@
 <?php
 /**
- * Service class help to interact with google sheet API.
+ * Service class help to interact with Google sheet API.
  *
  * @since 2.0.0
  *
@@ -9,12 +9,10 @@
 
 namespace GSWOO\Services;
 
-use Exception;
-use Google\Spreadsheet\SpreadsheetService;
-use Google\Spreadsheet\DefaultServiceRequest;
-use Google\Spreadsheet\ServiceRequestFactory;
+use GSWOO\Abstracts\GoogleApiInterplayAbstract;
+use Google_Service_Sheets;
 use WP_Error;
-
+use Exception;
 
 /**
  * Class SheetInterplayService
@@ -23,91 +21,38 @@ use WP_Error;
  *
  * @package GSWOO\Services
  */
-class SheetInterplayService {
+class SheetInterplayService extends GoogleApiInterplayAbstract {
 
 	/**
-	 * Google sheet service instance.
-	 *
-	 * @var object SpreadsheetFeed
+	 * Instance of Google_Service_Sheets class.
 	 *
 	 * @since  2.0.0
+	 * @var object Google\Service\Sheets\Google_Service_Sheets
 	 */
-	public $spread_sheet_feed;
+	public $google_service_sheets;
 
 	/**
-	 * Error aggregator.
+	 * SheetInterplayService constructor.
 	 *
-	 * @var object Wp_Error
-	 *
-	 * @since 2.0.0
+	 * @param array $options
 	 */
-	public $error;
+	public function __construct( $options ) {
 
-	/**
-	 * Try to bind library with google api.
-	 *
-	 * @since  2.0.0
-	 *
-	 * @param string                         $token
-	 * @param  bool|object AdminSettingsModel $model
-	 */
-	public function set_api_connect( $token = '', $model = false ) {
-		if ( ! $token && $model ) {
-			$token_service = $model->get_token_service();
-			if ( is_wp_error( $token_service->error ) ) {
-				$this->error = $token_service->error;
-				return $this;
-			}
-
-			$token = $token_service->token;
+		if ( empty( $options['google_auth_type'] ) ) {
+			return;
 		}
 
+		$this->options = $options;
+		$token_service = $this->get_token_service();
+
 		try {
-			$token           = $this->get_access_token_from_json_data( $token );
-			$service_request = new DefaultServiceRequest( $token );
-			ServiceRequestFactory::setInstance( $service_request );
-			$spread_sheet_service    = new SpreadsheetService();
-			$this->spread_sheet_feed = $spread_sheet_service->getSpreadsheetFeed();
+			$this->google_service_sheets = new Google_Service_Sheets( $token_service->client );
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error(
 				'api_connect_error',
 				'(' . __METHOD__ . ') ' . $e->getMessage()
 			);
 		}
-
-		return $this;
-	}
-
-	/**
-	 * Get data list of all sheets on a google drive.
-	 *
-	 * @since  2.0.0
-	 *
-	 * @return  array | object WP_Error
-	 */
-	public function get_google_drive_sheets_list() {
-		if ( $this->error ) {
-			return $this->error;
-		}
-
-		try {
-			$sheets_list = array();
-
-			$sheet_entries_list = $this->spread_sheet_feed->getEntries();
-
-			$count_sheet_entries = count( $sheet_entries_list );
-			for ( $i = 0; $i < $count_sheet_entries; $i++ ) {
-				$sheets_list[ $i ]['id']    = $sheet_entries_list[ $i ]->getId();
-				$sheets_list[ $i ]['title'] = $sheet_entries_list[ $i ]->getTitle();
-			}
-		} catch ( Exception $e ) {
-			$this->error = new WP_Error(
-				'get_sheet_error',
-				'(' . __METHOD__ . ') ' . $e->getMessage()
-			);
-		}
-
-		return $sheets_list;
 	}
 
 	/**
@@ -115,56 +60,41 @@ class SheetInterplayService {
 	 *
 	 * @since  2.0.0
 	 *
-	 * @noinspection PhpReturnDocTypeMismatchInspection
 	 * @noinspection PhpUndefinedVariableInspection*
 	 *
 	 * @param string $sheet_id
+	 * @param string $sheet_title
 	 *
-	 * @return string|WP_Error
+	 * @return WP_Error object|array
 	 */
-	public function get_sheet_csv( $sheet_id ) {
+	public function get_sheet_csv( $sheet_id, $sheet_title ) {
 		if ( $this->error ) {
 			return $this->error;
 		}
 
-		$sheet_csv = '';
 		try {
-			$spreadsheet = $this->spread_sheet_feed->getById( $sheet_id );
-
-			$worksheets = $spreadsheet->getWorksheetFeed()->getEntries();
-			$worksheet  = $worksheets[0];
-
-			$sheet_csv = $worksheet->getCsv();
+			$sheet =
+				$this->google_service_sheets->
+				spreadsheets_values->
+				get( $sheet_id, $sheet_title );
 
 		} catch ( Exception $e ) {
-			$this->error = new WP_Error(
-				'get_sheet_content_error',
+			return new WP_Error(
+				'get_sheet_csv',
 				'(' . __METHOD__ . ') ' . $e->getMessage()
 			);
 		}
 
-		return $sheet_csv;
-	}
-
-	/**
-	 * Try to pick access token from response token data.
-	 *
-	 * @param string $token Json response data.
-	 *
-	 * @throws Exception
-	 * @return string
-	 */
-	public function get_access_token_from_json_data( $token ) {
-		$token = json_decode( $token );
-		if ( empty( $token->access_token ) ) {
-			throw new Exception(
+		if ( empty( $sheet->values ) ) {
+			return new WP_Error(
+				'get_sheet_csv',
 				__(
-					'Invalid token access data json format',
+					"We can't receive any data from your google sheet, please check if your spread sheet is not empty",
 					'import-products-from-gsheet-for-woo-importer'
 				)
 			);
+		} else {
+			return $sheet->values;
 		}
-
-		return $token->access_token;
 	}
 }

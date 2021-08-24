@@ -48,6 +48,9 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	 */
 	public function set_client() {
 		try {
+			putenv(
+				'GOOGLE_APPLICATION_CREDENTIALS=' . GSWOO_URI_ABSPATH . 'assets/client_secret.json'
+			);
 			$this->client->useApplicationDefaultCredentials();
 			$this->client->setApplicationName( 'Something to do with my representatives' );
 			$this->client->setScopes(
@@ -71,10 +74,6 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	public function fetch_token() {
 		try {
 			$this->put_key_to_file_access();
-
-			putenv(
-				'GOOGLE_APPLICATION_CREDENTIALS=' . GSWOO_URI_ABSPATH . 'assets/client_secret.json'
-			);
 
 			$token = $this->client->fetchAccessTokenWithAssertion();
 		} catch ( Exception $e ) {

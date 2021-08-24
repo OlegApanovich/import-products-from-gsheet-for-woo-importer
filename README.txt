@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: woocommerce, importer, google sheet
 Requires at least: 4.7
 Tested up to: 5.8
-Stable tag: 2.0.3
+Stable tag: 2.1.1
 Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -59,6 +59,9 @@ Also you can follow instructions on a screenshots below.
 11. If you properly set your setting then after all you can find additional import button near standard import woocommerce button on a product page.
 
 == Changelog ==
+
+= 2.1.1 =
+* Fix - move plugin functionality to new Google v4 API
 
 = 2.0.3 =
 * Fix - Php warnings with not stable google API library.

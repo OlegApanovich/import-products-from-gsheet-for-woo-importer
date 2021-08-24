@@ -128,8 +128,10 @@ abstract class GoogleApiTokenAbstract {
 			return;
 		}
 
-		$this->token = wp_json_encode( $token );
-		$this->save_token();
+		if ( ! empty( $token ) ) {
+			$this->token = wp_json_encode( $token );
+			$this->save_token();
+		}
 	}
 
 	/**

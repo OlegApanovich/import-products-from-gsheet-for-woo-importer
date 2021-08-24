@@ -340,7 +340,11 @@ class AdminSettingsModel {
 	 * @return bool | WP_Error
 	 */
 	public function replace_import_file_with_gsheet_content( $import_form_data, $file_sheet_path ) {
-		$delimiter = $import_form_data['delimiter'] ?: ',';
+		if ( $import_form_data['delimiter'] ) {
+			$delimiter = $import_form_data['delimiter'];
+		} else {
+			$delimiter = ',';
+		}
 
 		$sheet_data =
 			$this->

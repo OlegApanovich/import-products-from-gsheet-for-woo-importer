@@ -11,6 +11,13 @@
 	<exclude-pattern>languages</exclude-pattern>
 	<exclude-pattern>src/WoocommerceImporter</exclude-pattern>
 
+	<!-- We allow using fopen and flose instead -->
+	<rule ref="WordPress">
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fopen"/>
+	</rule>
+	<rule ref="WordPress">
+		<exclude name="WordPress.WP.AlternativeFunctions.file_system_read_fclose"/>
+	</rule>
 	<!-- Exclude due to PSR-4 autoload intagration -->
 	<rule ref="WordPress">
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>

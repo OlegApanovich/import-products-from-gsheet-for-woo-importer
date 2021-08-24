@@ -76,7 +76,7 @@ class DriveInterplayService extends GoogleApiInterplayAbstract {
 			);
 			$results = $this->google_service_drive->files->listFiles( $params );
 			foreach ( $results->files as $spreadsheet ) {
-				if ( isset( $spreadsheet['kind'] ) && $spreadsheet['kind'] == 'drive#file' ) {
+				if ( isset( $spreadsheet['kind'] ) && 'drive#file' === $spreadsheet['kind'] ) {
 					$sheets_list[] = array(
 						'id'    => $spreadsheet['id'],
 						'title' => $spreadsheet['name'],

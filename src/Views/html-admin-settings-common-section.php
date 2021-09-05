@@ -22,7 +22,7 @@ if ( ! empty( $response['sheets_list'] ) ) {
 	?>
 	<h3>
 		<label for="plugin_google_sheet_data">
-			<?php esc_html_e( 'Google sheet title', 'import-products-from-gsheet-for-woo-importer' ); ?>
+			<?php esc_html_e( 'Google sheet title (support only native google-apps.spreadsheet file type)', 'import-products-from-gsheet-for-woo-importer' ); ?>
 		</label>
 	</h3>
 

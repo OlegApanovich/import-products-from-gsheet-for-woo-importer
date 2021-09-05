@@ -349,7 +349,7 @@ class AdminSettingsModel {
 		$sheet_data =
 			$this->
 			sheet_interplay_service->
-			get_sheet_csv( $import_form_data['gswoo-file'], $import_form_data['gswoo-sheet-name'] );
+			get_sheet_csv( $import_form_data['gswoo-file'] );
 
 		if ( is_wp_error( $sheet_data ) ) {
 			return $sheet_data;

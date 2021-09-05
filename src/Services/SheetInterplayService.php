@@ -63,20 +63,22 @@ class SheetInterplayService extends GoogleApiInterplayAbstract {
 	 * @noinspection PhpUndefinedVariableInspection*
 	 *
 	 * @param string $sheet_id
-	 * @param string $sheet_title
 	 *
 	 * @return WP_Error object|array
 	 */
-	public function get_sheet_csv( $sheet_id, $sheet_title ) {
+	public function get_sheet_csv( $sheet_id ) {
 		if ( $this->error ) {
 			return $this->error;
 		}
 
 		try {
+			$spreadsheet = $this->google_service_sheets->spreadsheets->get( $sheet_id );
+
+			$sheet_name = $spreadsheet[0]->properties->title;
+
 			$sheet =
 				$this->google_service_sheets->
-				spreadsheets_values->
-				get( $sheet_id, $sheet_title );
+				spreadsheets_values->get( $sheet_id, $sheet_name );
 
 		} catch ( Exception $e ) {
 			return new WP_Error(

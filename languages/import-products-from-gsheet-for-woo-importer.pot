@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GSheet For Woo Importer\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-24 08:44+0000\n"
+"POT-Creation-Date: 2021-09-05 17:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -85,7 +85,8 @@ msgid "Google drive API client_secret json"
 msgstr ""
 
 #: src/Views/html-admin-settings-common-section.php:25
-msgid "Google sheet title"
+msgid ""
+"Google sheet title (support only native google-apps.spreadsheet file type)"
 msgstr ""
 
 #. Name of the plugin
@@ -234,7 +235,7 @@ msgid ""
 "is not empty, and your your server has write permission to file: %s"
 msgstr ""
 
-#: src/Services/SheetInterplayService.php:91
+#: src/Services/SheetInterplayService.php:93
 msgid ""
 "We can't receive any data from your google sheet, please check if your "
 "spread sheet is not empty"

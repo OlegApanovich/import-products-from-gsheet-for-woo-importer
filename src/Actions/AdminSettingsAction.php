@@ -365,11 +365,11 @@ class AdminSettingsAction {
 	public function set_plugin_action_links( $links ) {
 		return array_merge(
 			array(
-				'<a href="' .
-				admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) .
-				'">' .
-				esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' ) .
-				'</a>',
+				sprintf(
+					'<a href="%s">%s</a>',
+					admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ),
+					esc_html__( 'Settings', 'import-products-from-gsheet-for-woo-importer' )
+				),
 			),
 			$links
 		);

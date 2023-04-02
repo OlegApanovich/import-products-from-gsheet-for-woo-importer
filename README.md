@@ -44,7 +44,7 @@ This method is recomended and default in plugin settings area. Follow the steps 
 
 1. Set your standard woocommerce import file to google drive.
 
-2. Go to [google console developer page.](https://console.developers.google.com)
+2. Go to [google cloud console page.](https://console.developers.google.com)
 
 3. In the search input type "google drive" and click on the first tip "Google Drive API" ![](assets/screenshot-1.png)
 

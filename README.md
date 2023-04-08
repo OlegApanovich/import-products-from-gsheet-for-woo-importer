@@ -57,7 +57,7 @@ This method is recomended and default in plugin settings area. Follow the steps 
 5. In the next page, the system  will ask you to fill the form with data for your credentials, please fill it in the same way as you can see on the screenshot below ![](assets/images/screenshot-6.png)
 
 
-6. In the next step you will be redirected to 'Create service account' page you will see the form for your it, feel free to choose any service account name in the appropriate field and select role project -> editor, than skip 'Grant users access to this service account" and press "Done" button. ![](assets/images/screenshot-7.png) After it you should have a newly created service account.
+6. In the next step you will be redirected to 'Create service account' page and you will see the form for it, feel free to choose any service account name in the appropriate field and select role project -> editor, than skip "Grant users access to this service account" and press "Done" button. ![](assets/images/screenshot-7.png) After it you should have a newly created service account.
 
 
 7. Then you can go to your [credentials page](https://console.cloud.google.com/apis/credentials) find your newly created 'Service Account' click on it ![](assets/images/screenshot-8.png)

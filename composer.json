@@ -1,7 +1,6 @@
 {
 	"require": {
-		"google/apiclient": "2.7.2",
-		"guzzlehttp/guzzle": "6.5.0"
+		"google/apiclient": "^2.12.1"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "3.*",

@@ -95,6 +95,7 @@ class FileCommentSniff implements Sniff
             T_CLASS,
             T_INTERFACE,
             T_TRAIT,
+            T_ENUM,
             T_FUNCTION,
             T_CLOSURE,
             T_PUBLIC,
@@ -127,7 +128,7 @@ class FileCommentSniff implements Sniff
 
         // Exactly one blank line after the file comment.
         $next = $phpcsFile->findNext(T_WHITESPACE, ($commentEnd + 1), null, true);
-        if ($tokens[$next]['line'] !== ($tokens[$commentEnd]['line'] + 2)) {
+        if ($next !== false && $tokens[$next]['line'] !== ($tokens[$commentEnd]['line'] + 2)) {
             $error = 'There must be exactly one blank line after the file comment';
             $phpcsFile->addError($error, $commentEnd, 'SpacingAfterComment');
         }

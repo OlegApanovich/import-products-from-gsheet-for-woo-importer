@@ -126,7 +126,6 @@ abstract class CredentialsLoader implements
             return;
         }
         $jsonKey = file_get_contents($path);
-
         return json_decode($jsonKey, true);
     }
 

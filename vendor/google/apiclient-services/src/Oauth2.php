@@ -18,6 +18,7 @@
 namespace Google\Service;
 
 use Google\Client;
+use Google\Service\Oauth2\Tokeninfo;
 
 /**
  * Service definition for Oauth2 (v2).
@@ -34,7 +35,7 @@ use Google\Client;
  */
 class Oauth2 extends \Google\Service
 {
-  /** View your email address. */
+  /** See your primary Google Account email address. */
   const USERINFO_EMAIL =
       "https://www.googleapis.com/auth/userinfo.email";
   /** See your personal info, including any personal info you've made publicly available. */

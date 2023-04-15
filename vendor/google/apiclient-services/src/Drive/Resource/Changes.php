@@ -68,6 +68,8 @@ class Changes extends \Google\Service\Resource
    * be no further change entries for this file.
    * @opt_param bool includeItemsFromAllDrives Whether both My Drive and shared
    * drive items should be included in results.
+   * @opt_param string includeLabels A comma-separated list of IDs of labels to
+   * include in the labelInfo part of the response.
    * @opt_param string includePermissionsForView Specifies which additional view's
    * permissions to include in the response. Only 'published' is supported.
    * @opt_param bool includeRemoved Whether to include changes indicating that
@@ -81,7 +83,7 @@ class Changes extends \Google\Service\Resource
    * the Application Data folder or shared files which have not been added to My
    * Drive.
    * @opt_param string spaces A comma-separated list of spaces to query within the
-   * user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
+   * corpora. Supported values are 'drive' and 'appDataFolder'.
    * @opt_param bool supportsAllDrives Whether the requesting application supports
    * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.
@@ -95,7 +97,8 @@ class Changes extends \Google\Service\Resource
     return $this->call('list', [$params], ChangeList::class);
   }
   /**
-   * Subscribes to changes for a user. (changes.watch)
+   * Subscribes to changes for a user. To use this method, you must include the
+   * pageToken query parameter. (changes.watch)
    *
    * @param string $pageToken The token for continuing a previous list request on
    * the next page. This should be set to the value of 'nextPageToken' from the
@@ -112,6 +115,8 @@ class Changes extends \Google\Service\Resource
    * be no further change entries for this file.
    * @opt_param bool includeItemsFromAllDrives Whether both My Drive and shared
    * drive items should be included in results.
+   * @opt_param string includeLabels A comma-separated list of IDs of labels to
+   * include in the labelInfo part of the response.
    * @opt_param string includePermissionsForView Specifies which additional view's
    * permissions to include in the response. Only 'published' is supported.
    * @opt_param bool includeRemoved Whether to include changes indicating that
@@ -125,7 +130,7 @@ class Changes extends \Google\Service\Resource
    * the Application Data folder or shared files which have not been added to My
    * Drive.
    * @opt_param string spaces A comma-separated list of spaces to query within the
-   * user corpus. Supported values are 'drive', 'appDataFolder' and 'photos'.
+   * corpora. Supported values are 'drive' and 'appDataFolder'.
    * @opt_param bool supportsAllDrives Whether the requesting application supports
    * both My Drives and shared drives.
    * @opt_param bool supportsTeamDrives Deprecated use supportsAllDrives instead.

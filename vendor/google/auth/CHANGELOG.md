@@ -1,3 +1,7 @@
+## 1.18.0 (08/24/2021)
+
+ *  [feat]: Add support for guzzlehttp/psr7 v2 (#357)
+
 ## 1.17.0 (08/17/2021)
 
  * [fix]: consistently use useSelfSignedJwt method in ServiceAccountJwtAccessCredentials (#351)
@@ -52,7 +56,7 @@
 ## 1.11.1 (7/27/2020)
 
 * [fix]: catch ConnectException in GCE check (#294)
-* [docs]: Adds [reference docs](https://googleapis.github.io/google-auth-library-php/master)
+* [docs]: Adds [reference docs](https://googleapis.github.io/google-auth-library-php/main)
 
 ## 1.11.0 (7/22/2020)
 

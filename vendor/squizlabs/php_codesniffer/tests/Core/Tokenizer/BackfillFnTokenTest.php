@@ -129,6 +129,41 @@ class BackfillFnTokenTest extends AbstractMethodUnitTest
 
 
     /**
+     * Test nested arrow functions with a shared closer.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testNestedSharedCloser()
+    {
+        $tokens = self::$phpcsFile->getTokens();
+
+        $token = $this->getTargetToken('/* testNestedSharedCloserOuter */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 4, 20);
+
+        $token = $this->getTargetToken('/* testNestedSharedCloserInner */', T_FN);
+        $this->backfillHelper($token, true);
+
+        $expectedScopeOpener = ($token + 4);
+        $expectedScopeCloser = ($token + 12);
+
+        $this->assertSame($expectedScopeOpener, $tokens[$token]['scope_opener'], 'Scope opener for "inner" arrow function is not the arrow token');
+        $this->assertSame($expectedScopeCloser, $tokens[$token]['scope_closer'], 'Scope closer for "inner" arrow function is not the TRUE token');
+
+        $opener = $tokens[$token]['scope_opener'];
+        $this->assertSame($expectedScopeOpener, $tokens[$opener]['scope_opener'], 'Opener scope opener for "inner" arrow function is not the arrow token');
+        $this->assertSame($expectedScopeCloser, $tokens[$opener]['scope_closer'], 'Opener scope closer for "inner" arrow function is not the semicolon token');
+
+        $closer = $tokens[$token]['scope_closer'];
+        $this->assertSame(($token - 4), $tokens[$closer]['scope_opener'], 'Closer scope opener for "inner" arrow function is not the arrow token of the "outer" arrow function (shared scope closer)');
+        $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer for "inner" arrow function is not the TRUE token');
+
+    }//end testNestedSharedCloser()
+
+
+    /**
      * Test arrow functions that call functions.
      *
      * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
@@ -270,6 +305,22 @@ class BackfillFnTokenTest extends AbstractMethodUnitTest
         $this->scopePositionTestHelper($token, 4, 9, 'comma');
 
     }//end testArrayValue()
+
+
+    /**
+     * Test arrow functions that are used as array values with no trailing comma.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testArrayValueNoTrailingComma()
+    {
+        $token = $this->getTargetToken('/* testArrayValueNoTrailingComma */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 4, 8, 'closing parenthesis');
+
+    }//end testArrayValueNoTrailingComma()
 
 
     /**
@@ -443,6 +494,24 @@ class BackfillFnTokenTest extends AbstractMethodUnitTest
         $this->assertSame($expectedScopeCloser, $tokens[$closer]['scope_closer'], 'Closer scope closer for ELSE is not the semicolon token');
 
     }//end testTernary()
+
+
+    /**
+     * Test typed arrow functions used in ternary operators.
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::processAdditional
+     *
+     * @return void
+     */
+    public function testTernaryWithTypes()
+    {
+        $tokens = self::$phpcsFile->getTokens();
+
+        $token = $this->getTargetToken('/* testTernaryWithTypes */', T_FN);
+        $this->backfillHelper($token);
+        $this->scopePositionTestHelper($token, 15, 27);
+
+    }//end testTernaryWithTypes()
 
 
     /**

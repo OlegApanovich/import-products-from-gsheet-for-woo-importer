@@ -108,6 +108,11 @@ class ConstructorPropertyPromotionAndNormalParams {
     public function __construct(public int $promotedProp, ?int $normalArg) {}
 }
 
+class ConstructorPropertyPromotionWithReadOnly {
+    /* testPHP81ConstructorPropertyPromotionWithReadOnly */
+    public function __construct(public readonly ?int $promotedProp, readonly private string|bool &$promotedToo) {}
+}
+
 /* testPHP8ConstructorPropertyPromotionGlobalFunction */
 // Intentional fatal error. Property promotion not allowed in non-constructor, but that's not the concern of this method.
 function globalFunction(private $x) {}
@@ -120,3 +125,40 @@ abstract class ConstructorPropertyPromotionAbstractMethod {
     // 3. The callable type is not supported for properties, but that's not the concern of this method.
     abstract public function __construct(public callable $y, private ...$x);
 }
+
+/* testCommentsInParameter */
+function commentsInParams(
+    // Leading comment.
+    ?MyClass /*-*/ & /*-*/.../*-*/ $param /*-*/ = /*-*/ 'default value' . /*-*/ 'second part' // Trailing comment.
+) {}
+
+/* testParameterAttributesInFunctionDeclaration */
+class ParametersWithAttributes(
+    public function __construct(
+        #[\MyExample\MyAttribute] private string $constructorPropPromTypedParamSingleAttribute,
+        #[MyAttr([1, 2])]
+        Type|false
+        $typedParamSingleAttribute,
+        #[MyAttribute(1234), MyAttribute(5678)] ?int $nullableTypedParamMultiAttribute,
+        #[WithoutArgument] #[SingleArgument(0)] $nonTypedParamTwoAttributes,
+        #[MyAttribute(array("key" => "value"))]
+        &...$otherParam,
+    ) {}
+}
+
+/* testPHP8IntersectionTypes */
+function intersectionTypes(Foo&Bar $obj1, Boo&Bar $obj2) {}
+
+/* testPHP81IntersectionTypesWithSpreadOperatorAndReference */
+function globalFunctionWithSpreadAndReference(Boo&Bar &$paramA, Foo&Bar ...$paramB) {}
+
+/* testPHP81MoreIntersectionTypes */
+function moreIntersectionTypes(MyClassA&\Package\MyClassB&\Package\MyClassC $var) {}
+
+/* testPHP81IllegalIntersectionTypes */
+// Intentional fatal error - simple types are not allowed with intersection types, but that's not the concern of the method.
+$closure = function (string&int $numeric_string) {};
+
+/* testPHP81NullableIntersectionTypes */
+// Intentional fatal error - nullability is not allowed with intersection types, but that's not the concern of the method.
+$closure = function (?Foo&Bar $object) {};

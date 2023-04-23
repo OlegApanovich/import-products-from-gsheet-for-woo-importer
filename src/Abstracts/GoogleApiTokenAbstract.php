@@ -108,7 +108,7 @@ abstract class GoogleApiTokenAbstract {
 			$this->client->setAccessToken( $this->token );
 		}
 
-		// If there is previous token and it is not expired.
+		// If there is previous token, and it is not expired.
 		if ( ! $this->is_token_null_value() ) {
 			if ( ! $this->client->isAccessTokenExpired() ) {
 				return;

@@ -11,8 +11,6 @@ namespace GSWOO\Services;
 
 use Exception;
 use GSWOO\Abstracts\GoogleApiTokenAbstract;
-use Google_Service_Sheets;
-use Google_Service_Drive;
 use WP_Error;
 
 /**
@@ -30,7 +28,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 	 *
 	 * @since  2.0.0
 	 */
-	const OAUTH2_ID = '836707027943-am8hdf20f7r5bi48f0r5pta545p7k7l2.apps.googleusercontent.com';
+	const OAUTH2_ID = '836707027943-7cdti4g8vtkt0fngg5cvjmp01fg2iksp.apps.googleusercontent.com';
 
 	/**
 	 * App secret.
@@ -39,7 +37,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 	 *
 	 * @since  2.0.0
 	 */
-	const OAUTH2_SECRET = 'UQtT-ty55dLXCjetDdM6tOts';
+	const OAUTH2_SECRET = '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';
 
 	/**
 	 * App redirect.
@@ -48,7 +46,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 	 *
 	 * @since  2.0.0
 	 */
-	const OAUTH2_REDIRECT = 'urn:ietf:wg:oauth:2.0:oob';
+	const OAUTH2_REDIRECT = 'https://monolitpro.info?plugin=import-products-from-gsheet-for-woo-importer&action=oauth';
 
 	/**
 	 * Google API auth code.
@@ -82,9 +80,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 			$this->client->setClientId( self::OAUTH2_ID );
 			$this->client->setClientSecret( self::OAUTH2_SECRET );
 			$this->client->setRedirectUri( self::OAUTH2_REDIRECT );
-			$this->client->setScopes( Google_Service_Sheets::SPREADSHEETS );
-			$this->client->setScopes( Google_Service_Drive::DRIVE_METADATA_READONLY );
-			$this->client->setAccessType( 'offline' );
+			$this->client->setScopes( array( 'https://www.googleapis.com/auth/drive.readonly' ) );
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}
@@ -101,6 +97,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 		try {
 			$this->client->fetchAccessTokenWithAuthCode( $this->google_code );
 			$token = $this->client->getAccessToken();
+            $token['expire'] = time() + $token['expires_in'];
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 			$token       = '';

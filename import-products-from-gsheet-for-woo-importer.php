@@ -8,7 +8,7 @@
  * Plugin Name: GSheet For Woo Importer
  * Plugin URI:  https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
  * Description: Import woocommerce products from google sheet by using native woocommerce importer
- * Version:     2.2.0
+ * Version:     2.2
  * Author:      Oleg Apanovich
  * Author URI:  https://github.com/OlegApanovich
  * License:     GPL-3.0+
@@ -32,7 +32,7 @@ final class GSWOO_Plugin {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var    GSWOO_Plugin
+	 * @var    GSWOO_Plugin object
 	 * @access protected
 	 * @since  1.0.0
 	 */
@@ -70,7 +70,7 @@ final class GSWOO_Plugin {
 	 */
 	public function __construct() {
 
-		if ( ! $this->is_request( 'admin' ) ) {
+		if ( ! is_admin() ) {
 			return;
 		}
 
@@ -179,37 +179,6 @@ final class GSWOO_Plugin {
 			false,
 			GSWOO_URI_ABSPATH . '/languages'
 		);
-	}
-
-	/**
-	 * What type of request is this scripts?
-	 *
-	 * @since 1.0.0
-	 *
-	 * @noinspection PhpSameParameterValueInspection
-	 *
-	 * @param  string $type admin, ajax, cron or frontend.
-	 *
-	 * @return bool
-	 */
-	private function is_request( $type ) {
-		$is_type = false;
-		switch ( $type ) {
-			case 'admin':
-				$is_type = is_admin();
-				break;
-			case 'ajax':
-				$is_type = defined( 'DOING_AJAX' );
-				break;
-			case 'cron':
-				$is_type = defined( 'DOING_CRON' );
-				break;
-			case 'frontend':
-				$is_type = ( ! is_admin() || defined( 'DOING_AJAX' ) ) && ! defined( 'DOING_CRON' );
-				break;
-		}
-
-		return $is_type;
 	}
 }
 

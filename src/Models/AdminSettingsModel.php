@@ -32,6 +32,14 @@ class AdminSettingsModel {
 	public $sheet_interplay_service;
 
 	/**
+	 * Instance of DriveInterplayService class.
+	 *
+	 * @since  2.0.0
+	 * @var object DriveInterplayService
+	 */
+	public $drive_interplay_service;
+
+	/**
 	 * Plugin options.
 	 *
 	 * @since  2.0.0

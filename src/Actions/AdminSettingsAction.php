@@ -118,14 +118,14 @@ class AdminSettingsAction {
 			return;
 		}
 
-        wp_enqueue_style(
+		wp_enqueue_style(
 			'gswoo-select2-css',
 			GSWOO_URI . '/assets/lib/select2/css/select2.min.css',
 			array(),
 			true
 		);
 
-        wp_enqueue_script(
+		wp_enqueue_script(
 			'gswoo-select2-js',
 			GSWOO_URI . '/assets/lib/select2/js/select2.min.js',
 			array( 'jquery' ),
@@ -133,13 +133,13 @@ class AdminSettingsAction {
 			true
 		);
 
-        wp_enqueue_script(
-            'gswoo-admin-settings',
-            GSWOO_URI . '/assets/js/admin-settings.js',
-            array(),
-            true,
-            true
-        );
+		wp_enqueue_script(
+			'gswoo-admin-settings',
+			GSWOO_URI . '/assets/js/admin-settings.js',
+			array(),
+			true,
+			true
+		);
 
 		wp_enqueue_script(
 			'gswoo-admin-settings-ajax',

@@ -81,6 +81,7 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 			$this->client->setClientSecret( self::OAUTH2_SECRET );
 			$this->client->setRedirectUri( self::OAUTH2_REDIRECT );
 			$this->client->setScopes( array( 'https://www.googleapis.com/auth/drive.readonly' ) );
+            $this->client->setAccessType('offline');
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 		}
@@ -97,7 +98,6 @@ class GoogleApiTokenAuthCodeMethodService extends GoogleApiTokenAbstract {
 		try {
 			$this->client->fetchAccessTokenWithAuthCode( $this->google_code );
 			$token = $this->client->getAccessToken();
-            $token['expire'] = time() + $token['expires_in'];
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
 			$token       = '';

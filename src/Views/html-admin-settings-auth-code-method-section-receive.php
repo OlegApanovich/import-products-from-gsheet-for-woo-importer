@@ -18,7 +18,7 @@ defined( 'ABSPATH' ) || exit;
 	</label>
 </h3>
 
-<a class="button-primary" target="_blank" href="https://monolitpro.info?plugin=import-products-from-gsheet-for-woo-importer&action=connect-redirect&page=<?php echo urlencode( admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) ); ?>">
+<a class="button-primary" href="https://monolitpro.info?plugin=import-products-from-gsheet-for-woo-importer&action=connect-redirect&page=<?php echo urlencode( admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) ); ?>">
 	<strong><?php esc_html_e( 'Get Code', 'import-products-from-gsheet-for-woo-importer' ); ?></strong>
 </a>
 

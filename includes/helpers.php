@@ -37,9 +37,6 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		if ( ! is_plugin_active( $path_to_plugin ) ) {
-			// Deactivate the current plugin.
-			deactivate_plugins( 'import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php' );
-
 			// Show an error alert on the admin area.
 			add_action(
 				'admin_notices',
@@ -47,40 +44,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 				$my_plugin_name,
 				$dependency_plugin_name
 				) {
-					?>
-				<div class="updated error">
-					<p>
-						<?php
-						echo wp_kses(
-							sprintf(
-								// translators: %1$s: current plugin name, %2$s plugin name that current plugin dependent on.
-								__(
-									'The plugin <strong>"%1$s"</strong> needs the plugin <strong>"%2$s"</strong> active',
-									'import-products-from-gsheet-for-woo-importer'
-								),
-								$my_plugin_name,
-								$dependency_plugin_name
-							),
-							array( 'strong' => array() )
-						);
-						echo '<br>';
-						echo wp_kses(
-							sprintf(
-								// translators: %1$s: current plugin name.
-								__(
-									'%1$1s%2$2s has been deactivated%3$3s',
-									'import-products-from-gsheet-for-woo-importer'
-								),
-								'<strong>',
-								$my_plugin_name,
-								'<srong>'
-							),
-							array( 'strong' => array() )
-						);
-						?>
-					</p>
-				</div>
-					<?php
+					include WP_PLUGIN_DIR . '/import-products-from-gsheet-for-woo-importer/src/Views/html-admin-required-plugin-notification.php';
 				}
 			);
 
@@ -108,10 +72,6 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 			);
 
 			if ( $error ) {
-
-				// Deactivate the current plugin.
-				deactivate_plugins( 'import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php' );
-
 				add_action(
 					'admin_notices',
 					function () use (
@@ -119,44 +79,7 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 					$dependency_plugin_name,
 					$version_to_check
 					) {
-						?>
-					<div class="updated error">
-						<p>
-							<?php
-							echo wp_kses(
-								sprintf(
-									// translators: %1$s: current plugin name,%2$s plugin version to check, %3$s plugin name that current plugin dependent on.
-									__(
-										'The plugin <strong>"%1$s"</strong> needs the <strong>version %2$s</strong> or newer of <strong>"%3$s"</strong>',
-										'import-products-from-gsheet-for-woo-importer'
-									),
-									$my_plugin_name,
-									$version_to_check,
-									$dependency_plugin_name
-								),
-								array( 'strong' => array() )
-							);
-							echo '<br>';
-							echo wp_kses(
-								sprintf(
-									// translators: %1$s: current plugin name.
-									__(
-										'%1$1s%2$2s has been deactivated%3$3s',
-										'import-products-from-gsheet-for-woo-importer'
-									),
-									'<strong>',
-									$my_plugin_name,
-									'<srong>'
-								),
-								array( 'strong' => array() )
-							);
-							?>
-						</p>
-					</div>
-						<?php
-						if ( isset( $_GET['activate'] ) ) {
-							unset( $_GET['activate'] );
-						}
+						include WP_PLUGIN_DIR . '/import-products-from-gsheet-for-woo-importer/src/Views/html-admin-required-version-plugin-notification.php';
 					}
 				);
 

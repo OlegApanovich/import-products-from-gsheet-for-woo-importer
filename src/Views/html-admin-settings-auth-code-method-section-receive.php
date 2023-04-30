@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
 
 // @codingStandardsIgnoreLine
 $code = empty( $_GET['code'] ) ? '' : rawurldecode( $_GET['code'] );
-// we need it to know where to redirect after authorization
+// We need to know where to redirect after authorization.
 $plugin_setting_page = '&page=' . ( admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) );
 $app_service_link    = 'https://monolitpro.info?plugin=import-products-from-gsheet-for-woo-importer?';
 $action_name         = '&action=connect-redirect';

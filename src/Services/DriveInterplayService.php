@@ -9,7 +9,7 @@
 
 namespace GSWOO\Services;
 
-use Google_Service_Drive;
+use Google\Service\Drive;
 use GSWOO\Abstracts\GoogleApiInterplayAbstract;
 use WP_Error;
 use Exception;
@@ -47,7 +47,7 @@ class DriveInterplayService extends GoogleApiInterplayAbstract {
 		$token_service = $this->get_token_service();
 
 		try {
-			$this->google_service_drive = new Google_Service_Drive( $token_service->client );
+			$this->google_service_drive = new Drive( $token_service->client );
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error(
 				'api_connect_error',

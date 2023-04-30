@@ -382,7 +382,7 @@ class AdminSettingsAction {
 	}
 
 	/**
-	 * Function callback for a add_settings_section
+	 * Function callback for add_settings_section
 	 *
 	 * @since 1.0.0
 	 */
@@ -391,7 +391,7 @@ class AdminSettingsAction {
 	}
 
 	/**
-	 * Function callback for a add_settings_section
+	 * Function callback for add_settings_section
 	 *
 	 * @since 2.0.0
 	 */

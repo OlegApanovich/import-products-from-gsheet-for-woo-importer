@@ -9,8 +9,8 @@
 
 namespace GSWOO\Services;
 
+use Google\Service\Sheets;
 use GSWOO\Abstracts\GoogleApiInterplayAbstract;
-use Google_Service_Sheets;
 use WP_Error;
 use Exception;
 
@@ -46,7 +46,7 @@ class SheetInterplayService extends GoogleApiInterplayAbstract {
 		$token_service = $this->get_token_service();
 
 		try {
-			$this->google_service_sheets = new Google_Service_Sheets( $token_service->client );
+			$this->google_service_sheets = new Sheets( $token_service->client );
 		} catch ( Exception $e ) {
 			$this->error = new WP_Error(
 				'api_connect_error',

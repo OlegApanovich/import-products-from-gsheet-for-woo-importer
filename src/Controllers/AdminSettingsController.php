@@ -48,8 +48,6 @@ class AdminSettingsController {
 	 * Add main plugin settings form.
 	 *
 	 * @since 2.0.0
-	 *
-	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function settings_form() {
 
@@ -64,7 +62,6 @@ class AdminSettingsController {
 	 * Prerequisites and display section settings
 	 *
 	 * @since 2.0.0
-	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_common_section() {
 
@@ -115,8 +112,6 @@ class AdminSettingsController {
 	 * Plugin connection google API error message on WC product screen
 	 *
 	 * @since 2.0.0
-	 *
-	 * @noinspection PhpUnusedLocalVariableInspection
 	 */
 	public function display_settings_require_admin_notice() {
 

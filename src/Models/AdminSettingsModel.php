@@ -250,7 +250,7 @@ class AdminSettingsModel {
 		$return['message'] = sprintf(
 		// translators: %s: plugin import page url.
 			__(
-				'Your settings was received successfully, now you can go to <a href="%s">import products spreadsheet page</a> and try import',
+				'Your settings were received successfully, now you can go to <a href="%s">import products spreadsheet page</a> and try import',
 				'import-products-from-gsheet-for-woo-importer'
 			),
 			$menu_page_url

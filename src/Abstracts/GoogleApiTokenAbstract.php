@@ -68,7 +68,7 @@ abstract class GoogleApiTokenAbstract {
 	}
 
 	/**
-	 * Save fetched token from google API to wp options.
+	 * Save fetched token from Google API to wp options.
 	 *
 	 * @since 2.0.0
 	 *
@@ -109,18 +109,11 @@ abstract class GoogleApiTokenAbstract {
 		}
 
 		// If there is previous token, and it is not expired.
-		if ( ! $this->is_token_null_value() ) {
-			if ( ! $this->client->isAccessTokenExpired() ) {
-				return;
-			}
+		if ( ! $this->is_we_need_new_token() ) {
+			return;
 		}
 
-		// Refresh the token if possible, else fetch a new one.
-		if ( $this->client->getRefreshToken() ) {
-			$token = $this->client->fetchAccessTokenWithRefreshToken( $this->client->getRefreshToken() );
-		} else {
-			$token = $this->fetch_token();
-		}
+		$token = $this->get_token_from_api();
 
 		// Check to see if there was an error.
 		if ( is_array( $token ) && array_key_exists( 'error', $token ) ) {
@@ -131,6 +124,43 @@ abstract class GoogleApiTokenAbstract {
 		if ( ! empty( $token ) ) {
 			$this->token = wp_json_encode( $token );
 			$this->save_token();
+		}
+	}
+
+	/**
+	 * Request to google api to get token.
+	 *
+	 * @since 2.3
+	 *
+	 * @return array|string
+	 */
+	public function get_token_from_api() {
+		// Refresh the token if possible, else fetch a new one.
+		if ( $this->client->getRefreshToken() ) {
+			$token = $this->client->fetchAccessTokenWithRefreshToken( $this->client->getRefreshToken() );
+		} else {
+			$token = $this->fetch_token();
+		}
+
+		return $token;
+	}
+
+	/**
+	 * Check if we need to obtain new token.
+	 *
+	 * @since 2.3
+	 *
+	 * @return bool
+	 */
+	public function is_we_need_new_token() {
+		if ( $this->is_token_null_value() ) {
+			return true;
+		}
+
+		if ( $this->client->isAccessTokenExpired() ) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 

@@ -31,11 +31,11 @@ This method is recomended and default in plugin settings area. Follow the steps 
 
 3. In the next page you need provide access "See and download all your Google Drive files." with plugin application. Please check corresponding checkbox and press continue button ![](assets/images/screenshot-14.png)
 
-4. Than you will be redirected back to the plugin setting page with you access code on it. Please press "Save Options" button.![](assets/images/screenshot-16.png)
+4. Then you will be redirected back to the plugin settings page with your access code on it. Please press "Save Options" button.![](assets/images/screenshot-16.png)
 
 5. If code valid you will see corresponding message and new select for google sheet title and then you must to choose google sheet title that become your import file ![](assets/images/screenshot-17.png) Sheet title you can find in upper left corner of your sheet on google drive ![](assets/images/screenshot-18.png) 
 
-6. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-19.png)
+6. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-20.png)
 
 
 ### 2 method. "Manual Connect" with assertion client_secret json code.

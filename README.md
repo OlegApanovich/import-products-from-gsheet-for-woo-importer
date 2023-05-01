@@ -21,23 +21,21 @@ After plugin installation we need to set connection with google API. In a plugin
 
 You need to set connection once and in the feature you can process import woocommerce product with your google sheet file every time you need.
 
-### 1 method. "One Click Auto Connect" with google auth code (!!! Please note since google change his connection api, first method  temporary not working, please use second method with "Manual Connect" !!!)
+### 1 method. "One Click Auto Connect" with google auth code 
 
 This method is recomended and default in plugin settings area. Follow the steps to set it.
 
-1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab ![](assets/images/screenshot-12.png)
+1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab ![](assets/images/screenshot-19.png)
 
 2. You will be redirected with new tab in plugin application page on a google service. Please choose google account where you store your google sheet import file on google drive ![](assets/images/screenshot-13.png)
 
 3. In the next page you need provide access "See and download all your Google Drive files." with plugin application. Please check corresponding checkbox and press continue button ![](assets/images/screenshot-14.png)
 
-4. In the last page you received google auth code. Please copy this code.![](assets/images/screenshot-15.png)
+4. Than you will be redirected back to the plugin setting page with you access code on it. Please press "Save Options" button.![](assets/images/screenshot-16.png)
 
-5. After you received code, please return to plugin setting page, paste it to corresponding input and press "Save Options" button.![](assets/images/screenshot-16.png)
+5. If code valid you will see corresponding message and new select for google sheet title and then you must to choose google sheet title that become your import file ![](assets/images/screenshot-17.png) Sheet title you can find in upper left corner of your sheet on google drive ![](assets/images/screenshot-18.png) 
 
-6. If code valid you will see corresponding message and new select for google sheet title and then you must to choose google sheet title that become your import file ![](assets/images/screenshot-17.png) Sheet title you can find in upper left corner of your sheet on google drive ![](assets/images/screenshot-18.png) 
-
-7. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-19.png)
+6. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-19.png)
 
 
 ### 2 method. "Manual Connect" with assertion client_secret json code.

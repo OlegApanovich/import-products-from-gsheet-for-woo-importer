@@ -40,7 +40,7 @@ This method is recomended and default in plugin settings area. Follow the steps 
 
 ### 2 method. "Manual Connect" with assertion client_secret json code.
 
-1. If you do not have a google API client_secret json code than go to [google cloud console page.](https://console.developers.google.com) where you can create new one (if you have than you can go to step 13)
+1. If you do not have a google API client_secret json code than go to [google cloud console page.](https://console.developers.google.com) where you can create new one (if you have than you can go to step 11)
 
 
 2. Go to [API Library page ](https://console.cloud.google.com/apis/library) and in the search input type "Google Drive API" ![](assets/images/screenshot-2.png) 

@@ -35,6 +35,8 @@ class DriveInterplayService extends GoogleApiInterplayAbstract {
 	/**
 	 * SheetInterplayService constructor.
 	 *
+     * @since  2.0.0
+     *
 	 * @param array $options
 	 */
 	public function __construct( $options ) {

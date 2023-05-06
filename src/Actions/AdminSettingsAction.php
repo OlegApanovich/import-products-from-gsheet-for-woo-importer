@@ -261,13 +261,6 @@ class AdminSettingsAction {
 	 */
 	public function init_admin_settings_fields_common_section() {
 		add_settings_field(
-			'plugin_auth_type',
-			'',
-			array( $this->settings_controller, 'display_common_section' ),
-			'common_page',
-			'common_section'
-		);
-		add_settings_field(
 			'plugin_sheet_data',
 			'',
 			array( $this->settings_controller, 'display_common_section' ),

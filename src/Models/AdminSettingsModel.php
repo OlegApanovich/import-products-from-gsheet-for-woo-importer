@@ -24,22 +24,6 @@ defined( 'ABSPATH' ) || exit;
 class AdminSettingsModel {
 
 	/**
-	 * Instance of SheetInterplayService class.
-	 *
-	 * @since  2.0.0
-	 * @var object SheetInterplayService
-	 */
-	public $sheet_interplay_service;
-
-	/**
-	 * Instance of DriveInterplayService class.
-	 *
-	 * @since  2.0.0
-	 * @var object DriveInterplayService
-	 */
-	public $drive_interplay_service;
-
-	/**
 	 * Plugin options.
 	 *
 	 * @since  2.0.0
@@ -51,9 +35,7 @@ class AdminSettingsModel {
 	 * AdminSettingsModel constructor.
 	 */
 	public function __construct() {
-		$this->options                 = $this->get_plugin_options();
-		$this->sheet_interplay_service = new SheetInterplayService( $this->options );
-		$this->drive_interplay_service = new DriveInterplayService( $this->options );
+		$this->options = $this->get_plugin_options();
 	}
 
 	/**
@@ -131,9 +113,10 @@ class AdminSettingsModel {
 			return $response;
 		}
 
+        $drive_interplay_service = new DriveInterplayService( $this->options );
+
 		$sheets_list =
-			$this->
-			drive_interplay_service->
+            $drive_interplay_service->
 			get_google_drive_sheets_list();
 
 		if ( is_wp_error( $sheets_list ) ) {
@@ -354,9 +337,10 @@ class AdminSettingsModel {
 			$delimiter = ',';
 		}
 
+        $sheet_interplay_service = new SheetInterplayService( $this->options );
+
 		$sheet_data =
-			$this->
-			sheet_interplay_service->
+            $sheet_interplay_service->
 			get_sheet_csv( $import_form_data['gswoo-file'] );
 
 		if ( is_wp_error( $sheet_data ) ) {

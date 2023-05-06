@@ -31,16 +31,16 @@ This method is recomended and default in plugin settings area. Follow the steps 
 
 3. In the next page you need provide access "See and download all your Google Drive files." with plugin application. Please check corresponding checkbox and press continue button ![](assets/images/screenshot-14.png)
 
-4. Than you will be redirected back to the plugin setting page with you access code on it. Please press "Save Options" button.![](assets/images/screenshot-16.png)
+4. Then you will be redirected back to the plugin settings page with your access code on it. Please press "Save Options" button.![](assets/images/screenshot-16.png)
 
 5. If code valid you will see corresponding message and new select for google sheet title and then you must to choose google sheet title that become your import file ![](assets/images/screenshot-17.png) Sheet title you can find in upper left corner of your sheet on google drive ![](assets/images/screenshot-18.png) 
 
-6. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-19.png)
+6. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-20.png)
 
 
 ### 2 method. "Manual Connect" with assertion client_secret json code.
 
-1. If you do not have a google API client_secret json code than go to [google cloud console page.](https://console.developers.google.com) where you can create new one (if you have than you can go to step 13)
+1. If you do not have a google API client_secret json code than go to [google cloud console page.](https://console.developers.google.com) where you can create new one (if you have than you can go to step 11)
 
 
 2. Go to [API Library page ](https://console.cloud.google.com/apis/library) and in the search input type "Google Drive API" ![](assets/images/screenshot-2.png) 
@@ -58,7 +58,7 @@ This method is recomended and default in plugin settings area. Follow the steps 
 6. In the next step you will be redirected to 'Create service account' page and you will see the form for it, feel free to choose any service account name in the appropriate field and select role project -> editor, than skip "Grant users access to this service account" and press "Done" button. ![](assets/images/screenshot-7.png) After it you should have a newly created service account.
 
 
-7. Then you can go to your [credentials page](https://console.cloud.google.com/apis/credentials) find your newly created 'Service Account' click on it ![](assets/images/screenshot-8.png)
+7. Then you can go to your [credentials page](https://console.cloud.google.com/apis/credentials) and find your newly created 'Service Account' click on it ![](assets/images/screenshot-8.png)
 
 
 8. Then find the key tab and create a new key client_secret for your service account with json format. ![](assets/images/screenshot-9.png)

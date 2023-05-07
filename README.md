@@ -27,7 +27,7 @@ This method is recomended and default in plugin settings area. Follow the steps 
 
 1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab ![](assets/images/screenshot-19.png)
 
-2. You will be redirected to google plugin application page. Please choose google account where you store your google sheet import file on google drive ![](assets/images/screenshot-13.png)
+2. You will be redirected to google plugin application page. Please choose google account where you store your google sheet import file on google drive      ![](assets/images/screenshot-13.png)
 
 3. In the next page you need provide access "See and download all your Google Drive files." to plugin application. ![](assets/images/screenshot-14.png)
 

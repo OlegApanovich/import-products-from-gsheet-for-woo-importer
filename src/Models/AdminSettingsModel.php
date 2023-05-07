@@ -113,10 +113,10 @@ class AdminSettingsModel {
 			return $response;
 		}
 
-        $drive_interplay_service = new DriveInterplayService( $this->options );
+		$drive_interplay_service = new DriveInterplayService( $this->options );
 
 		$sheets_list =
-            $drive_interplay_service->
+			$drive_interplay_service->
 			get_google_drive_sheets_list();
 
 		if ( is_wp_error( $sheets_list ) ) {
@@ -337,10 +337,10 @@ class AdminSettingsModel {
 			$delimiter = ',';
 		}
 
-        $sheet_interplay_service = new SheetInterplayService( $this->options );
+		$sheet_interplay_service = new SheetInterplayService( $this->options );
 
 		$sheet_data =
-            $sheet_interplay_service->
+			$sheet_interplay_service->
 			get_sheet_csv( $import_form_data['gswoo-file'] );
 
 		if ( is_wp_error( $sheet_data ) ) {

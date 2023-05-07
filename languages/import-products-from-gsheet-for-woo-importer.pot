@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Woocommerce Import Google Sheet Connector\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-09-05 17:06+0000\n"
+"POT-Creation-Date: 2023-05-07 12:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,13 +13,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.1.1"
-
-#. %1$s: current plugin name.
-#: includes/helpers.php:70 includes/helpers.php:143
-#, php-format
-msgid "%1$1s%2$2s has been deactivated%3$3s"
-msgstr ""
+"X-Loco-Version: 2.5.3; wp-6.2\n"
+"X-Domain: import-products-from-gsheet-for-woo-importer"
 
 #: src/Views/html-admin-settings-common-section.php:31
 msgid "-- select an option --"
@@ -35,7 +30,7 @@ msgid ""
 "error:"
 msgstr ""
 
-#: src/Models/AdminSettingsModel.php:322
+#: src/Models/AdminSettingsModel.php:313
 msgid ""
 "Can't find predefined sheet on a Google drive, please reset your setting and "
 "try to set them again"
@@ -66,12 +61,12 @@ msgid ""
 "being defined as smaller than upload_max_filesize in php.ini."
 msgstr ""
 
-#: src/Views/html-admin-settings-auth-code-method-section-receive.php:22
+#: src/Views/html-admin-settings-auth-code-method-section-receive.php:30
 msgid "Get Code"
 msgstr ""
 
 #: src/Views/html-admin-settings-auth-code-method-section-restore.php:17
-#: src/Views/html-admin-settings-auth-code-method-section-receive.php:17
+#: src/Views/html-admin-settings-auth-code-method-section-receive.php:25
 msgid "Google Access Code"
 msgstr ""
 
@@ -89,10 +84,6 @@ msgid ""
 "Google sheet title (support only native google-apps.spreadsheet file type)"
 msgstr ""
 
-#. Name of the plugin
-msgid "Woocommerce Import Google Sheet Connector"
-msgstr ""
-
 #: src/WoocommerceImporter/Views/html-product-csv-import-form.php:115
 msgid "Hide advanced options"
 msgstr ""
@@ -106,12 +97,12 @@ msgid ""
 "https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer"
 msgstr ""
 
-#: src/Actions/AdminSettingsAction.php:182
+#: src/Actions/AdminSettingsAction.php:188
 msgid "Import From Google Sheet"
 msgstr ""
 
-#: src/Actions/AdminSettingsAction.php:204
-#: src/Actions/AdminSettingsAction.php:205
+#: src/Actions/AdminSettingsAction.php:210
+#: src/Actions/AdminSettingsAction.php:211
 msgid "Import Google Sheet"
 msgstr ""
 
@@ -172,7 +163,7 @@ msgstr ""
 msgid "Save Options"
 msgstr ""
 
-#: src/Actions/AdminSettingsAction.php:371
+#: src/Actions/AdminSettingsAction.php:370
 msgid "Settings"
 msgstr ""
 
@@ -181,7 +172,7 @@ msgid "Show advanced options"
 msgstr ""
 
 #. %1$s: current plugin name,%2$s plugin version to check, %3$s plugin name that current plugin dependent on.
-#: includes/helpers.php:129
+#: src/Views/html-admin-required-version-plugin-notification.php:24
 #, php-format
 msgid ""
 "The plugin <strong>\"%1$s\"</strong> needs the <strong>version %2$s</strong> "
@@ -189,7 +180,7 @@ msgid ""
 msgstr ""
 
 #. %1$s: current plugin name, %2$s plugin name that current plugin dependent on.
-#: includes/helpers.php:57
+#: src/Views/html-admin-required-plugin-notification.php:23
 #, php-format
 msgid ""
 "The plugin <strong>\"%1$s\"</strong> needs the plugin <strong>"
@@ -220,7 +211,7 @@ msgid ""
 msgstr ""
 
 #. %s: file path.
-#: src/Models/AdminSettingsModel.php:366
+#: src/Models/AdminSettingsModel.php:358
 #, php-format
 msgid ""
 "We can't create import file, please check your server file write permissions "
@@ -228,7 +219,7 @@ msgid ""
 msgstr ""
 
 #. %s: file path.
-#: src/Models/AdminSettingsModel.php:384
+#: src/Models/AdminSettingsModel.php:376
 #, php-format
 msgid ""
 "We can't insert data to your import file, please check if your spread sheet "
@@ -242,17 +233,21 @@ msgid ""
 msgstr ""
 
 #. %s: plugin import page url.
-#: src/Models/AdminSettingsModel.php:216
+#: src/Models/AdminSettingsModel.php:207
 #, php-format
 msgid ""
 "We can't set connection with google API by your provided credentials. Please "
 "check your settings and internet connection and try again. Error: %s"
 msgstr ""
 
-#: src/Models/AdminSettingsModel.php:268
+#: src/Models/AdminSettingsModel.php:259
 msgid ""
 "We successfully connected to google API by your provided credentials. Please "
 "select google sheet title for import process."
+msgstr ""
+
+#. Name of the plugin
+msgid "Woocommerce Import Google Sheet Connector"
 msgstr ""
 
 #. %s1: plugin import page url, %s2: closing link tag.
@@ -264,9 +259,9 @@ msgid ""
 msgstr ""
 
 #. %s: plugin import page url.
-#: src/Models/AdminSettingsModel.php:244
+#: src/Models/AdminSettingsModel.php:235
 #, php-format
 msgid ""
-"Your settings was received successfully, now you can go to <a href=\"%s\">"
+"Your settings were received successfully, now you can go to <a href=\"%s\">"
 "import products spreadsheet page</a> and try import"
 msgstr ""

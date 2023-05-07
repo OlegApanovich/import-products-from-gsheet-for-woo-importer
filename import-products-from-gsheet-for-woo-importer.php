@@ -5,7 +5,7 @@
  * @since 1.0.0
  * @package GSWOO
  *
- * Plugin Name: GSheet For Woo Importer
+ * Plugin Name: Woocommerce Import Google Sheet Connector
  * Plugin URI:  https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer
  * Description: Import woocommerce products from google sheet by using native woocommerce importer
  * Version:     2.2
@@ -93,7 +93,7 @@ final class GSWOO_Plugin {
 	 */
 	public function is_woocommerce() {
 		return gswoo_is_plugin_active(
-			'GSheet For Woo Importer',
+			'Woocommerce Import Google Sheet Connector',
 			'WooCommerce',
 			'woocommerce/woocommerce.php',
 			'3.1.0'

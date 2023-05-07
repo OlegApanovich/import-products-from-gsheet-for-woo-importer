@@ -3,7 +3,7 @@ Contributors: mrdollar4444
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K9NTJ6E2RQN3A&source=url
 Tags: woocommerce, importer, google sheet
 Requires at least: 4.7
-Tested up to: 5.8
+Tested up to: 6.2
 Stable tag: 2.2.0
 Requires PHP: 5.6
 License: GPLv3 or later
@@ -24,7 +24,7 @@ Full instruction about plugin options you can find on [our github plugin page](h
 == Installation ==
 1. Upload the plugin folder to the ‘/wp-content/plugins/’ directory
 2. Activate the Woocommerce Import Products Google Sheet plugin through the ‘Plugins’ menu in WordPress
-3. Go to Woocommerce Import Products Google Sheet Settings menu to make main settings.
+3. Go to Woocommerce Import Products Google Sheet Settings menu to connect your Google sheet and woocommerce import.
 4. Full instruction about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer)
 
 == Frequently Asked Questions ==
@@ -32,31 +32,23 @@ Full instruction about plugin options you can find on [our github plugin page](h
 = Where I can get "Google drive API client_secret json" for a plugin settings  =
 
 Instructions about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer)
-Also you can follow instructions on a screenshots below.
+Also you can follow instructions on a screenshots above.
 
 == Screenshots ==
 
-1. Set your standard woocommerce import file to google drive. Click [link](https://console.developers.google.com) where you can find google console developer. In the search input type "google drive" and click on the first tip "Google Drive API".
+1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab.
 
-2. If it is your first project in google developer console and you have never created a project before, then the system will ask you to create a new one, click button "Create".
+2. You will be redirected to google plugin application page. Please choose google account where you store your google sheet import file on google drive.
 
-3. Then you will be redirected to the project settings page, for our needs, there will be enough standard project options and you can just click button "Create" on this page.
+3. In the next page you need provide access "See and download all your Google Drive files." to plugin application.
 
-4. In the next page, the system will ask you to enable google drive api for your new project, then just press button "Enable".
+4. Then you will be redirected back to the plugin settings page with your access code on it. Please press "Save Options" button.
 
-5. Then you will be redirected to the main google drive api info page where you can create new credentials if you have not created them before. Just click button "Create Сredentials".
+5. If code valid you will see corresponding message and new select for google sheet title and then you must to choose google sheet title that become your import file.
 
-6. In the next page, the system  will ask you to fill the form out with data for your credentials, please fill it in the same way as you can see on the screenshot below and press the button "What credentials do I need".
+6. Sheet title you can find in upper left corner of your sheet on google drive.
 
-7. In the next page you will see the next form for your credentials, feel free to choose any service account name in the appropriate field and select role project -> editor, key button type leave default json and press button "Continue".
-
-8. After all, the system will offer you to download the api key json file. Save it on your local machine and then you can close google developer console browser tab. Please copy the client_secret json key (all file content) that you have received in the previous step to appropriate input in option plugin page. Please find client_email in client_secret json file and copy it to your buffer for the next step.
-
-9. Open your google sheet file that you set to your google drive in step 1 and share access to it with client_email email that you copy to buffer in previous step.
-
-10. Then copy the name of the google sheet file to appropriate plugin setting field "Google sheet title" and press the submit button.
-
-11. If you properly set your setting then after all you can find additional import button near standard import woocommerce button on a product page.
+7. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file.
 
 == Changelog ==
 

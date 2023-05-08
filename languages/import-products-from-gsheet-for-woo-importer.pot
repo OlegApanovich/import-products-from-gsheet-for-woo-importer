@@ -1,7 +1,7 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Woocommerce Import Google Sheet Connector\n"
+"Project-Id-Version: GSheet For Woo Importer\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-07 12:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
@@ -247,7 +247,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-msgid "Woocommerce Import Google Sheet Connector"
+msgid "GSheet For Woo Importer"
 msgstr ""
 
 #. %s1: plugin import page url, %s2: closing link tag.

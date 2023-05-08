@@ -1,4 +1,4 @@
-=== Woocommerce Import Google Sheet Connector ===
+=== GSheet For Woo Importer ===
 Contributors: mrdollar4444
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K9NTJ6E2RQN3A&source=url
 Tags: woocommerce, importer, google sheet

@@ -58,7 +58,7 @@ class SheetInterplayService extends GoogleApiInterplayAbstract {
 	/**
 	 * Get sheet csv data.
 	 *
-	 * @since  2.0.0
+	 * @since 2.0.0
 	 *
 	 * @noinspection PhpUndefinedVariableInspection*
 	 *

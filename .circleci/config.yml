@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  php-codestyle:
+    docker:
+      - image: mrdollar4444/progect-manager-circleci:latest
+    steps:
+      - checkout
+      - run:
+          name: CodeStyle
+          command: vendor/bin/phpcs --standard=/var/www/html/wp-content/plugins/import-products-from-gsheet-for-woo-importer/config/phpcs.xml /var/www/html/wp-content/plugins/import-products-from-gsheet-for-woo-importer/src /var/www/html/wp-content/plugins/import-products-from-gsheet-for-woo-importer/import-products-from-gsheet-for-woo-importer.php /var/www/html/wp-content/plugins/import-products-from-gsheet-for-woo-importer/includes /var/www/html/wp-content/plugins/import-products-from-gsheet-for-woo-importer/uninstall.php
+
+workflows:
+  codestyle:
+    jobs:
+      - php-codestyle

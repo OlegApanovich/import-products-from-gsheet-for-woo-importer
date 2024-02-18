@@ -39,7 +39,7 @@
 		<exclude name="WordPress.WP.AlternativeFunctions.file_system_read_file_put_contents"/>
 	</rule>
 
-	<!-- Single line rule configuration -->
+	<!-- Single file rule configuration -->
 	<rule ref="WordPress.PHP.DiscouragedPHPFunctions.runtime_configuration_putenv">
 		<exclude-pattern>src/Services/GoogleApiTokenAssertionMethodService.php</exclude-pattern>
 	</rule>

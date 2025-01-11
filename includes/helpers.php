@@ -87,10 +87,12 @@ if ( ! function_exists( 'gswoo_get_plugin_version' ) ) :
 	 * @return bool|string
 	 */
 	function gswoo_get_plugin_version( $plugin_file_path ) {
-        // phpcs:ignore:WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
-		$plugin_data = file_get_contents( $plugin_file_path );
-		if ( preg_match( '/^[ \t\/*#@]*[Vv]ersion\s*:\s*([^\r\n]+)/m', $plugin_data, $matches ) ) {
-			return trim( $matches[1] );
+		if ( file_exists( $plugin_file_path ) && is_readable( $plugin_file_path ) ) {
+            // phpcs:ignore:WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+			$plugin_data = file_get_contents( $plugin_file_path );
+			if ( preg_match( '/^[ \t\/*#@]*[Vv]ersion\s*:\s*([^\r\n]+)/m', $plugin_data, $matches ) ) {
+				return trim( $matches[1] );
+			}
 		}
 		return false;
 	}

@@ -10,13 +10,11 @@
 
 defined( 'ABSPATH' ) || exit;
 
-if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
+if ( ! function_exists( 'gswoo_validate_dependency_plugin' ) ) :
 	/**
-	 * Verify if a plugin is active, if not deactivate the actual plugin and show an error.
+	 * Verify if a plugin is active, if not than deactivate the actual our plugin and show an error.
 	 *
-	 * @see https://gist.github.com/dianjuar/9a398c9e86a20a30868eee0c653e0ca4
-	 *
-	 * @since  1.0.0
+	 * @since  1.0
 	 *
 	 * @param string $my_plugin_name The plugin name trying to activate. The name of this plugin.
 	 * @param string $dependency_plugin_name The dependency plugin name.
@@ -26,68 +24,75 @@ if ( ! function_exists( 'gswoo_is_plugin_active' ) ) :
 	 *
 	 * @return bool
 	 */
-	function gswoo_is_plugin_active(
+	function gswoo_validate_dependency_plugin(
 		$my_plugin_name,
 		$dependency_plugin_name,
 		$path_to_plugin,
 		$version_to_check = null
 	) {
-		$success = true;
+		$success          = true;
+		$template_payload = array();
 		// Needed to the function "deactivate_plugins" works.
 		include_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 		if ( ! is_plugin_active( $path_to_plugin ) ) {
 			// Show an error alert on the admin area.
-			add_action(
-				'admin_notices',
-				function () use (
-				$my_plugin_name,
-				$dependency_plugin_name
-				) {
-					include WP_PLUGIN_DIR . '/import-products-from-gsheet-for-woo-importer/src/Views/html-admin-required-plugin-notification.php';
-				}
+			$template_payload = array(
+				'my_plugin_name'         => $my_plugin_name,
+				'dependency_plugin_name' => $dependency_plugin_name,
+				'version_to_check'       => $version_to_check,
 			);
-
-			$success = false;
+			$success          = false;
 		} else {
-			// If version to check is not defined do anything.
-			if ( null === $version_to_check ) {
-				/**
-				 * Allow empty return
-				 *
-				 * @noinspection PhpInconsistentReturnPointsInspection
-				 */
-				return;
-			}
-
 			// Get the plugin dependency info.
-			$dep_plugin_data =
-				get_plugin_data( WP_PLUGIN_DIR . '/' . $path_to_plugin );
+			$version =
+				gswoo_get_plugin_version( WP_PLUGIN_DIR . '/' . $path_to_plugin );
 
 			// Compare version.
-			$error = ! version_compare(
-				$dep_plugin_data['Version'],
+			$is_required_version = ! version_compare(
+				$version,
 				$version_to_check,
 				'>='
 			);
 
-			if ( $error ) {
-				add_action(
-					'admin_notices',
-					function () use (
-					$my_plugin_name,
-					$dependency_plugin_name,
-					$version_to_check
-					) {
-						include WP_PLUGIN_DIR . '/import-products-from-gsheet-for-woo-importer/src/Views/html-admin-required-version-plugin-notification.php';
-					}
+			if ( $is_required_version ) {
+				$template_payload = array(
+					'my_plugin_name'         => $my_plugin_name,
+					'dependency_plugin_name' => $dependency_plugin_name,
+					'version_to_check'       => $version_to_check,
 				);
-
-				$success = false;
+				$success          = false;
 			}
 		}
 
+		if ( ! $success ) {
+			add_action(
+				'admin_notices',
+				function () use ( $template_payload ) {
+					include WP_PLUGIN_DIR . '/import-products-from-gsheet-for-woo-importer/src/Views/html-admin-required-plugin-notification.php';
+				}
+			);
+		}
+
 		return $success;
+	}
+endif;
+
+if ( ! function_exists( 'gswoo_get_plugin_version' ) ) :
+	/**
+	 * Get the plugin version, parsing main plugin file.
+	 *
+	 * @param string $plugin_file_path
+	 *
+	 * @return bool|string
+	 */
+	function gswoo_get_plugin_version( $plugin_file_path ) {
+        // phpcs:ignore:WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+		$plugin_data = file_get_contents( $plugin_file_path );
+		if ( preg_match( '/^[ \t\/*#@]*[Vv]ersion\s*:\s*([^\r\n]+)/m', $plugin_data, $matches ) ) {
+			return trim( $matches[1] );
+		}
+		return false;
 	}
 endif;
 

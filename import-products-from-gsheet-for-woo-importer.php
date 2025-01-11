@@ -92,7 +92,7 @@ final class GSWOO_Plugin {
 	 * @return bool
 	 */
 	public function is_woocommerce() {
-		return gswoo_is_plugin_active(
+		return gswoo_validate_dependency_plugin(
 			'GSheet For Woo Importer',
 			'WooCommerce',
 			'woocommerce/woocommerce.php',

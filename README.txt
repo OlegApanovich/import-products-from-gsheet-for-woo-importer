@@ -48,6 +48,10 @@ Also you can follow instructions on a screenshots above.
 
 == Changelog ==
 
+= 2.3.1 =
+* Fix - Php warnings related to translation.
+* Fix - Php fatal error with deleted woocommerce.
+
 = 2.3 =
 * Fix - 'One Click Auto Connect' Google API connect method and remove deprecated oob link functionality.
 

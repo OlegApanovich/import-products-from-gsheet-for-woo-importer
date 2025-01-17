@@ -9,6 +9,8 @@ Requires PHP: 5.6
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
+Enhances WooCommerce import by allowing product imports directly from Google Sheets stored on Google Drive.
+
 == Description ==
 
 This plugin extends standard woocommerce import products functionality and lets you import, not only from a local file, but also from your google sheet file which you store on your google drive and can be edited by any member of your store team.

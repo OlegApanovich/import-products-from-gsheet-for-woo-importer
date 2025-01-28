@@ -183,3 +183,4 @@ final class GSWOO_Plugin {
 }
 
 GSWOO_Plugin::instance();
+

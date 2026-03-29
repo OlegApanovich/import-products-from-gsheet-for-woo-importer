@@ -389,6 +389,10 @@ class AdminSettingsAction {
 	 * @since 2.0.0
 	 */
 	public function process_ajax_restore_action() {
+		if ( ! current_user_can( 'delete_option' ) ) {
+			wp_die( esc_attr__( 'You do not have permission to perform this action.', 'import-products-from-gsheet-for-woo-importer' ) );
+		}
+
 		$this->settings_controller->settings_model->delete_options();
 		wp_die();
 	}

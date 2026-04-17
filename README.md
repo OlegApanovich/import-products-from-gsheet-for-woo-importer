@@ -24,46 +24,48 @@ You need to set the connection once, and in the future you can process import wo
 1. If you already have Google API client_secret json code, then go to step 11, if not, go to step 2.
 
 
-2. Go to [API Library page ](https://console.cloud.google.com/apis/library) and in the search input type "Google Drive API" ![](assets/images/screenshot-2.png) 
+2. Go to [API Library page ](https://console.cloud.google.com/apis/library) and in the search input type "Google Drive API"
+  
+![](assets/images/screenshot-2.png) 
 
 
-3. Click on the first search result, and if you haven't enabled it before, you will see the "Enable' button, if it was already enabled before, you should see the "Manage' button. Clieck 'Manage' or 'Enable' button![](assets/images/screenshot-3.png)
+5. Click on the first search result, and if you haven't enabled it before, you will see the "Enable' button, if it was already enabled before, you should see the "Manage' button. Clieck 'Manage' or 'Enable' button![](assets/images/screenshot-3.png)
 
 
-4. Then you will be redirected to the 'API/Service Details' page, where you can manage your drive api. Click the tab 'Credentials' there. ![](assets/images/screenshot-5.png)
+6. Then you will be redirected to the 'API/Service Details' page, where you can manage your drive api. Click the tab 'Credentials' there. ![](assets/images/screenshot-5.png)
 
 
-5. On the 'Credentials' tab, click the 'Create Credentials' button and pick the 'Service account' option in the drop-down menu. ![](assets/images/screenshot-6.png)
+7. On the 'Credentials' tab, click the 'Create Credentials' button and pick the 'Service account' option in the drop-down menu. ![](assets/images/screenshot-6.png)
 
 
-6. In the next step, you will be redirected to 'Create service account' page. Feel free to choose any service account name and ID in the appropriate fields. Then click the 'Create and continue' button. ![](assets/images/screenshot-7.png)
+8. In the next step, you will be redirected to 'Create service account' page. Feel free to choose any service account name and ID in the appropriate fields. Then click the 'Create and continue' button. ![](assets/images/screenshot-7.png)
 
-7. Then, on the 'Permissions' step, select role project -> editor and press the "Continue" button. ![](assets/images/screenshot-8.png)
+9. Then, on the 'Permissions' step, select role project -> editor and press the "Continue" button. ![](assets/images/screenshot-8.png)
 
-9. Then, on a 'Principals with access' click step, just click the 'Done' button. ![](assets/images/screenshot-9.png)
+10. Then, on a 'Principals with access' click step, just click the 'Done' button. ![](assets/images/screenshot-9.png)
 
-10. Then you will be redirected to [credentials page](https://console.cloud.google.com/apis/credentials) page, where you can find your newly created 'Service Account' in the list, click on it. ![](assets/images/screenshot-10.png)
+11. Then you will be redirected to [credentials page](https://console.cloud.google.com/apis/credentials) page, where you can find your newly created 'Service Account' in the list, click on it. ![](assets/images/screenshot-10.png)
 
 
-11. Then, on your service account page, click the 'Keys' tab. ![](assets/images/screenshot-11.png)
+12. Then, on your service account page, click the 'Keys' tab. ![](assets/images/screenshot-11.png)
 
-12. Then, on the 'Keys' tab click the 'Add key' button and pick the 'Create new key' option in the drop-down menu. ![](assets/images/screenshot-12.png)
+13. Then, on the 'Keys' tab click the 'Add key' button and pick the 'Create new key' option in the drop-down menu. ![](assets/images/screenshot-12.png)
 
-13. On the next step, pick JSON and the 'Create' button in the modal. ![](assets/images/screenshot-13.png)
+14. On the next step, pick JSON and the 'Create' button in the modal. ![](assets/images/screenshot-13.png)
 
-14. Download json file to your computer and open it with any text editor.
+15. Download json file to your computer and open it with any text editor.
 
-15. In the json find 'client_email' it should looks something like it 'test11@gsheet-product-importer.iam.gserviceaccount.com'. Copy it for the next step
+16. In the json find 'client_email' it should looks something like it 'test11@gsheet-product-importer.iam.gserviceaccount.com'. Copy it for the next step
 
-16. On your [google drive page](https://drive.google.com/drive/my-drive) open google sheet import file that you will use. Remember that import supports only native google-apps.spreadsheet file type.
+17. On your [google drive page](https://drive.google.com/drive/my-drive) open google sheet import file that you will use. Remember that import supports only native google-apps.spreadsheet file type.
 
-17. Click the button 'Share' for your google sheet file. ![](assets/images/screenshot-14.png)
+18. Click the button 'Share' for your google sheet file. ![](assets/images/screenshot-14.png)
 
-18. Paste your email there that you copied in step 15 and press the 'Send' button. ![](assets/images/screenshot-15.png)
+19. Paste your email there that you copied in step 15 and press the 'Send' button. ![](assets/images/screenshot-15.png)
 
-19. Right now, go to the plugin settings page in your wordpress dashboard and paste the client_secret json key (all file content that you obtained in step 14) to the appropriate input and press the 'Save' button. ![](assets/images/screenshot-16.png)
+20. Right now, go to the plugin settings page in your wordpress dashboard and paste the client_secret json key (all file content that you obtained in step 14) to the appropriate input and press the 'Save' button. ![](assets/images/screenshot-16.png)
 
-20. After it, you should see select with google sheets list for your import, pick one of them, and press the 'Save Options' button again. ![](assets/images/screenshot-17.png)
+21. After it, you should see select with google sheets list for your import, pick one of them, and press the 'Save Options' button again. ![](assets/images/screenshot-17.png)
 
 
 That’s all, if you set valid data, you will see a success message, and when you next time try to import woocommerce product you will see an additional button that gives you the opportunity to import a product from google sheet. ![](assets/images/screenshot-4.png)

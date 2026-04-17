@@ -14,31 +14,12 @@ Also as option you can directly install plugin from github repository.
 
 ## Set plugin options
 
-After plugin installation we need to set connection with google API. In a plugin settings you have two options to set google API connection.
-1. "One Click Auto Connect" method with google auth code ( more simple and straightforward connection method ).
-2. "Manual Connect" method with assertion client_secret json code.
-
+After plugin installation, we need to set a connection with the Google API. In the plugin settings, you have to set the Google Drive API client_secret json.
 
 You need to set connection once and in the feature you can process import woocommerce product with your google sheet file every time you need.
 
-### 1 method. "One Click Auto Connect" with google auth code 
 
-This method is recomended and default in plugin settings area. Follow the steps to set it.
-
-1. Go to plugin setting and press "Get Code" button in "One Click Auto Connect" tab ![](assets/images/screenshot-19.png)
-
-2. You will be redirected to google plugin application page. Please choose google account where you store your google sheet import file on google drive      ![](assets/images/screenshot-13.png)
-
-3. In the next page you need provide access "See and download all your Google Drive files." to plugin application. ![](assets/images/screenshot-14.png)
-
-4. Then you will be redirected back to the plugin settings page with your access code on it. Please press "Save Options" button.![](assets/images/screenshot-16.png)
-
-5. If code valid you will see corresponding message and new select for google sheet title and then you must to choose google sheet title that become your import file ![](assets/images/screenshot-17.png) Sheet title you can find in upper left corner of your sheet on google drive ![](assets/images/screenshot-18.png) 
-
-6. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file ![](assets/images/screenshot-20.png)
-
-
-### 2 method. "Manual Connect" with assertion client_secret json code.
+### Set connection wtih client_secret json code.
 
 1. If you do not have a google API client_secret json code than go to [google cloud console page.](https://console.developers.google.com) where you can create new one (if you have than you can go to step 11)
 

@@ -46,15 +46,10 @@ class AdminSettingsModel {
 	 * @return string
 	 */
 	public function get_active_google_auth_type() {
-		if ( isset( $_GET['auth_tab'] ) ) {
-			$auth_type = sanitize_text_field( wp_unslash( $_GET['auth_tab'] ) );
+		if ( ! empty( $this->options['google_auth_type'] ) ) {
+			$auth_type = $this->options['google_auth_type'];
 		} else {
-			if ( empty( $this->options['google_auth_type'] ) ) {
-				// fallback for default method.
-				$auth_type = 'auth_code_method_tab';
-			} else {
-				$auth_type = $this->options['google_auth_type'];
-			}
+			$auth_type = 'assertion_method_tab';
 		}
 
 		return apply_filters( 'gswoo_get_active_google_auth_type', $auth_type, $this->options );
@@ -154,17 +149,10 @@ class AdminSettingsModel {
 		if ( empty( $this->options ) || empty( $this->options['google_auth_type'] ) ) {
 			$is_empty = true;
 		} else {
-			switch ( $this->options['google_auth_type'] ) {
-				case 'assertion_method_tab':
-					if ( ! $this->options['google_api_key'] ) {
-						$is_empty = true;
-					}
-					break;
-				case 'auth_code_method_tab':
-					if ( empty( $this->options['google_code_oauth2'] ) ) {
-						$is_empty = true;
-					}
-					break;
+			if ( 'assertion_method_tab' === $this->options['google_auth_type'] ) {
+				if ( ! $this->options['google_api_key'] ) {
+					$is_empty = true;
+				}
 			}
 		}
 

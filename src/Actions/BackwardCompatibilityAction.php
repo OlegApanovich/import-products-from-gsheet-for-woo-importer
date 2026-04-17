@@ -50,6 +50,8 @@ class BackwardCompatibilityAction {
 			2
 		);
 
+		add_action( 'admin_init', array( $this, 'remove_code_oauth2_options' ) );
+
 		add_filter(
 			'gswoo_get_empty_response',
 			array( $this, 'add_backward_get_empty_response' ),
@@ -131,5 +133,33 @@ class BackwardCompatibilityAction {
 		}
 
 		return $is_empty;
+	}
+
+	/**
+	 * Remove 'One Click Connection Mehtod' options.
+	 *
+	 * @since 2.4
+	 * @to all later
+	 */
+	public function remove_code_oauth2_options() {
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		if ( ! isset( $_GET['page'] ) || 'woocommerce_import_products_google_sheet_menu' !== $_GET['page'] ) {
+			return;
+		}
+
+		$options = get_option( 'plugin_wc_import_google_sheet_options', array() );
+
+		if ( ! is_array( $options ) || ! isset( $options['google_code_oauth2'] ) ) {
+			return;
+		}
+
+		unset( $options['google_code_oauth2'] );
+
+		if ( isset( $options['google_auth_type'] ) && 'auth_code_method_tab' === $options['google_auth_type'] ) {
+			$options['google_auth_type'] = 'assertion_method_tab';
+		}
+
+		update_option( 'plugin_wc_import_google_sheet_options', $options );
+		delete_option( 'plugin_wc_import_google_sheet_gs_token' );
 	}
 }

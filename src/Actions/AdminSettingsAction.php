@@ -62,10 +62,6 @@ class AdminSettingsAction {
 		);
 		add_action(
 			'admin_init',
-			array( $this, 'init_admin_settings_fields_auth_code_method_section' )
-		);
-		add_action(
-			'admin_init',
 			array( $this, 'init_admin_settings_fields_common_section' )
 		);
 
@@ -241,12 +237,6 @@ class AdminSettingsAction {
 			'assertion_method_page'
 		);
 		add_settings_section(
-			'oauth_code_method_section',
-			'',
-			array( $this, 'plugin_section_text' ),
-			'auth_code_method_page'
-		);
-		add_settings_section(
 			'common_section',
 			'',
 			array( $this, 'plugin_section_text' ),
@@ -285,21 +275,6 @@ class AdminSettingsAction {
 	}
 
 	/**
-	 * Init plugin settings fields for oauth_code_method_section
-	 *
-	 * @since 2.0.0
-	 */
-	public function init_admin_settings_fields_auth_code_method_section() {
-		add_settings_field(
-			'plugin_google_oauth2_code',
-			'',
-			array( $this->settings_controller, 'display_settings_auth_code_method_section' ),
-			'auth_code_method_page',
-			'oauth_code_method_section'
-		);
-	}
-
-	/**
 	 * Set options and sanitize user input
 	 *
 	 * @noinspection PhpUnused
@@ -314,9 +289,6 @@ class AdminSettingsAction {
 
 		$valid_input['google_api_key']
 			= isset( $input['google_api_key'] ) ? esc_html( $input['google_api_key'] ) : '';
-
-		$valid_input['google_code_oauth2']
-			= isset( $input['google_code_oauth2'] ) ? sanitize_text_field( $input['google_code_oauth2'] ) : '';
 
 		$valid_input['google_sheet_data']
 			= isset( $input['google_sheet_data'] ) ? esc_html( $input['google_sheet_data'] ) : '';

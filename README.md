@@ -5,10 +5,10 @@ This is a wordpress plugin that extends standard woocommerce import products fun
 Standard woocommerce import, which was introduced by woocommerce team since version 3.1, became a greater plugin feature that lets you not use additional plugins and extensions for product import processes. However, if it’s a pain every time when you’re loading csv import files from your local machine, then this plugin is a great choice that lets you not do it anymore. Just set it once, and in the future you will only have to press the button "Import" as usual. The plugin itself will pull the new data from the specified google sheet table.
 
 ## Installation
-It's a recommended to use the [official plugin page on WordPress.org](https://wordpress.org/plugins/import-products-from-gsheet-for-woo-importer/).
+It's recommended to use the [official plugin page on WordPress.org](https://wordpress.org/plugins/import-products-from-gsheet-for-woo-importer/).
 
-Also as option you can directly install plugin from github repository.
-1. Clone repository to the `/wp-content/plugins/` directory.
+Also, as an option, you can directly install the plugin from github repository.
+1. Clone the repository to the `/wp-content/plugins/` directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 
@@ -16,7 +16,7 @@ Also as option you can directly install plugin from github repository.
 
 After plugin installation, we need to set a connection with the Google API. In the plugin settings, you have to set the Google Drive API client_secret json.
 
-You need to set connection once and in the feature you can process import woocommerce product with your google sheet file every time you need.
+You need to set the connection once, and in the future you can process import woocommerce products with your google sheet file every time you need.
 
 
 ### Set connection wtih client_secret json code.

@@ -10,7 +10,6 @@
 namespace GSWOO\Abstracts;
 
 use GSWOO\Services\GoogleApiTokenAssertionMethodService;
-use GSWOO\Services\GoogleApiTokenAuthCodeMethodService;
 
 /**
  * Class GoogleApiInterplayAbstract
@@ -46,14 +45,7 @@ abstract class GoogleApiInterplayAbstract {
 	 * @return GoogleApiTokenAbstract
 	 */
 	public function get_token_service() {
-		switch ( $this->options['google_auth_type'] ) {
-			case 'assertion_method_tab':
-				$token_service = new GoogleApiTokenAssertionMethodService( $this->options['google_api_key'] );
-				break;
-			case 'auth_code_method_tab':
-				$token_service = new GoogleApiTokenAuthCodeMethodService( $this->options['google_code_oauth2'] );
-				break;
-		}
+		$token_service = new GoogleApiTokenAssertionMethodService( $this->options['google_api_key'] );
 
 		return $token_service;
 	}

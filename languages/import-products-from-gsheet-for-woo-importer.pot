@@ -61,15 +61,6 @@ msgid ""
 "being defined as smaller than upload_max_filesize in php.ini."
 msgstr ""
 
-#: src/Views/html-admin-settings-auth-code-method-section-receive.php:30
-msgid "Get Code"
-msgstr ""
-
-#: src/Views/html-admin-settings-auth-code-method-section-restore.php:17
-#: src/Views/html-admin-settings-auth-code-method-section-receive.php:25
-msgid "Google Access Code"
-msgstr ""
-
 #: src/Views/html-admin-settings-form.php:22
 msgid "Google API Connect Method"
 msgstr ""
@@ -133,10 +124,6 @@ msgstr ""
 
 #. Author of the plugin
 msgid "Oleg Apanovich"
-msgstr ""
-
-#: src/Views/html-admin-settings-form.php:29
-msgid "One Click Auto Connect"
 msgstr ""
 
 #: src/WoocommerceImporter/WcProductCsvImporterController.php:153

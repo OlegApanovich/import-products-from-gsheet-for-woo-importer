@@ -50,11 +50,6 @@ class AdminSettingsController {
 	 * @since 2.0.0
 	 */
 	public function settings_form() {
-
-		$active_tab =
-			$this->settings_model->
-			get_active_google_auth_type();
-
 		include_once GSWOO_URI_ABSPATH . '/src/Views/html-admin-settings-form.php';
 	}
 
@@ -89,22 +84,6 @@ class AdminSettingsController {
 		} else {
 			include_once GSWOO_URI_ABSPATH .
 				'/src/Views/html-admin-settings-assertion-method-section-restore.php';
-		}
-	}
-
-	/**
-	 * Prerequisites and display section settings
-	 *
-	 * @since 2.0.0
-	 */
-	public function display_settings_auth_code_method_section() {
-
-		if ( empty( $this->options['google_code_oauth2'] ) || ! empty( $this->options['settings_auth_restore'] ) ) {
-			include_once GSWOO_URI_ABSPATH .
-				'/src/Views/html-admin-settings-auth-code-method-section-receive.php';
-		} else {
-			include_once GSWOO_URI_ABSPATH .
-				'/src/Views/html-admin-settings-auth-code-method-section-restore.php';
 		}
 	}
 

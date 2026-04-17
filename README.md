@@ -74,7 +74,7 @@ You need to set the connection once, and in the future you can process import wo
 
 26. Download json file to your computer and open it with any text editor.
 
-27. In the json find 'client_email' it should looks something like it 'test11@gsheet-product-importer.iam.gserviceaccount.com'. Copy it for the next step
+27. In the json find 'client_email' it should looks something like it 'test11@gsheet-product-importer.iam.gserviceaccount.com'. Copy it for the next step.
 
 28. On your [google drive page](https://drive.google.com/drive/my-drive) open google sheet import file that you will use. Remember that import supports only native google-apps.spreadsheet file type.
 

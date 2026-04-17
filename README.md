@@ -95,4 +95,7 @@ You need to set the connection once, and in the future you can process import wo
 ![](assets/images/screenshot-17.png)
 
 
-That’s all, if you set valid data, you will see a success message, and when you next time try to import woocommerce product you will see an additional button that gives you the opportunity to import a product from google sheet. ![](assets/images/screenshot-4.png)
+That’s all, if you set valid data, you will see a success message, and when you next time try to import woocommerce product you will see an additional button that gives you the opportunity to import a product from google sheet.
+
+
+![](assets/images/screenshot-4.png)

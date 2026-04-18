@@ -148,7 +148,8 @@ class AdminSettingsAction {
 			'gswoo-admin-settings-ajax',
 			'gswoo_admin_ajax',
 			array(
-				'url' => admin_url( 'admin-ajax.php' ),
+				'url'   => admin_url( 'admin-ajax.php' ),
+				'nonce' => wp_create_nonce( 'gswoo_restore_action_nonce' ),
 			)
 		);
 	}
@@ -361,7 +362,16 @@ class AdminSettingsAction {
 	 * @since 2.0.0
 	 */
 	public function process_ajax_restore_action() {
-		if ( ! current_user_can( 'delete_option' ) ) {
+		if ( ! isset( $_POST['nonce'] ) ) {
+			wp_die( esc_attr__( 'Nonce is missing.', 'import-products-from-gsheet-for-woo-importer' ) );
+		}
+
+		$nonce = sanitize_text_field( wp_unslash( $_POST['nonce'] ) );
+		if ( ! wp_verify_nonce( $nonce, 'gswoo_restore_action_nonce' ) ) {
+			wp_die( esc_attr__( 'Nonce verification failed.', 'import-products-from-gsheet-for-woo-importer' ) );
+		}
+
+		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_die( esc_attr__( 'You do not have permission to perform this action.', 'import-products-from-gsheet-for-woo-importer' ) );
 		}
 

@@ -351,13 +351,14 @@ class AdminSettingsAction {
 	/**
 	 * Redirect to plugin settings page after activation.
 	 *
-	 * @since 2.5.0
+	 * @since 2.4
 	 */
 	public function activation_redirect() {
-		if ( ! get_transient( 'gswoo_activation_redirect' ) ) {
+		$user_id = get_current_user_id();
+		if ( ! get_user_meta( $user_id, 'gswoo_activation_redirect', true ) ) {
 			return;
 		}
-		delete_transient( 'gswoo_activation_redirect' );
+		delete_user_meta( $user_id, 'gswoo_activation_redirect' );
 		if ( wp_doing_ajax() || is_network_admin() ) {
 			return;
 		}

@@ -84,7 +84,6 @@ final class GSWOO_Plugin {
 		$this->define_activation_hook();
 		$this->init_hooks();
 		$this->init_actions();
-		$this->init_actions();
 	}
 
 	/**
@@ -133,7 +132,7 @@ final class GSWOO_Plugin {
 		register_activation_hook(
 			GSWOO_PLUGIN_FILE,
 			function () {
-				set_transient( 'gswoo_activation_redirect', true, 30 );
+				update_user_meta( get_current_user_id(), 'gswoo_activation_redirect', true );
 			}
 		);
 	}

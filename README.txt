@@ -3,7 +3,7 @@ Contributors: mrdollar4444
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K9NTJ6E2RQN3A&source=url
 Tags: woocommerce, importer, google sheet
 Requires at least: 5.9
-Tested up to: 6.7
+Tested up to: 6.9
 Stable tag: 2.3
 Requires PHP: 8.1
 License: GPLv3 or later
@@ -13,11 +13,11 @@ Enhances WooCommerce import by allowing product imports directly from Google She
 
 == Description ==
 
-This plugin extends standard woocommerce import products functionality and lets you import, not only from a local file, but also from your google sheet file which you store on your google drive and can be edited by any member of your store team.
+This is a wordpress plugin that extends standard woocommerce import products functionality and lets you import, not only from a local file, but also from your google sheet file, which you store on your google drive and can be edited by any member of your store team.
 
-Standard woocommerce import, that was introduced by woocommerce team since version 3.1, became a great plugin feature that lets you not use additional plugins and extensions for product import processes. However, if it’s a pain every time when you’re loading csv import files from your local machine, then this plugin is a great choice that lets you not to do it anymore. Just set your google sheet that you store on your google drive once and in the future you will only have to press the button "Import" as usual. Plugin itself will pull the new data from the specified google sheet table.
+Standard woocommerce import, which was introduced by woocommerce team since version 3.1, became a greater plugin feature that lets you not use additional plugins and extensions for product import processes. However, if it’s a pain every time when you’re loading csv import files from your local machine, then this plugin is a great choice that lets you not do it anymore. Just set it once, and in the future you will only have to press the button "Import" as usual. The plugin itself will pull the new data from the specified google sheet table.
 
-Full instruction about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer) or you can use shorter version with screenshots below.
+Full instruction about plugin setup options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer).
 
 == Installation ==
 1. Upload the plugin folder to the ‘/wp-content/plugins/’ directory
@@ -29,26 +29,18 @@ Full instruction about plugin options you can find on [our github plugin page](h
 
 = Where I can get "Google drive API client_secret json" for a plugin settings  =
 
-Instructions about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer)
-Also you can follow instructions on a screenshots above.
+Instructions about plugin options you can find on [our github plugin page](https://github.com/OlegApanovich/import-products-from-gsheet-for-woo-importer).
 
 == Screenshots ==
 
-1. Go to plugin settings and press "Get Code" button in "One Click Auto Connect" tab.
-
-2. You will be redirected to google plugin application page. Please choose google account where you store your google sheet import file on google drive.
-
-3. In the next page you need provide access "See and download all your Google Drive files." to plugin application.
-
-4. Then you will be redirected back to the plugin settings page with your access code on it. Please press "Save Options" button.
-
-5. If code valid you will see corresponding message and new select for google sheet title where you should to choose google sheet title that become your import file.
-
-6. Sheet title you can find in upper left corner of your sheet on google drive.
-
-7. That all. If you set all settings properly you will receive success connection message with link to standard woocommerce import page where you can process import products with your google sheet file.
-
 == Changelog ==
+
+= 2.4.0 =
+* Dev - Add support for Microsoft Excel native formats.
+* Dev - Add redirect to plugin settings after plugin activation.
+* Dev - Bump min PHP version to 8.1 and min WordPress version to 5.9.
+* Fix - Remove 'One Click Auto Connect' due to Google API new payment requirements that do not correspond to nonprofit open source projects.
+* Fix - PHP fatal error when WooCommerce is not active.
 
 = 2.3.1 =
 * Fix - Php warnings related to translation.

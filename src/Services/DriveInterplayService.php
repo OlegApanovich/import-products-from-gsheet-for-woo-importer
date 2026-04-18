@@ -73,8 +73,19 @@ class DriveInterplayService extends GoogleApiInterplayAbstract {
 		$sheets_list = array();
 
 		try {
-			$params  = array(
-				'q' => "mimeType='application/vnd.google-apps.spreadsheet'",
+			$mime_types = array(
+				'application/vnd.google-apps.spreadsheet',
+				'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+				'application/vnd.ms-excel',
+				'application/vnd.ms-excel.sheet.macroEnabled.12',
+				'application/vnd.oasis.opendocument.spreadsheet',
+			);
+			$mime_query = implode(
+				' or ',
+				array_map( fn( $type ) => "mimeType='$type'", $mime_types )
+			);
+			$params = array(
+				'q' => $mime_query,
 			);
 			$results = $this->google_service_drive->files->listFiles( $params );
 			foreach ( $results->files as $spreadsheet ) {

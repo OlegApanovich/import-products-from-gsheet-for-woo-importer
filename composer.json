@@ -1,6 +1,7 @@
 {
 	"require": {
-		"google/apiclient": "^2.12.1"
+		"google/apiclient": "^2.12.1",
+		"phpoffice/phpspreadsheet": "^5.6"
 	},
 	"require-dev": {
 		"squizlabs/php_codesniffer": "3.*",
@@ -22,7 +23,7 @@
 	},
 	"config": {
 		"platform": {
-			"php": "5.6.1"
+			"php": "8.1.0"
 		}
 	}
 }

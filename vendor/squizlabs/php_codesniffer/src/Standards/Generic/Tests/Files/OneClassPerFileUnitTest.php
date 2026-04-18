@@ -4,13 +4,18 @@
  *
  * @author    Andy Grunwald <andygrunwald@gmail.com>
  * @copyright 2010-2014 Andy Grunwald
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Standards\Generic\Tests\Files;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
+/**
+ * Unit test class for the OneClassPerFile sniff.
+ *
+ * @covers \PHP_CodeSniffer\Standards\Generic\Sniffs\Files\OneClassPerFileSniff
+ */
 class OneClassPerFileUnitTest extends AbstractSniffUnitTest
 {
 

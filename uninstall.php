@@ -19,4 +19,3 @@ $option_list = array(
 foreach ( $option_list as $option_name ) {
 	delete_option( $option_name );
 }
-

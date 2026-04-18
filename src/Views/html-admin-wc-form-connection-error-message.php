@@ -10,7 +10,7 @@
 ?>
 <h2 style="color: red">
 	<?php
-	echo sprintf(
+	printf(
 		// translators: %s1: plugin import page url, %s2: closing link tag.
 		esc_html__(
 			'You do not set plugin google API connection settings properly, please go to %1$1s plugin settings page %2$2s and try to set it again.',

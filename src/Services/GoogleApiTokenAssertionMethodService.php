@@ -94,6 +94,7 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	public function put_key_to_file_access() {
 
 		try {
+            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
 			$try_file_put = file_put_contents(
 				GSWOO_URI_ABSPATH . 'assets/client_secret.json',
 				$this->google_api_key

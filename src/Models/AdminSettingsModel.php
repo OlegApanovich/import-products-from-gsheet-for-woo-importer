@@ -148,11 +148,9 @@ class AdminSettingsModel {
 
 		if ( empty( $this->options ) || empty( $this->options['google_auth_type'] ) ) {
 			$is_empty = true;
-		} else {
-			if ( 'assertion_method_tab' === $this->options['google_auth_type'] ) {
-				if ( ! $this->options['google_api_key'] ) {
-					$is_empty = true;
-				}
+		} elseif ( 'assertion_method_tab' === $this->options['google_auth_type'] ) {
+			if ( ! $this->options['google_api_key'] ) {
+				$is_empty = true;
 			}
 		}
 
@@ -335,7 +333,7 @@ class AdminSettingsModel {
 			return $sheet_data;
 		}
 
-		$resource = fopen( $file_sheet_path, 'w' );
+		$resource = fopen( $file_sheet_path, 'w' ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fopen
 
 		if ( ! $resource ) {
 			return new WP_Error(
@@ -374,7 +372,7 @@ class AdminSettingsModel {
 			fputcsv( $resource, $sheet_string, $delimiter );
 		}
 
-		fclose( $resource );
+		fclose( $resource ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_fclose
 
 		return true;
 	}

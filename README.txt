@@ -2,10 +2,10 @@
 Contributors: mrdollar4444
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=K9NTJ6E2RQN3A&source=url
 Tags: woocommerce, importer, google sheet
-Requires at least: 4.7
+Requires at least: 5.9
 Tested up to: 6.7
 Stable tag: 2.3
-Requires PHP: 5.6
+Requires PHP: 8.1
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 

@@ -15,7 +15,7 @@ defined( 'ABSPATH' ) || exit;
 <div class="notice notice-warning is-dismissible">
 	<p>
 		<?php
-		echo sprintf(
+		printf(
 		// translators: %1s: plugin import page link, %2s: close link tag.
 			esc_html__(
 				'We can not show you import google sheet plugin button because you do not set google api connection, please go to %1$1s plugin settings page %2$2s and try to set it again.',

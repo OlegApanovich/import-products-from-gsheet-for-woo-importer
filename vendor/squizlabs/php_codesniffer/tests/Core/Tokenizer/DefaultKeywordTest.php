@@ -5,7 +5,7 @@
  *
  * @author    Juliette Reinders Folmer <phpcs_nospam@adviesenzo.nl>
  * @copyright 2020-2021 Squiz Pty Ltd (ABN 77 084 670 600)
- * @license   https://github.com/squizlabs/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
+ * @license   https://github.com/PHPCSStandards/PHP_CodeSniffer/blob/master/licence.txt BSD Licence
  */
 
 namespace PHP_CodeSniffer\Tests\Core\Tokenizer;
@@ -282,6 +282,9 @@ class DefaultKeywordTest extends AbstractMethodUnitTest
      * Test a specific edge case where a scope opener would be incorrectly set.
      *
      * @link https://github.com/squizlabs/PHP_CodeSniffer/issues/3326
+     *
+     * @covers PHP_CodeSniffer\Tokenizers\PHP::tokenize
+     * @covers PHP_CodeSniffer\Tokenizers\Tokenizer::recurseScopeMap
      *
      * @return void
      */

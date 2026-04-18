@@ -47,6 +47,7 @@ class AdminSettingsAction {
 	public function init() {
 
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
+		add_action( 'admin_init', array( $this, 'activation_redirect' ) );
 
 		add_action(
 			'admin_init',
@@ -345,6 +346,24 @@ class AdminSettingsAction {
 			),
 			$links
 		);
+	}
+
+	/**
+	 * Redirect to plugin settings page after activation.
+	 *
+	 * @since 2.4
+	 */
+	public function activation_redirect() {
+		$user_id = get_current_user_id();
+		if ( ! get_user_meta( $user_id, 'gswoo_activation_redirect', true ) ) {
+			return;
+		}
+		delete_user_meta( $user_id, 'gswoo_activation_redirect' );
+		if ( wp_doing_ajax() || is_network_admin() ) {
+			return;
+		}
+		wp_safe_redirect( admin_url( 'admin.php?page=woocommerce_import_products_google_sheet_menu' ) );
+		exit;
 	}
 
 	/**

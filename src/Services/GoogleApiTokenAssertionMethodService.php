@@ -48,10 +48,7 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	 */
 	public function set_client() {
 		try {
-			putenv(
-				'GOOGLE_APPLICATION_CREDENTIALS=' . GSWOO_URI_ABSPATH . 'assets/client_secret.json'
-			);
-			$this->client->useApplicationDefaultCredentials();
+			$this->client->setAuthConfig( json_decode( $this->google_api_key, true ) );
 			$this->client->setApplicationName( 'Something to do with my representatives' );
 			$this->client->setScopes(
 				array(
@@ -73,8 +70,6 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 	 */
 	public function fetch_token() {
 		try {
-			$this->put_key_to_file_access();
-
 			$token = $this->client->fetchAccessTokenWithAssertion();
 		} catch ( Exception $e ) {
 			$token       = '';
@@ -82,34 +77,5 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 		}
 
 		return $token;
-	}
-
-	/**
-	 * Try to put key to access file.
-	 *
-	 * @since 2.0.0
-	 *
-	 * @return bool
-	 */
-	public function put_key_to_file_access() {
-
-		try {
-            // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
-			$try_file_put = file_put_contents(
-				GSWOO_URI_ABSPATH . 'assets/client_secret.json',
-				$this->google_api_key
-			);
-		} catch ( Exception $e ) {
-			$this->error = new WP_Error( 'token_error', '(' . __METHOD__ . ')' . $e->getMessage() );
-		}
-
-		if ( empty( $try_file_put ) ) {
-			$this->error = new WP_Error(
-				'token_error',
-				'(' . __METHOD__ . ')' . __( 'Put file content error', 'import-products-from-gsheet-for-woo-importer' )
-			);
-		}
-
-		return true;
 	}
 }

@@ -162,8 +162,22 @@ class SheetInterplayService extends GoogleApiInterplayAbstract {
 			);
 		}
 
-		$tmp = tempnam( sys_get_temp_dir(), 'gswoo_' );
-		file_put_contents( $tmp, $content ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+		$tmp     = tempnam( sys_get_temp_dir(), 'gswoo_' );
+		$written = file_put_contents( $tmp, $content ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_file_put_contents
+
+		if ( false === $written ) {
+			return new WP_Error(
+				'tmp_file_write_error',
+				'(' . __METHOD__ . ') ' . sprintf(
+					// translators: %s: file path.
+					__(
+						"Could not write temporary file: %s. Please check your server's write permissions.",
+						'import-products-from-gsheet-for-woo-importer'
+					),
+					$tmp
+				)
+			);
+		}
 
 		return $this->parse_spreadsheet_file( $tmp );
 	}
@@ -198,7 +212,7 @@ class SheetInterplayService extends GoogleApiInterplayAbstract {
 			return new WP_Error(
 				'get_sheet_csv',
 				__(
-					"We can't receive any data from your google sheet, please check if your spread sheet is not empty",
+					"We couldn't retrieve any data from the spreadsheet. Please confirm the sheet is not empty.",
 					'import-products-from-gsheet-for-woo-importer'
 				)
 			);

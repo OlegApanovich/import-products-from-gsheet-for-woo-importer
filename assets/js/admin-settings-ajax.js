@@ -12,7 +12,10 @@ jQuery( document ).ready(
 			function (e) {
 				if ( $( '.restore-button' ).length ) {
 					e.preventDefault();
-					var data = {action: 'restore_action'},
+					var data = {
+						action: 'restore_action',
+						nonce: gswoo_admin_ajax.nonce
+					},
 					href     = $( this ).attr( 'href' );
 
 					$.ajax(

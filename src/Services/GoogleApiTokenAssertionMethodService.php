@@ -78,5 +78,4 @@ class GoogleApiTokenAssertionMethodService extends GoogleApiTokenAbstract {
 
 		return $token;
 	}
-
 }

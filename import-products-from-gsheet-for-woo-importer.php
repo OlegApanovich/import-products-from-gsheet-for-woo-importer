@@ -81,7 +81,9 @@ final class GSWOO_Plugin {
 		}
 
 		$this->define_constants();
+		$this->define_activation_hook();
 		$this->init_hooks();
+		$this->init_actions();
 		$this->init_actions();
 	}
 
@@ -120,6 +122,20 @@ final class GSWOO_Plugin {
 		define( 'GSWOO_URI', plugins_url( '', GSWOO_PLUGIN_FILE ) );
 		define( 'GSWOO_URI_ABSPATH', __DIR__ . '/' );
 		define( 'GSWOO_WC_ABSPATH', WP_PLUGIN_DIR . '/woocommerce/' );
+	}
+
+	/**
+	 * Define activation hook.
+	 *
+	 * @since 1.0.0
+	 */
+	public function define_activation_hook() {
+		register_activation_hook(
+			GSWOO_PLUGIN_FILE,
+			function () {
+				set_transient( 'gswoo_activation_redirect', true, 30 );
+			}
+		);
 	}
 
 	/**

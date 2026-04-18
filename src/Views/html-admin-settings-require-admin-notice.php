@@ -16,10 +16,12 @@ defined( 'ABSPATH' ) || exit;
 	<p>
 		<?php
 		printf(
-		// translators: %1s: plugin import page link, %2s: close link tag.
-			esc_html__(
-				'We can not show you import google sheet plugin button because you do not set google api connection, please go to %1$1s plugin settings page %2$2s and try to set it again.',
-				'import-products-from-gsheet-for-woo-importer'
+			// translators: %1$s: opening link tag, %2$s: closing link tag.
+			wp_kses_post(
+				__(
+					'We can not show you import google sheet plugin button because you do not set google api connection, please go to %1$s plugin settings page %2$s and try to set it again.',
+					'import-products-from-gsheet-for-woo-importer'
+				)
 			),
 			'<a href="' . esc_url( $menu_page_url ) . '">',
 			'</a>'

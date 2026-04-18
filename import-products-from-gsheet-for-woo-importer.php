@@ -118,7 +118,7 @@ final class GSWOO_Plugin {
 	private function define_constants() {
 		define( 'GSWOO_PLUGIN_FILE', __FILE__ );
 		define( 'GSWOO_URI', plugins_url( '', GSWOO_PLUGIN_FILE ) );
-		define( 'GSWOO_URI_ABSPATH', dirname( __FILE__ ) . '/' );
+		define( 'GSWOO_URI_ABSPATH', __DIR__ . '/' );
 		define( 'GSWOO_WC_ABSPATH', WP_PLUGIN_DIR . '/woocommerce/' );
 	}
 

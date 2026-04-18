@@ -84,10 +84,10 @@ class DriveInterplayService extends GoogleApiInterplayAbstract {
 				' or ',
 				array_map( fn( $type ) => "mimeType='$type'", $mime_types )
 			);
-			$params = array(
+			$params     = array(
 				'q' => $mime_query,
 			);
-			$results = $this->google_service_drive->files->listFiles( $params );
+			$results    = $this->google_service_drive->files->listFiles( $params );
 			foreach ( $results->files as $spreadsheet ) {
 				if ( isset( $spreadsheet['kind'] ) && 'drive#file' === $spreadsheet['kind'] ) {
 					$sheets_list[] = array(

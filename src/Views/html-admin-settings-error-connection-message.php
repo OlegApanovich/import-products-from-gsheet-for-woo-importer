@@ -12,8 +12,8 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<h3 style="color: red;">
+<h4 style="color: red; max-width: 500px; color: #D32F2F;">
 	<?php
 	echo wp_kses( $response['message'], array( 'a' => array( 'href' => array() ) ) );
 	?>
-</h3>
+</h4>

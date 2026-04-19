@@ -1009,9 +1009,10 @@ class Client
                 $this->setRedirectUri($config[$key]['redirect_uris'][0]);
             }
         } else {
-            // new-style
-            $this->setClientId($config['client_id']);
-            $this->setClientSecret($config['client_secret']);
+            if ( isset($config['client_id'], $config['client_secret']) ) {
+                $this->setClientId($config['client_id']);
+                $this->setClientSecret($config['client_secret']);
+            }
             if (isset($config['redirect_uris'])) {
                 $this->setRedirectUri($config['redirect_uris'][0]);
             }
